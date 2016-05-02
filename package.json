@@ -1,0 +1,26 @@
+{
+  "name": "lsc",
+  "namespace": "",
+  "main": "./",
+  "version": "v0.16.502",
+  "description": "The LabShare CLI manager",
+  "private": true,
+  "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LabShare/lsc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LabShare/lsc/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "lsc": "lsc"
+  },
+  "dependencies": {
+    "ls-shell": "https://github.com/LabShare/shell"
+  },
+  "devDependencies": {
+
+  }
+}
