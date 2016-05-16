@@ -15,16 +15,8 @@
 logs
 *.log
 
-# LabShare Packages
-packages
-
 #Local Config
 config.json
-
-#Local post-install script artifacts
-start-services
-lsc.cmd
-lsc
 
 # Runtime data
 pids
