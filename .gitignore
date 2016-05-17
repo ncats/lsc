@@ -17,6 +17,7 @@ logs
 
 #Local Config
 config.json
+app.conf
 
 # Runtime data
 pids

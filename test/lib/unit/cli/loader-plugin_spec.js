@@ -4,9 +4,9 @@ const path = require('path'),
     _ = require('lodash'),
     flatiron = require('flatiron');
 
-describe('cliLoaderPlugin', function () {
+describe('cliLoaderPlugin', () => {
 
-    var cliLoaderPlugin,
+    let cliLoaderPlugin,
         packagePath,
         flatironApp,
         createFlatironApp;
@@ -28,13 +28,15 @@ describe('cliLoaderPlugin', function () {
 
     describe('After attaching the plugin', function () {
 
-        it('extends the Flatiron app with new CLI commands', function () {
+        it('extends the Flatiron app with new CLI commands', done => {
             expect(_.keys(flatironApp.commands).length).toBe(0);
-            flatironApp.start();
-            var commandNames = _.keys(flatironApp.commands);
-            expect(commandNames.length).toBe(3);
-            _.each(['hello', 'help', 'goodbye'], function (name) {
-                expect(commandNames).toContain(name);
+            flatironApp.init(() => {
+                let commandNames = _.keys(flatironApp.commands);
+                expect(commandNames.length).toBe(3);
+                _.each(['hello', 'help', 'goodbye'], name => {
+                    expect(commandNames).toContain(name);
+                });
+                done();
             });
         });
 
