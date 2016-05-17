@@ -1,0 +1,8 @@
+{
+  "name": "main-package",
+  "version": "0.0.1",
+  "packageDependencies": {
+    "cli-package1": "*",
+    "cli-package2": "*"
+  }
+}

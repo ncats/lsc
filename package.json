@@ -1,0 +1,43 @@
+{
+  "name": "lsc",
+  "namespace": "",
+  "main": "./",
+  "version": "v0.16.517",
+  "description": "The LabShare CLI manager",
+  "private": true,
+  "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LabShare/lsc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LabShare/lsc/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "pretest": "node -e 'process.exit(0)'",
+    "test": "jasmine-node --captureExceptions --color ./test/lib/unit",
+    "coverage": "istanbul cover jasmine-node ./test/lib/unit"
+  },
+  "bin": {
+    "lsc": "./lib/bin/lsc.js"
+  },
+  "dependencies": {
+    "flatiron": "^0.4.2",
+    "flatiron-cli-config": "^0.1.5",
+    "glob": "^7.0.3",
+    "json-override": "^0.2.0",
+    "lodash": "^4.12.0",
+    "q": "^1.4.1",
+    "yargs": "^4.3.2"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.2",
+    "jasmine-core": "^2.2.0",
+    "jasmine-node": "^1.14.5",
+    "mock-fs": "^3.9.0",
+    "promise-matchers": "^0.9.5",
+    "proxyquire": "^1.4.0",
+    "sinon": "^1.14.1"
+  }
+}
