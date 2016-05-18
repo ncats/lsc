@@ -1,0 +1,37 @@
+{
+  "name": "<%= appNameSlug %>",
+  "version": "<%= appVersion %>",
+  "description": "<%= appDescription %>",
+  "homepage": "https://github.com/LabShare/<%= appNameSlug %>.git",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "angular": "~1.5.0",
+    "angular-cookies": "~1.5.0",
+    "angular-resource": "~1.5.0",
+    "angular-route": "~1.5.0",
+    "angular-sanitize": "~1.5.0",
+    "angular-touch": "~1.5.0",
+    "angular-animate": "~1.5.0",
+    "angular-material": "1.0.0-rc5",
+    "angular-aria": "~1.5.0",
+    "angular-ui-router": "~0.2.18",
+    "angular-messages": "~1.5.0",
+    "angular-ui-router-title": "~0.0.4",
+    "requirejs-domready": "~2.0.1",
+    "requirejs-text": "~2.0.13",
+    "requirejs-plugins": "~1.0.3",
+    "requirejs": "https://github.com/jrburke/requirejs.git#~2.1.15",
+    "lodash": "~3.10.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.5.0",
+    "angular-scenario": "~1.5.0"
+  },
+  "resolutions": {
+    "angular": "~1.5.0"
+  }
+}
