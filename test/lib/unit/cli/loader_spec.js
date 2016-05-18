@@ -167,7 +167,7 @@ describe('CliLoader', () => {
         });
 
         it('logs an error if an exception is thrown', done => {
-            cliLoader.options.main = 'INVALID';
+            cliLoader.options.main = 1337;
             cliLoader.load(error => {
                 expect(error.message).toContain('Failed to load CLI commands');
                 done();
