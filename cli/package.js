@@ -54,7 +54,7 @@ module.exports = {
             answers.appVersion = [
                 'v0',
                 year.slice(2),
-                padLeft(today.getMonth() + 1) + padLeft(today.getDate())
+                (today.getMonth() + 1) + padLeft(today.getDate())
             ].join('.');
             answers.appNameSlug = _.slugify(answers.appName);
             answers.appYear = year;
