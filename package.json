@@ -1,9 +1,9 @@
 {
   "name": "lsc",
-  "namespace": "",
+  "namespace": "lsc",
   "main": "./",
-  "version": "v0.16.519",
-  "description": "The LabShare CLI manager",
+  "version": "v0.16.520",
+  "description": "Lab Share Command",
   "private": true,
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "repository": {
