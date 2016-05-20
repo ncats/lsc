@@ -2,7 +2,7 @@
 
 ##Before you start
 1. Install Node.js from https://nodejs.org/.
-2. Globally install LSC with `npm i -g https://github.com/LabShare/lsc`.
+2. Globally install LSC with `npm i -g lsc`.
 3. After globally installing LSC, it can be accessed by running `lsc` in the terminal. Run `lsc help` to display a list of available commands.
 
 ##Docs
