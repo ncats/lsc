@@ -4,7 +4,6 @@
   "main": "./",
   "version": "v0.16.520",
   "description": "Lab Share Command",
-  "private": true,
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "repository": {
     "type": "git",
