@@ -16,10 +16,10 @@
   "license": "MIT",
   "packageDependencies": {
     "lsc": "*",
-    "lss": "*"
+    "services": "*"
   },
   "dependencies": {
     "lsc": "https://github.com/LabShare/lsc",
-    "lss": "https://github.com/LabShare/lss"
+    "services": "https://github.com/LabShare/services"
   }
 }
