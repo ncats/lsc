@@ -9,6 +9,11 @@
     "jquery": true,
     "phantomjs": true
   },
+  "globals": {
+    "requirejs": true,
+    "require": true,
+    "define": true
+  },
   "extends": "eslint:recommended",
   "rules": {
     "accessor-pairs": "error",
@@ -53,10 +58,7 @@
     "eol-last": "off",
     "eqeqeq": "error",
     "func-names": "off",
-    "func-style": [
-      "error",
-      "declaration"
-    ],
+    "func-style": "off",
     "generator-star-spacing": "error",
     "global-require": "off",
     "guard-for-in": "off",
@@ -138,7 +140,7 @@
     "no-native-reassign": "error",
     "no-negated-condition": "off",
     "no-nested-ternary": "error",
-    "no-new": "error",
+    "no-new": "off",
     "no-new-func": "error",
     "no-new-object": "error",
     "no-new-require": "error",
@@ -173,12 +175,7 @@
     "no-trailing-spaces": "off",
     "no-undef-init": "error",
     "no-undefined": "error",
-    "no-underscore-dangle": [
-      "error",
-      {
-        "allowAfterThis": true
-      }
-    ],
+    "no-underscore-dangle": "off",
     "no-unmodified-loop-condition": "error",
     "no-unneeded-ternary": "error",
     "no-unsafe-finally": "error",
@@ -200,7 +197,7 @@
       "error",
       "never"
     ],
-    "object-property-newline": "error",
+    "object-property-newline": "off",
     "object-shorthand": "off",
     "one-var": "off",
     "one-var-declaration-per-line": "error",
