@@ -61,6 +61,7 @@ module.exports = {
 
             gulp.src([
                     `${__dirname}/../.eslintrc.json`,
+                    `${__dirname}/../.eslintignore`,
                     `${__dirname}/../templates/common/**`,
                     `${__dirname}/../templates/${answers.projectType}-package/**`
                 ])

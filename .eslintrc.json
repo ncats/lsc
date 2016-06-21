@@ -12,7 +12,8 @@
   "globals": {
     "requirejs": true,
     "require": true,
-    "define": true
+    "define": true,
+    "chrome": true
   },
   "extends": "eslint:recommended",
   "rules": {
@@ -148,16 +149,11 @@
     "no-octal-escape": "error",
     "no-param-reassign": "off",
     "no-path-concat": "error",
-    "no-plusplus": [
-      "error",
-      {
-        "allowForLoopAfterthoughts": true
-      }
-    ],
+    "no-plusplus": "off",
     "no-process-env": "error",
     "no-process-exit": "error",
     "no-proto": "error",
-    "no-prototype-builtins": "error",
+    "no-prototype-builtins": "off",
     "no-restricted-globals": "error",
     "no-restricted-imports": "error",
     "no-restricted-modules": "error",
@@ -179,7 +175,13 @@
     "no-unmodified-loop-condition": "error",
     "no-unneeded-ternary": "error",
     "no-unsafe-finally": "error",
-    "no-unused-expressions": "error",
+    "no-unused-expressions": [
+      "error",
+      {
+        "allowShortCircuit": true,
+        "allowTernary": true
+      }
+    ],
     "no-use-before-define": "off",
     "no-useless-call": "error",
     "no-useless-computed-key": "error",
@@ -211,7 +213,7 @@
     "prefer-const": "off",
     "prefer-reflect": "off",
     "prefer-rest-params": "error",
-    "prefer-spread": "error",
+    "prefer-spread": "off",
     "prefer-template": "off",
     "quote-props": "off",
     "quotes": "off",
@@ -252,8 +254,11 @@
     ],
     "valid-jsdoc": "off",
     "vars-on-top": "off",
-    "wrap-iife": "error",
-    "wrap-regex": "error",
+    "wrap-iife": [
+      "error",
+      "any"
+    ],
+    "wrap-regex": "off",
     "yield-star-spacing": "error",
     "yoda": [
       "error",
