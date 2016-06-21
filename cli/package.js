@@ -60,6 +60,7 @@ module.exports = {
             answers.appYear = year;
 
             gulp.src([
+                    `${__dirname}/../.eslintrc.json`,
                     `${__dirname}/../templates/common/**`,
                     `${__dirname}/../templates/${answers.projectType}-package/**`
                 ])

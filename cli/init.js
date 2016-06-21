@@ -15,7 +15,7 @@ module.exports = function init() {
         main: process.cwd(),
         directories: [lscRoot]
     });
-
+    
     try {
         global.LabShare.Config = config;
     } catch (error) {

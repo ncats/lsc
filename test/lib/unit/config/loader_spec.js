@@ -1,13 +1,8 @@
 'use strict';
 
-const proxyquire = require('proxyquire');
-
-require('promise-matchers');
-
 describe('configLoader', () => {
 
     let configLoaderSync,
-        configLoader,
         packagePath,
         config,
         options,
@@ -21,7 +16,6 @@ describe('configLoader', () => {
         };
 
         configLoaderSync = require('../../../../lib/config/loader').sync;
-        configLoader = require('../../../../lib/config/loader');
     });
 
     beforeEach(() => {
