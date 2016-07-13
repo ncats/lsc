@@ -217,8 +217,8 @@
     "prefer-template": "off",
     "quote-props": "off",
     "quotes": [
-      "error", 
-      "single", 
+      "error",
+      "single",
       {
         "avoidEscape": true,
         "allowTemplateLiterals": true
