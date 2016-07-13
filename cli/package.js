@@ -5,6 +5,7 @@ const gulp = require('gulp'),
     template = require('gulp-template'),
     rename = require('gulp-rename'),
     _ = require('underscore.string'),
+    PackageUpdate = require('../lib/package/update'),
     inquirer = require('inquirer');
 
 function padLeft(dateValue) {
@@ -16,6 +17,7 @@ let defaultAppName = process.cwd().split('/').pop().split('\\').pop();
 module.exports = {
     usage: [
         'lsc package create - creates a LabShare package inside the current directory',
+        'lsc package update - performs a clean update of the project in the current working directory',
         ''
     ],
     create() {
@@ -77,5 +79,16 @@ module.exports = {
                     this.log.info(`Successfully created LabShare ${answers.projectType} package...`);
                 });
         });
+    },
+    update() {
+        let packageUpdate = new PackageUpdate();
+
+        this.log.info('Updating current project...');
+
+        packageUpdate.on('status', message => {
+            this.log.info(message);
+        });
+
+        packageUpdate.updateSync();
     }
 };
