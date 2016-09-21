@@ -2,7 +2,7 @@
   "name": "lsc",
   "namespace": "lsc",
   "main": "./",
-  "version": "v0.16.714",
+  "version": "v0.16.921",
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "repository": {
@@ -25,6 +25,7 @@
   "dependencies": {
     "flatiron": "^0.4.2",
     "flatiron-cli-config": "^0.1.5",
+    "fluent-logger": "^2.0.1",
     "glob": "^7.0.3",
     "gulp": "^3.9.1",
     "gulp-conflict": "^0.4.0",
