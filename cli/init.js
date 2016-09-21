@@ -23,7 +23,11 @@ module.exports = function init() {
         throw error;
     }
 
-    let logDirectory = _.get(global.LabShare, 'Config.lsc.Log.Path');
+    let logDirectory = _.get(global.LabShare, 'Config.lsc.Log.Path'),
+        fluentD = _.get(global.LabShare, 'Config.lsc.Log.FluentD', {});
 
-    global.LabShare.Logger = new Logger(logDirectory);
+    global.LabShare.Logger = new Logger({
+        logDirectory,
+        fluentD
+    });
 };
