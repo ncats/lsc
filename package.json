@@ -2,7 +2,7 @@
   "name": "lsc",
   "namespace": "lsc",
   "main": "./",
-  "version": "v0.16.928",
+  "version": "v0.16.1005",
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "repository": {

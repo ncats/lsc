@@ -18,10 +18,10 @@
     "postinstall": "bower install --config.cwd=./ui"
   },
   "packageDependencies": {
-    "lsc": "https://github.com/LabShare/ls-ui"
+    "ls-shell": "*"
   },
   "dependencies": {
-    "ls-ui": "https://github.com/LabShare/ls-ui"
+    "ls-shell": "https://github.com/LabShare/shell"
   },
   "devDependencies": {
     "bower": "^1.6.2"
