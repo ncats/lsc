@@ -156,7 +156,7 @@
     "no-prototype-builtins": "off",
     "no-restricted-globals": "error",
     "no-restricted-imports": "error",
-    "no-restricted-modules": "error",
+    "no-restricted-modules": "off",
     "no-restricted-syntax": "error",
     "no-return-assign": "error",
     "no-script-url": "error",
