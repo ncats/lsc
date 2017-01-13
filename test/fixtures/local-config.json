@@ -1,0 +1,8 @@
+{
+  "pack1": {
+    "a": "b"
+  },
+  "cli-package2": {
+    "value": "asdef"
+  }
+}

@@ -8,13 +8,23 @@ const _ = require('lodash'),
     path = require('path'),
     configLoader = require('../lib/config').Loader,
     {Logger} = require('../lib/log'),
+    yargs = require('yargs'),
     lscRoot = path.join(__dirname, '..');
 
 module.exports = function init() {
-    let config = configLoader.sync({
-        main: process.cwd(),
-        directories: [lscRoot]
-    });
+    let argv = yargs.options({
+            configFile: {
+                alias: ['config', 'conf'],
+                describe: 'A path to a local configuration file',
+                type: 'string',
+                default: null
+            }
+        }).argv,
+        config = configLoader.sync({
+            main: process.cwd(),
+            directories: [lscRoot],
+            configFilePath: argv.configFile
+        });
 
     try {
         global.LabShare.Config = config;
@@ -23,8 +33,8 @@ module.exports = function init() {
         throw error;
     }
 
-    let logDirectory = _.get(global.LabShare, 'Config.lsc.Log.Path'),
-        fluentD = _.get(global.LabShare, 'Config.lsc.Log.FluentD', {});
+    let logDirectory = _.get(config, 'lsc.Log.Path'),
+        fluentD = _.get(config, 'lsc.Log.FluentD', {});
 
     global.LabShare.Logger = new Logger({
         logDirectory,
