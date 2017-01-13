@@ -1,5 +1,7 @@
 'use strict';
 
+const path = require('path');
+
 describe('configLoader', () => {
 
     let configLoaderSync,
@@ -76,6 +78,34 @@ describe('configLoader', () => {
 
             config['cli-package1'] = null;
             expect(config['cli-package1']).toBeNull();
+        });
+
+    });
+
+    describe('after loading configuration from a file path', () => {
+
+        beforeEach(() => {
+            config = configLoaderSync({
+                main: packagePath,
+                configFilePath: path.join('test', 'fixtures', 'local-config.json')
+            });
+        });
+
+        it('applies normalization and overrides package configuration by name', () => {
+            expect(config['pack1']).toEqual({
+                a: 'b'
+            });
+
+            // It still loaded the cli-package1 and cli-package2 configurations since the 'main' option was provided
+            expect(config['cli-package1']).toEqual(cliPackage1ConfigExpectation);
+
+            // The 'configFilePath' config file data replaced cli-package2's configuration
+            expect(config['cli-package2']).toEqual({
+                value: 'asdef',
+                Listen: {
+                    Port: 9999
+                }
+            });
         });
 
     });
