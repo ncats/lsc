@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "6"
+before_install:
+  - git config --global url."git@github.com:".insteadOf "https://github.com/"
+  - git config --global user.email "travis@travis-ci.org"
+  - git config --global user.name "Travis"
+install:
+  - npm install
+script:
+  - npm test
+  - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then npm install -g codacy-coverage && npm run coverage && cat ./coverage/lcov.info | codacy-coverage && rm -rf ./coverage; fi

@@ -1,5 +1,7 @@
 # LSC
 
+[![Build Status](https://travis-ci.org/LabShare/lsc.svg?branch=master)](https://travis-ci.org/LabShare/lsc)
+
 ##Before you start
 1. Install Node.js from https://nodejs.org/.
 2. Globally install LSC with `npm i -g lsc`.
