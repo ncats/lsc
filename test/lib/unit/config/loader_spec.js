@@ -9,6 +9,7 @@ describe('configLoader', () => {
         config,
         options,
         cliPackage1ConfigExpectation,
+        cliPackage3ConfigExpectation,
         cliPackage2ConfigExpectation;
 
     beforeEach(() => {
@@ -22,20 +23,23 @@ describe('configLoader', () => {
 
     beforeEach(() => {
         cliPackage1ConfigExpectation = {
-            "Hello": "World!",
-            "Values": [1, 2, 3]
+            'Hello': 'World!',
+            'Values': [1, 2, 3]
         };
         cliPackage2ConfigExpectation = {
-            "aKey": "aValue",
-            "Data": {
-                "Data1": 1,
-                "Data2": 2,
-                "Data3": 3
+            'aKey': 'aValue',
+            'Data': {
+                'Data1': 1,
+                'Data2': 2,
+                'Data3': 3
             },
-            "Listen": {
-                "Port": 9999,
-                "Url": "Some/url"
+            'Listen': {
+                'Port': 9999,
+                'Url': 'Some/url'
             }
+        };
+        cliPackage3ConfigExpectation = {
+            'Hi': 'there!'
         };
     });
 
@@ -78,6 +82,10 @@ describe('configLoader', () => {
 
             config['cli-package1'] = null;
             expect(config['cli-package1']).toBeNull();
+        });
+
+        it('works with scoped NPM modules', () => {
+            expect(config['cli-package3']).toEqual(cliPackage3ConfigExpectation);
         });
 
     });
