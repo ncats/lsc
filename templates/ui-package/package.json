@@ -14,16 +14,20 @@
     "url": "https://github.com/LabShare/<%= appNameSlug %>/issues"
   },
   "license": "MIT",
-  "scripts": {
-    "postinstall": "bower install --config.cwd=./ui"
-  },
+  "scripts": {},
   "packageDependencies": {
     "ls-shell": "*"
   },
   "dependencies": {
-    "ls-shell": "https://github.com/LabShare/shell"
+    "ls-shell": "https://github.com/LabShare/shell",
+    "angular": "1.6.1",
+    "angular-resource": "1.6.1",
+    "angular-route": "1.6.1",
+    "angular-sanitize": "1.6.1",
+    "angular-ui-router": "~0.2.18",
+    "lodash": "^4.6.1"
   },
   "devDependencies": {
-    "bower": "^1.6.2"
+    "angular-mocks": "1.6.1"
   }
 }
