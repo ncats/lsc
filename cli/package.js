@@ -16,7 +16,7 @@ let defaultAppName = process.cwd().split('/').pop().split('\\').pop();
 
 module.exports = {
     usage: [
-        'lsc package create - creates a LabShare package inside the current directory',
+        'lsc package create - creates a LabShare project inside the current directory',
         'lsc package update - performs a clean update of the project in the current working directory',
         ''
     ],
@@ -24,7 +24,7 @@ module.exports = {
         let prompts = [
             {
                 name: 'projectType',
-                message: 'Which type of LabShare package do you want to create?',
+                message: 'Which type of LabShare project do you want to create?',
                 type: 'list',
                 default: 'cli',
                 choices: ['cli', 'ui', 'api']
@@ -76,7 +76,7 @@ module.exports = {
                 .pipe(conflict('./'))
                 .pipe(gulp.dest('./'))
                 .on('end', () => {
-                    this.log.info(`Successfully created LabShare ${answers.projectType} package...`);
+                    this.log.info(`Successfully created LabShare ${answers.projectType} project...`);
                 });
         });
     },

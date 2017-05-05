@@ -1,9 +1,9 @@
 {
   "name": "main-package",
   "version": "0.0.1",
-  "packageDependencies": [
-    "cli-package1",
-    "cli-package2",
-    "@scoped/cli-package3"
-  ]
+  "dependencies": {
+    "cli-package1": "*",
+    "cli-package2": "*",
+    "@scoped/cli-package3": "*"
+  }
 }

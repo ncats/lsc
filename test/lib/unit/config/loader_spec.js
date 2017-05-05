@@ -46,7 +46,7 @@ describe('configLoader', () => {
     it('throws an exception when invalid arguments and/or options are provided', () => {
         expect(() => {
             configLoaderSync({
-                packageDirectory: [123]
+                main: 123
             });
         }).toThrow();
         expect(() => {
