@@ -23,8 +23,13 @@ describe('configLoader', () => {
 
     beforeEach(() => {
         cliPackage1ConfigExpectation = {
-            'Hello': 'World!',
-            'Values': [1, 2, 3]
+            Hello: 'World!',
+            Values: [1, 2, 3],
+            'cli-package2': {
+                Listen: {
+                    Port: 9999
+                }
+            }
         };
         cliPackage2ConfigExpectation = {
             'aKey': 'aValue',
@@ -39,7 +44,10 @@ describe('configLoader', () => {
             }
         };
         cliPackage3ConfigExpectation = {
-            'Hi': 'there!'
+            "cli-package3": {
+                Hi: 'there!'
+            },
+            Hi: 'there!'
         };
     });
 
@@ -74,7 +82,6 @@ describe('configLoader', () => {
         });
 
         it('allows config data to be modified after initialization', () => {
-            config = configLoaderSync(options);
             expect(config['cli-package1'].Hello).toBe('World!');
 
             config['cli-package1'].Hello = '?';
@@ -86,6 +93,10 @@ describe('configLoader', () => {
 
         it('works with scoped NPM modules', () => {
             expect(config['cli-package3']).toEqual(cliPackage3ConfigExpectation);
+        });
+
+        it('does not load empty or missing configuration objects', () => {
+            expect(config['dummy-dependency']).toBeUndefined();
         });
 
     });
