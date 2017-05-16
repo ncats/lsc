@@ -4,6 +4,7 @@
   "dependencies": {
     "cli-package1": "*",
     "cli-package2": "*",
-    "@scoped/cli-package3": "*"
+    "@scoped/cli-package3": "*",
+    "dummy-dependency": "*"
   }
 }
