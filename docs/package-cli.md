@@ -1,13 +1,9 @@
-### Creating a CLI project
+###Creating new CLI commands
 
- - `npm i -g lsc`
- - Create a new directory to store the CLI project
- - Run `lsc package create` inside the CLI project directory and select the `cli` type
+First, make sure LSC is globally installed. Then create a directory for your LabShare CLI package. Afterwards, run `lsc package create` inside the new directory and select the `cli` package type.
 
-### Creating new CLI commands
-
-To define new CLI commands, add Node.js modules inside the 'cli' directory of your LabShare CLI project. Command help
-text can be defined by exporting a `usage` array property containing lines of text. The file name of each CLI module
+To define new CLI commands, add Node.js modules inside the 'cli' directory of your LabShare CLI package. Command help
+text can be defined by adding a 'usage' array property to the module exports object. The file name of each CLI module
 defines the main command name and function names exported by the module define sub-commands. Each main command name
 must be unique.
 
