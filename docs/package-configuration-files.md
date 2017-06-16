@@ -1,8 +1,8 @@
-###Working with package configuration files [Optional]
+### Working with package configuration files [Optional]
 
 LabShare packages can define a configuration file named `config.json` inside the package's root directory.
 
-####Accessing config file data
+#### Accessing config file data
 
 In the server-side, all configuration file data will be read by the Shell at start up and stored in a global `LabShare.Config` object. 
 To access the config values you defined, use your package's lowercase `package.json` 'namespace' value (or 'name' if you did not define a 'namespace')
@@ -17,14 +17,14 @@ Example config file:
 }
 ```
 
-####Example: accessing config file data in the NodeJS environment
+#### Example: accessing config file data in the NodeJS environment
 ```
 // my-module.js
 global.LabShare.Config['my-package-name'].Value === 5;
 global.LabShare.Config['my-package-name'].Foo === 'Bar';
 ```
 
-####Overriding configuration values
+#### Overriding configuration values
 
 To override the configuration for one or more locally installed packages, specify the package name and an object containing the modified 
 property names and values.
