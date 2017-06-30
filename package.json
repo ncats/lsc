@@ -1,7 +1,7 @@
 {
   "name": "lsc",
   "main": "./",
-  "version": "v0.17.0524",
+  "version": "v0.17.0630",
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "repository": {
@@ -49,7 +49,7 @@
     "istanbul": "^0.4.2",
     "jasmine-core": "^2.2.0",
     "jasmine-node": "^1.14.5",
-    "mock-fs": "^3.9.0",
+    "mock-fs": "^4.4.1",
     "proxyquire": "^1.4.0"
   }
 }
