@@ -1,7 +1,7 @@
 {
   "name": "lsc",
   "main": "./",
-  "version": "v0.17.0717",
+  "version": "v0.17.0807",
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "repository": {
@@ -44,7 +44,8 @@
     "tiny-json-http": "^5.1.1",
     "underscore.string": "^3.3.4",
     "untildify": "^3.0.2",
-    "yargs": "^4.8.1"
+    "winston": "2.3.1",
+    "yargs": "^8.0.2"
   },
   "devDependencies": {
     "istanbul": "^0.4.2",
