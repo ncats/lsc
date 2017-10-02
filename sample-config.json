@@ -5,7 +5,8 @@
       "FluentD": {
         "host": "localhost",
         "port": 24224,
-        "timeout": 3.0
+        "timeout": 3.0,
+        "tag": "labshare"
       }
     }
   }
