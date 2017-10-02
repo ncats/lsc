@@ -1,12 +1,13 @@
 /**
- * This module is used to initialize the global LabShare object
+ * @exports This module is used to initialize the global LabShare object
  */
 
 'use strict';
 
 const _ = require('lodash'),
     path = require('path'),
-    configLoader = require('../lib/config').Loader,
+    utils = require('../lib/cli/utils'),
+    {Loader} = require('../lib/config'),
     {Logger} = require('../lib/log'),
     yargs = require('yargs'),
     lscRoot = path.join(__dirname, '..');
@@ -20,11 +21,12 @@ module.exports = function init() {
                 default: null
             }
         }).argv,
-        config = configLoader.sync({
+        config = Loader.sync({
             main: process.cwd(),
             directories: [lscRoot],
             configFilePath: argv.configFile
-        });
+        }),
+        name = utils.getPackageName(utils.getPackageManifest(process.cwd()));
 
     try {
         global.LabShare.Config = config;
@@ -34,7 +36,9 @@ module.exports = function init() {
     }
 
     let logDirectory = _.get(config, 'lsc.Log.Path'),
-        fluentD = _.get(config, 'lsc.Log.FluentD', {});
+        fluentD = _.defaults(_.get(config, 'lsc.Log.FluentD', {}), {
+            tag: name || 'labshare'
+        });
 
     global.LabShare.Logger = new Logger({
         logDirectory,
