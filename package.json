@@ -1,7 +1,7 @@
 {
   "name": "lsc",
   "main": "./",
-  "version": "v1.17.1002",
+  "version": "v1.17.1015",
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "repository": {
@@ -16,16 +16,28 @@
     "npm": ">=3.7.0",
     "node": ">=6.0.0"
   },
+  "types": "./index.d.ts",
   "license": "MIT",
   "scripts": {
-    "pretest": "node -e 'process.exit(0)'",
+    "prepublish": "tsc",
+    "postinstall": "tsc",
+    "pretest": "tsc",
     "test": "jasmine-node --captureExceptions --color ./test/lib/unit",
-    "coverage": "istanbul cover jasmine-node ./test/lib/unit"
+    "coverage": "istanbul cover jasmine-node ./test/lib/unit",
+    "build": "tsc",
+    "watch:build": "tsc --watch"
   },
   "bin": {
     "lsc": "./lib/bin/lsc.js"
   },
   "dependencies": {
+    "@types/glob": "^5.0.33",
+    "@types/lodash": "^4.14.77",
+    "@types/q": "^1.0.5",
+    "@types/semver": "^5.4.0",
+    "@types/shelljs": "^0.7.4",
+    "@types/winston": "^2.3.6",
+    "@types/yargs": "^8.0.2",
     "eslint-plugin-promise": "^1.3.2",
     "flatiron": "^0.4.2",
     "flatiron-cli-config": "^0.1.5",
@@ -48,10 +60,12 @@
     "yargs": "^8.0.2"
   },
   "devDependencies": {
+    "@types/jasmine": "^2.6.0",
     "istanbul": "^0.4.2",
     "jasmine-core": "^2.2.0",
     "jasmine-node": "^1.14.5",
     "mock-fs": "^4.4.1",
-    "proxyquire": "^1.4.0"
+    "proxyquire": "^1.4.0",
+    "typescript": "^2.5.3"
   }
 }

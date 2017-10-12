@@ -1,40 +1,48 @@
 'use strict';
 
-const flatiron = require('flatiron'),
-    path = require('path'),
-    _ = require('lodash'),
-    {app} = flatiron,
-    cwd = process.cwd(),
-    cliUtils = require('../cli/utils'),
-    lscRoot = path.join(__dirname, '..', '..'),
-    checkSelfUpdate = require('../check-self-update');
+import flatiron = require('flatiron')
+import path = require('path')
+import _ = require('lodash')
+import {isPackageSync} from "./utils"
+import {checkSelfUpdate} from "../check-self-update/index"
+import labShare from '../labshare'
+import loaderPlugin = require('./loader-plugin')
 
-let labShare = require('../labshare');
+const {app} = flatiron,
+    cwd = process.cwd(),
+    lscRoot = path.join(__dirname, '..', '..');
+
+interface StartOptions {
+    directories: string[]
+    pattern: string
+    main: string
+}
+
+interface packageJson {
+    description: string
+    version: string
+}
 
 /**
  * @param {object} options
- * @param {string} options.cwd
  * @param {string} options.main
  * @param {Array} options.directories
  * @param {string} options.pattern
  */
-module.exports = function start(options = {}) {
-    options = _.defaults(options, {
-        cwd,
-        main: options.cwd || cwd,
-        directories: [lscRoot],
-        pattern: '{src/cli,cli}/*.js'
-    });
-
-    let pkg = null;
+export function start(options: StartOptions = {
+    main: cwd,
+    directories: [lscRoot],
+    pattern: '{src/cli,cli}/*.js'
+}) {
+    let pkg: packageJson;
 
     checkSelfUpdate('lsc');
 
-    if (cliUtils.isPackageSync(options.cwd)) {
+    if (isPackageSync(options.main)) {
         app.config.file({
-            file: path.join(options.cwd, 'config.json')
+            file: path.join(options.main, 'config.json')
         });
-        pkg = require(path.join(options.cwd, 'package.json'));
+        pkg = require(path.join(options.main, 'package.json'));
     } else {
         pkg = require(path.join(lscRoot, 'package.json'));
         app.config.file({
@@ -55,8 +63,9 @@ module.exports = function start(options = {}) {
         ],
         version: true
     });
+
     app.use(require('flatiron-cli-config'));
-    app.use(require('../cli').Plugin, options);
+    app.use(loaderPlugin, options);
 
     global.LabShare = labShare;
 
@@ -66,4 +75,4 @@ module.exports = function start(options = {}) {
             process.exit(1);
         }
     });
-};
+}

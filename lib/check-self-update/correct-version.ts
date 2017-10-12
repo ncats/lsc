@@ -2,8 +2,6 @@
  This function "corrects" a version and can be used both with local version and
  latest version */
 
-const correctVersion = (version) => {
+export function correctVersion(version: string) {
     return version.replace(/[a-zA-Z]/g, '').split('.').map(n => parseInt(n, 10)).join('.')
-};
-
-module.exports = correctVersion;
+}

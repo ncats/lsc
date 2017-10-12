@@ -4,3 +4,10 @@ test
 .npmignore
 .gitmodules
 *.md
+*.ts
+*.map
+package-lock.json
+.eslintrc.json
+.eslintignore
+node_modules/@types/*
+tsconfig.json

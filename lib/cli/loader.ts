@@ -13,21 +13,22 @@
 
 'use strict';
 
-const path = require('path'),
-    _ = require('lodash'),
-    Q = require('q'),
-    assert = require('assert'),
-    cliUtils = require('./utils'),
-    ADDITIONAL_COMMANDS_HEADER_TITLE = 'Additional commands',
+import {getMatchingFilesSync, getPackageManifest, getPackageName, applyToNodeModulesSync} from "./utils";
+import path = require('path')
+import _ = require('lodash')
+import Q = require('q')
+import assert = require('assert')
+
+const ADDITIONAL_COMMANDS_HEADER_TITLE = 'Additional commands',
     COMMAND_HEADER_TITLE = 'All commands',
     INIT_TIMEOUT = 5000,
     MISSING_COMMANDS_ERROR_MESSAGE = 'No commands found!';
 
-function hasLogger(app) {
+function hasLogger(app): boolean {
     return app.log && app.log.warn && app.log.error && app.log.help;
 }
 
-function getBaseName(commandFile) {
+function getBaseName(commandFile: string) {
     return path.basename(commandFile, path.extname(commandFile));
 }
 
@@ -35,7 +36,21 @@ function createCommandHeader(name) {
     return ['', name, _.repeat('-', name.length)];
 }
 
-class CliLoader {
+interface CliLoaderOptions {
+    configFilePath?: string
+    main?: string
+    packageDirectory?: string
+    directories?: string | string[]
+    timeout?: number
+    pattern?: string
+}
+
+export class CliLoader {
+
+    public _commands;
+    private initModules: string[];
+    private app;
+    private options: CliLoaderOptions;
 
     /**
      * @throws Error if the given app is not an initialized Flatiron app.
@@ -50,27 +65,27 @@ class CliLoader {
      *
      * @constructor
      */
-    constructor(app, options = {}) {
+    public constructor(app, options: CliLoaderOptions) {
         assert.ok(app.commands && hasLogger(app), '`app` must be a Flatiron app with command storage and logging capabilities');
         assert.ok(app.plugins && app.plugins.cli, 'The Flatiron cli plugin must be loaded by the app');
 
         this.app = app;
-        this._commands = {};        // format: {packageName1: {cmd1Name: 'path/to/cmd1Name', cmd2Name: 'path/to/cmd2Name', ...}, packageName2: ...}
-        this._initModules = [];     // format: ['path/to/init.js', ...]
+        this._commands = {};       // format: {packageName1: {cmd1Name: 'path/to/cmd1Name', cmd2Name: 'path/to/cmd2Name', ...}, packageName2: ...}
+        this.initModules = [];     // format: ['path/to/init.js', ...]
 
-        if (options.main) {
+        if (_.get(options, 'main')) {
             assert.ok(_.isString(options.main), '`options.main` must be a string');
             options.main = path.resolve(options.main);
         }
-        if (options.directories) {
-            options.directories = _.isArray(options.directories) ? options.directories : [options.directories];
-            options.directories = _.map(options.directories, directory => {
+
+        if (_.get(options, 'directories')) {
+            options.directories = _.map(_.isArray(options.directories) ? options.directories : [options.directories], directory => {
                 assert.ok(_.isString(directory), '`options.directories` must contain non-empty strings');
                 return path.resolve(directory);
             });
         }
 
-        this.options = _.defaults(options, {
+        this.options = _.defaults(options || {}, {
             main: '',
             pattern: 'cli/*.js',
             directories: [],
@@ -86,17 +101,17 @@ class CliLoader {
      * An error is logged if two different packages try to load a command with the same name, a command could not be loaded, or
      * if a command module does not contain help text.
      */
-    load(callback) {
+    public load(callback?: (error: Error) => void) {
         let app = this.app;
 
         // Cache all init and command modules
         try {
             _.each(this.options.directories, this._storeCommands.bind(this));
             if (this.options.main) {
-                cliUtils.applyToNodeModulesSync(this.options.main, this._storeCommands.bind(this));
+                applyToNodeModulesSync(this.options.main, this._storeCommands.bind(this));
             }
         } catch (error) {
-            return Q.reject(new Error(`Failed to load CLI commands: ${error.message}`, error.stack)).nodeify(callback);
+            return Q.reject(new Error(`Failed to load CLI commands: ${error.message}: ${error.stack}`)).nodeify(callback);
         }
 
         // Run all the init functions
@@ -123,7 +138,7 @@ class CliLoader {
     /**
      * @description Synchronously unloads all the commands stored by the CLiLoader.
      */
-    unload() {
+    public unload() {
         _.each(this._commands, pkg => {
             _.each(_.keys(pkg), name => {
                 delete this.app.commands[name];
@@ -135,11 +150,11 @@ class CliLoader {
     /**
      * @description Displays a list of available commands.
      */
-    displayHelp() {
+    public displayHelp() {
         let app = this.app,
             help = [],
-            commands = this._getStoredCommandNames(),
-            additionalCommands = this._getUncategorizedCommands();
+            commands = this.getStoredCommandNames(),
+            additionalCommands = this.getUncategorizedCommands();
 
         if (_.isEmpty(commands) && _.isEmpty(additionalCommands)) {
             return app.log.help(MISSING_COMMANDS_ERROR_MESSAGE);
@@ -151,7 +166,7 @@ class CliLoader {
             help = help.concat(createCommandHeader(ADDITIONAL_COMMANDS_HEADER_TITLE), additionalCommands);
         }
 
-        _.each(help, function (message) {
+        _.each(help, (message: string) => {
             app.log.help(message);
         });
     }
@@ -162,12 +177,13 @@ class CliLoader {
      * @returns {Promise}
      * @private
      */
-    _init(callback) {
+    private _init(callback?: (error: Error) => void) {
         let promises = [];
 
-        _.each(this._initModules, initModulePath => {
+        _.each(this.initModules, initModulePath => {
             promises.push(Q.Promise((resolve, reject) => {
                 let init = null;
+
                 try {
                     init = require(initModulePath);
                 } catch (error) {
@@ -202,16 +218,16 @@ class CliLoader {
      * @param {String} directory - An absolute path to a directory
      * @private
      */
-    _storeCommands(directory) {
-        let manifest = cliUtils.getPackageManifest(directory);
+    private _storeCommands(directory: string) {
+        let manifest = getPackageManifest(directory);
         if (!manifest) {
             return;
         }
 
-        let packageName = cliUtils.getPackageName(manifest),
+        let packageName = getPackageName(manifest),
             commands = this._getCommands(directory, this.options.pattern);
 
-        _.each(commands, (command, name) => {
+        _.each(commands, (command, name: string) => {
             this._commands[packageName] = this._commands[packageName] || {};
 
             if (_.has(this._commands[packageName], name)) {
@@ -225,14 +241,13 @@ class CliLoader {
     /**
      * @description Retrieves and organizes the names of all the stored commands.
      * @returns {Array} of command names categorized by package names
-     * @private
      */
-    _getStoredCommandNames() {
+    private getStoredCommandNames(): string[] {
         let allCommands = [],
             commands = this._commands;
 
-        _.each(commands, (pkgCommands, pkgName) => {
-            var commandList = _.keys(pkgCommands);
+        _.each(commands, (pkgCommands, pkgName: string) => {
+            let commandList = _.keys(pkgCommands);
             if (_.isEmpty(commandList)) {
                 return;
             }
@@ -242,16 +257,23 @@ class CliLoader {
         return allCommands;
     }
 
-    _getCommands(directory, pattern) {
+    /**
+     *
+     * @param directory
+     * @param pattern
+     * @returns {{}}
+     * @private
+     */
+    private _getCommands(directory: string, pattern: string) {
         let commands = {},
-            commandFilePaths = cliUtils.getMatchingFilesSync(directory, pattern);
+            commandFilePaths = getMatchingFilesSync(directory, pattern);
 
-        _.each(commandFilePaths, commandFilePath => {
+        _.each(commandFilePaths, (commandFilePath: string) => {
             let baseName = getBaseName(commandFilePath);
 
             // Store 'init' modules separately
             if (/^init$/i.test(baseName)) {
-                this._initModules.push(commandFilePath);
+                this.initModules.push(commandFilePath);
             } else {
                 commands[baseName] = commandFilePath;
             }
@@ -264,9 +286,8 @@ class CliLoader {
      * @description Retrieves all the command names stored in the Flatiron app that were not
      * stored by the CliLoader.
      * @returns {Array} A list of command names.
-     * @private
      */
-    _getUncategorizedCommands() {
+    private getUncategorizedCommands(): string[] {
         let appCommands = _.keys(this.app.commands),
             storedCommands = _.values(this._commands);
 
@@ -278,4 +299,3 @@ class CliLoader {
     }
 }
 
-module.exports = CliLoader;

@@ -1,6 +1,6 @@
 'use strict';
 
-const correctVersion = require('./correct-version');
+import {correctVersion} from "./correct-version"
 
 function hasNewerVersion(currentVersion, latestVersion) {
     return currentVersion !== latestVersion;
@@ -40,13 +40,11 @@ function message({name, currentVersion, latestVersion}) {
  * @param {Object} jsonData
  * @api public
  */
-const promptIfNewerVersion = (name, jsonData) => {
+export function promptIfNewerVersion(name: string, jsonData) {
     const latestVersion = getLatestVersion(jsonData);
     const currentVersion = getModuleCurrentVersion();
 
     if (hasNewerVersion(currentVersion, latestVersion)) {
         global.LabShare.Logger.info(message({name, currentVersion, latestVersion}));
     }
-};
-
-module.exports = promptIfNewerVersion;
+}

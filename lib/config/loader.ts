@@ -18,33 +18,41 @@
 
 'use strict';
 
-const _ = require('lodash'),
-    path = require('path'),
-    assert = require('assert'),
-    untildify = require('untildify'),
-    override = require('json-override'),
-    cliUtils = require('../cli/utils');
+import {getPackageName, readJSON, getPackageManifest, getPackageConfigPath, applyToNodeModulesSync} from "../cli/utils";
+
+import _ = require('lodash')
+import path = require('path')
+import assert = require('assert')
+import untildify = require('untildify')
+import override = require('json-override')
 
 /**
  * Assigns the package configuration object to the given config object.
  *
- * @throws Error if cliUtils.readJSON fails.
+ * @throws Error if readJSON fails.
  *
  * @param {String} directory A LabShare package directory
  * @param {Object} config Contains configuration data
  */
-function loadConfig(directory, config) {
-    let pkgConfigPath = cliUtils.getPackageConfigPath(directory),
-        manifest = cliUtils.getPackageManifest(directory);
+function loadConfig(directory: string, config): void {
+    let pkgConfigPath = getPackageConfigPath(directory),
+        manifest = getPackageManifest(directory);
 
     if (!manifest) {
         return;
     }
 
-    let name = cliUtils.getPackageName(manifest),
-        pkgConfig = config[name] || cliUtils.readJSON(pkgConfigPath);
+    let name = getPackageName(manifest),
+        pkgConfig = config[name] || readJSON(pkgConfigPath);
 
     config[name] = pkgConfig || {};
+}
+
+interface ConfigLoaderOptions {
+    configFilePath?: string
+    main?: string
+    packageDirectory?: string
+    directories?: string[]
 }
 
 /**
@@ -60,8 +68,15 @@ function loadConfig(directory, config) {
  * first then any configuration files found in 'main' or 'directories' will be loaded next.
  * @constructor
  */
-class ConfigLoader {
-    constructor(options = {}) {
+export class ConfigLoader {
+    private options: ConfigLoaderOptions;
+
+    constructor(options: ConfigLoaderOptions = {
+        configFilePath: null,
+        main: null,
+        packageDirectory: null,
+        directories: []
+    }) {
         if (options.configFilePath) {
             assert.ok(_.isString(options.configFilePath), '`options.configFilePath` must be a string');
             options.configFilePath = path.resolve(untildify(options.configFilePath));
@@ -78,8 +93,7 @@ class ConfigLoader {
         }
 
         if (options.directories) {
-            options.directories = _.isArray(options.directories) ? options.directories : [options.directories];
-            options.directories = _.map(options.directories, directory => {
+            options.directories = _.map(_.isArray(options.directories) ? options.directories : [options.directories], directory => {
                 assert.ok(_.isString(directory), '`options.directories` must contain non-empty strings');
                 return path.resolve(directory);
             });
@@ -92,11 +106,11 @@ class ConfigLoader {
      * @throws Error if a JSON config file could not be parsed.  Missing config.json files are silently ignored.
      * @returns {Object} containing read-only access to config data organized by LabShare package names.
      */
-    sync() {
+    public sync() {
         let config = {};
 
         if (this.options.configFilePath) {
-            config = cliUtils.readJSON(this.options.configFilePath);
+            config = readJSON(this.options.configFilePath);
             if (!config) {
                 throw new Error(`Failed to load config file from "${this.options.configFilePath}"`);
             }
@@ -104,7 +118,7 @@ class ConfigLoader {
 
         try {
             if (this.options.main) {
-                cliUtils.applyToNodeModulesSync(this.options.main, directory => {
+                applyToNodeModulesSync(this.options.main, directory => {
                     loadConfig(directory, config);
                 });
             }
@@ -135,9 +149,9 @@ class ConfigLoader {
      * @param {Object} config - object containing package configuration data
      * @private
      */
-    _overrideValues(config) {
-        _.each(config, (packageConfig, packageName) => {
-            _.each(packageConfig, (value, key) => {
+    private _overrideValues(config) {
+        _.each(config, (packageConfig, packageName: string) => {
+            _.each(packageConfig, (value, key: string) => {
                 if (_.has(config, key)) {
                     config[key] = override(config[key], value);
 
@@ -150,9 +164,7 @@ class ConfigLoader {
 }
 
 // Expose the sync version and the constructor
-module.exports.sync = function configLoaderSync(options) {
+export function configLoaderSync(options: ConfigLoaderOptions) {
     let configLoader = new ConfigLoader(options);
     return configLoader.sync();
-};
-
-module.exports.ConfigLoader = ConfigLoader;
+}
