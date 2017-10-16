@@ -17,7 +17,6 @@ logs
 
 #Local Config
 config.json
-app.conf
 
 # Runtime data
 pids
@@ -50,3 +49,9 @@ apps
 release
 dist
 
+#TypeScript-generated files
+lib/**/*.js
+cli/*.js
+test/lib/**/*.js
+index.js
+*.js.map

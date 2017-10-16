@@ -1,17 +1,17 @@
 'use strict';
 
-const fetchModuleRegistryInfo = require('./fetch-module-registry-info'),
-    promptIfNewerVersion = require('./prompt-if-newer-version');
+import {fetchModuleRegistryInfo} from "./fetch-module-registry-info";
+import {promptIfNewerVersion} from "./prompt-if-newer-version";
 
 /**
  *
  * @param {String} name - package.json name
  * @returns {Promise.<T>}
  */
-module.exports = (name) => {
+export function checkSelfUpdate(name: string) {
     return fetchModuleRegistryInfo(name)
         .then(data => promptIfNewerVersion(name, data))
-        .catch(error => {
+        .catch(() => {
             /* silently fail if user has no internet connection */
         })
-};
+}

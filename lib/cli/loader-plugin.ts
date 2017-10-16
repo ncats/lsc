@@ -31,7 +31,7 @@
 
 'use strict';
 
-const CliLoader = require('./loader');
+import {CliLoader} from './loader'
 
 exports.name = 'cli-loader-plugin';
 

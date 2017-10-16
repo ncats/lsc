@@ -4,38 +4,34 @@
 
 'use strict';
 
-const _ = require('lodash'),
-    path = require('path'),
-    utils = require('../lib/cli/utils'),
-    {Loader} = require('../lib/config'),
-    {Logger} = require('../lib/log'),
-    yargs = require('yargs'),
-    lscRoot = path.join(__dirname, '..');
+import _ = require('lodash')
+import path = require('path')
+import yargs = require('yargs')
+import {configLoaderSync} from '../lib/config'
+import {getPackageManifest, getPackageName} from "../lib/cli/utils";
+import {Logger} from "../lib/log/logger";
 
-module.exports = function init() {
+const lscRoot = path.join(__dirname, '..');
+
+export = function init() {
     let argv = yargs.options({
             configFile: {
                 alias: ['config', 'conf'],
                 describe: 'A path to a local configuration file',
                 type: 'string',
-                default: null
+                'default': null
             }
         }).argv,
-        config = Loader.sync({
+        config = configLoaderSync({
             main: process.cwd(),
             directories: [lscRoot],
             configFilePath: argv.configFile
         }),
-        name = utils.getPackageName(utils.getPackageManifest(process.cwd()));
+        name: string = getPackageName(getPackageManifest(process.cwd()));
 
-    try {
-        global.LabShare.Config = config;
-    } catch (error) {
-        error.message = `Failed to load global.LabShare.Config: ${error.message}`;
-        throw error;
-    }
+    global.LabShare.Config = config;
 
-    let logDirectory = _.get(config, 'lsc.Log.Path'),
+    let logDirectory: string = _.get(config, 'lsc.Log.Path'),
         fluentD = _.defaults(_.get(config, 'lsc.Log.FluentD', {}), {
             tag: name || 'labshare'
         });

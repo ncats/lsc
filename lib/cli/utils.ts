@@ -11,7 +11,7 @@ const fs = require('fs'),
  * @returns {Array} A list of LabShare package dependencies or an empty array
  * @private
  */
-function getPackageDependencies(manifest) {
+function getPackageDependencies(manifest): string[] {
     return (_.isObject(manifest) && _.isObject(manifest.packageDependencies))
         ? (_.isArray(manifest.packageDependencies) ? manifest.packageDependencies : Object.keys(manifest.packageDependencies))
         : [];
@@ -21,12 +21,12 @@ function getPackageDependencies(manifest) {
  * @description Retrieves the LabShare package's name
  * @param {Object} manifest - A package.json parsed into a JS object
  */
-exports.getPackageName = function (manifest) {
+export function getPackageName(manifest): string {
     if (!manifest || !(manifest.namespace || manifest.name)) {
         return null;
     }
     return (manifest.namespace || manifest.name).toLowerCase();
-};
+}
 
 /**
  * @description Helper function for reading JSON files. It returns undefined if the JSON file does not
@@ -35,7 +35,7 @@ exports.getPackageName = function (manifest) {
  * @param {string} filePath - The path to a JSON file
  * @returns {Object|undefined}
  */
-exports.readJSON = function (filePath) {
+export function readJSON (filePath) {
     assert.ok(_.isString(filePath) && !_.isEmpty(filePath), 'readJSON: `filePath` must be a non-empty string');
 
     filePath = path.resolve(filePath);
@@ -49,21 +49,21 @@ exports.readJSON = function (filePath) {
             throw error;
         }
     }
-};
+}
 
 /**
  * @description Checks if the directory contains a LabShare package.
  * @param {string} directory
  * @returns {Boolean}
  */
-exports.isPackageSync = function isPackageSync(directory) {
+export function isPackageSync(directory): boolean {
     try {
-        let manifest = exports.getPackageManifest(directory);
+        let manifest = getPackageManifest(directory);
         return !!manifest;
     } catch (e) {
         return false;
     }
-};
+}
 
 /**
  * @Throws Error when the parsed manifest does not contain a 'name' property.
@@ -71,28 +71,28 @@ exports.isPackageSync = function isPackageSync(directory) {
  * @param {String} directory - A path to a directory
  * @returns {Object} containing parsed package.json data, otherwise null/undefined
  */
-exports.getPackageManifest = function (directory) {
+export function getPackageManifest(directory) {
     assert.ok(_.isString(directory), 'getPackageManifest: `directory` must be a non-empty string');
 
     let manifestPath = path.resolve(directory, 'package.json'),
-        manifest = exports.readJSON(manifestPath);
+        manifest = readJSON(manifestPath);
 
     if (!manifest) {
         return null;
-    } else if (!exports.getPackageName(manifest)) {
+    } else if (!getPackageName(manifest)) {
         throw new Error(manifestPath + ' is missing a `name` property');
     }
 
     return manifest;
-};
+}
 
 /**
  * @param {String} directory A LabShare package directory
  * @returns {String} The absolute path to the package's local config file
  */
-exports.getPackageConfigPath = function (directory) {
+export function getPackageConfigPath(directory: string): string {
     return path.resolve(directory, 'config.json');
-};
+}
 
 /**
  * @description Synchronously applies the given function to each LabShare package inside the given directory.
@@ -103,18 +103,18 @@ exports.getPackageConfigPath = function (directory) {
  * @param {Function} func - A function that accepts a path to a LabShare project
  * @param thisArg The context of `func`
  */
-exports.applyToNodeModulesSync = function applyToNodeModulesSync(directory, func, thisArg) {
+export function applyToNodeModulesSync(directory: string, func: (packagePath: string) => void, thisArg?: any): void {
     assert.ok(_.isString(directory), 'applyToNodeModulesSync: `root` must be a non-empty string');
     assert.ok(_.isFunction(func), 'applyToNodeModulesSync: `func` must be a function');
 
     let loadedDependencies = {};
 
-    if (!exports.isPackageSync(directory)) {
+    if (!isPackageSync(directory)) {
         return;
     }
 
     function getDependenciesRecursively(packagePath) {
-        let manifest = exports.getPackageManifest(packagePath),
+        let manifest = getPackageManifest(packagePath),
             dependencies = getPackageDependencies(manifest),
             dependencyPaths = [],
             id = path.basename(packagePath);
@@ -124,9 +124,11 @@ exports.applyToNodeModulesSync = function applyToNodeModulesSync(directory, func
 
         _.each(dependencies, dependency => {
             let dependencyPath = path.join(directory, 'node_modules', dependency);
-            if (!exports.isPackageSync(dependencyPath)) {
+
+            if (!isPackageSync(dependencyPath)) {
                 throw new Error(`"${id}" depends on "${dependency}" but it does not exist in "${dependencyPath}". Make sure it is installed!`);
             }
+
             dependencyPaths.push(dependencyPath);
         });
 
@@ -140,7 +142,7 @@ exports.applyToNodeModulesSync = function applyToNodeModulesSync(directory, func
     }
 
     getDependenciesRecursively(directory);
-};
+}
 
 /**
  * Throws an exception if the pattern is empty or glob.sync has an error.
@@ -149,8 +151,8 @@ exports.applyToNodeModulesSync = function applyToNodeModulesSync(directory, func
  * @param {String} pattern A glob pattern
  * @returns {Array} of absolute file paths
  */
-exports.getMatchingFilesSync = function (directory, pattern) {
+export function getMatchingFilesSync(directory, pattern): string[] {
     return glob.sync(pattern, {cwd: directory}).map((file) => {
         return path.resolve(directory, file);
     });
-};
+}

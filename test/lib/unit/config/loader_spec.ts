@@ -1,11 +1,11 @@
 'use strict';
 
-const path = require('path');
+import path = require('path')
+import {configLoaderSync} from '../../../../lib/config/loader'
 
 describe('configLoader', () => {
 
-    let configLoaderSync,
-        packagePath,
+    let packagePath,
         config,
         options,
         cliPackage1ConfigExpectation,
@@ -17,8 +17,6 @@ describe('configLoader', () => {
         options = {
             main: packagePath
         };
-
-        configLoaderSync = require('../../../../lib/config/loader').sync;
     });
 
     beforeEach(() => {
@@ -47,15 +45,15 @@ describe('configLoader', () => {
         expect(() => {
             configLoaderSync({
                 packageDirectory: [123]
-            });
+            } as any);
         }).toThrow();
         expect(() => {
             configLoaderSync({
                 directories: ['a/directory', 5]
-            });
+            } as any);
         }).toThrow();
         expect(() => {
-            configLoaderSync();
+            configLoaderSync({});
         }).not.toThrow();
     });
 

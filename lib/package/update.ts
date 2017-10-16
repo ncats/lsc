@@ -8,27 +8,34 @@
 
 'use strict';
 
-const assert = require('assert'),
-    shell = require('shelljs'),
-    rimraf = require('rimraf'),
-    path = require('path'),
-    cliUtils = require('../cli/utils'),
-    {EventEmitter} = require('events');
+import assert = require('assert')
+import shell = require('shelljs')
+import rimraf = require('rimraf')
+import path = require('path')
+import {EventEmitter} from 'events'
+import {isPackageSync} from "../cli/utils";
+import child = require('child_process')
 
-function gitPull(directory) {
+function gitPull(directory: string): void {
     shell.exec(`git --git-dir=${path.join(directory, '.git')} --work-tree=${directory} pull`);
 }
 
-function npmInstall(directory) {
-    return shell.exec(`npm i --prefix ${directory}`, {async: true});
+function npmInstall(directory: string): child.ChildProcess {
+    return shell.exec(`npm i --prefix ${directory}`, {async: true}) as child.ChildProcess;
 }
 
-function cleanModuleDirectories(directory) {
+function cleanModuleDirectories(directory: string): void {
     rimraf.sync(path.join(directory, 'node_modules'));
     rimraf.sync(path.join(directory, 'ui', 'bower_components'));
 }
 
-class PackageUpdate extends EventEmitter {
+interface PackageUpdateOptions {
+    cwd: string
+}
+
+export class PackageUpdate extends EventEmitter {
+
+    private cwd: string;
 
     /**
      * @description Package updater class
@@ -36,10 +43,10 @@ class PackageUpdate extends EventEmitter {
      * @param {string} options.cwd
      * @constructor
      */
-    constructor(options = {}) {
+    constructor(options: PackageUpdateOptions = {cwd: null}) {
         super();
         this.cwd = options.cwd || process.cwd();
-        assert.ok(cliUtils.isPackageSync(this.cwd), `PackageUpdater: ${this.cwd} does not contain a LabShare package!`);
+        assert.ok(isPackageSync(this.cwd), `PackageUpdater: ${this.cwd} does not contain a LabShare package!`);
     }
 
     updateSync() {
@@ -68,5 +75,3 @@ class PackageUpdate extends EventEmitter {
         });
     };
 }
-
-module.exports = PackageUpdate;

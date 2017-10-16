@@ -1,14 +1,15 @@
 'use strict';
 
+import {PackageUpdate} from "../lib/package/update";
+
 const gulp = require('gulp'),
     conflict = require('gulp-conflict'),
     template = require('gulp-template'),
     rename = require('gulp-rename'),
     _ = require('underscore.string'),
-    PackageUpdate = require('../lib/package/update'),
     inquirer = require('inquirer');
 
-function padLeft(dateValue) {
+function padLeft(dateValue: number) {
     return (dateValue < 10) ? '0' + dateValue : dateValue.toString();
 }
 

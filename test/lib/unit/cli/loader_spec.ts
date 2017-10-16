@@ -1,31 +1,29 @@
 'use strict';
 
-const path = require('path'),
-    _ = require('lodash');
+import path = require('path')
+import _ = require('lodash')
+import {CliLoader} from "../../../../lib/cli/loader";
 
 function allArgs(spy) {
-    return _.flatten(_.map(spy.calls, call => {
+    return _.flatten(_.map(spy.calls, (call: any) => {
         return call.args;
     }));
 }
 
+function toContainAllOf(actual: string[], expected: string[]): boolean {
+    return _.every(expected, (value) => {
+        return _.includes(actual, value);
+    });
+}
+
 describe('CliLoader', () => {
 
-    let CliLoader,
-        cliLoader,
+    let cliLoader,
         packagePath,
         flatironAppMock,
         options;
 
-    beforeEach(function () {
-        this.addMatchers({
-            toContainAllOf: function (expected) {
-                return _.every(expected, (value) => {
-                    return _.includes(this.actual, value);
-                });
-            }
-        });
-
+    beforeEach(() => {
         packagePath = './test/fixtures/main-package';
         flatironAppMock = {
             commands: {},
@@ -42,59 +40,59 @@ describe('CliLoader', () => {
         options = {
             main: packagePath
         };
-        CliLoader = require('../../../../lib/cli/loader');
+
         cliLoader = new CliLoader(flatironAppMock, options);
     });
 
-    it('throws an exception when invalid arguments and/or options are provided', function () {
+    it('throws an exception when invalid arguments and/or options are provided', () => {
         let original = _.cloneDeep(flatironAppMock);
 
         expect(function () {
             new CliLoader(flatironAppMock, {
                 main: []
-            });
+            } as any);
         }).toThrow();
 
         expect(function () {
             flatironAppMock.plugins = null;
-            new CliLoader(flatironAppMock);
-        }).toThrow();
+            new CliLoader(flatironAppMock, {});
+        } as any).toThrow();
         _.assign(flatironAppMock, original);
 
         expect(function () {
             flatironAppMock.commands = null;
-            new CliLoader(flatironAppMock);
-        }).toThrow();
+            new CliLoader(flatironAppMock, {});
+        } as any).toThrow();
         _.assign(flatironAppMock, original);
 
         expect(function () {
             flatironAppMock.log = null;
-            new CliLoader(flatironAppMock);
+            new CliLoader(flatironAppMock, {});
         }).toThrow();
         _.assign(flatironAppMock, original);
 
         expect(function () {
             new CliLoader(flatironAppMock, {
                 directories: 42
-            });
+            } as any);
         }).toThrow();
 
         expect(function () {
             new CliLoader(flatironAppMock, {
-                directories: 'a/path/to/a/directory'
-            });
+                directories: ['a/path/to/a/directory']
+            } as any);
         }).not.toThrow();
     });
 
     it('does not throw if options are not provided', () => {
         expect(function () {
-            new CliLoader(flatironAppMock);
+            new CliLoader(flatironAppMock, {});
         }).not.toThrow();
     });
 
     describe('.load', function () {
 
-        it('adds CLI commands to the app and caches command information', done => {
+        it('adds CLI commands to the app and caches command information', (done: DoneFn) => {
             expect(cliLoader._commands['cli-package1']).toBeUndefined();
             expect(cliLoader._commands['cli-package2']).toBeUndefined();
             expect(_.isEmpty(_.keys(flatironAppMock.commands))).toBeTruthy();
@@ -105,18 +103,20 @@ describe('CliLoader', () => {
                 let commandInfo1 = cliLoader._commands['cli-package1'],
                     commandInfo2 = cliLoader._commands['cli-package2'];
 
-                expect(_.keys(commandInfo1).concat(_.keys(commandInfo2))).toContainAllOf(['hello', 'add', 'subtract', 'goodbye']);
-                expect(_.keys(flatironAppMock.commands)).toContainAllOf(['hello', 'add', 'subtract', 'goodbye']);
+                expect(toContainAllOf(_.keys(commandInfo1).concat(_.keys(commandInfo2)), ['hello', 'add', 'subtract', 'goodbye']))
+                    .toBeTruthy();
+                expect(toContainAllOf(_.keys(flatironAppMock.commands), ['hello', 'add', 'subtract', 'goodbye']))
+                    .toBeTruthy();
                 done();
             });
         });
 
-        it('attempts to load commands from each directory specified by the "directories" option', done => {
+        it('attempts to load commands from each directory specified by the "directories" option', (done: DoneFn) => {
             let cliLoader = new CliLoader(flatironAppMock, {
                 directories: [path.join(packagePath, 'node_modules', 'cli-package1')]
             });
             expect(cliLoader._commands['cli-package1']).toBeUndefined();
-            expect(_.keys(flatironAppMock.commands)).not.toContainAllOf(['hello', 'goodbye']);
+            expect(toContainAllOf(_.keys(flatironAppMock.commands), ['hello', 'goodbye'])).toBeFalsy();
 
             cliLoader.load(error => {
                 expect(error).toBeNull();
@@ -128,12 +128,12 @@ describe('CliLoader', () => {
                 // Make sure 'init' functions are not treated like regular commands!
                 expect(commandInfo1['init']).toBeUndefined();
 
-                expect(_.keys(flatironAppMock.commands)).toContainAllOf(['goodbye', 'hello']);
+                expect(toContainAllOf(_.keys(flatironAppMock.commands), ['goodbye', 'hello'])).toBeTruthy();
                 done();
             });
         });
 
-        it('runs the functions defined by the init modules of LabShare packages', done => {
+        it('runs the functions defined by the init modules of LabShare packages', (done: DoneFn) => {
             let options = {
                 main: packagePath,
                 timeout: 25
@@ -148,7 +148,7 @@ describe('CliLoader', () => {
             });
         });
 
-        it('ignores duplicate commands from LabShare packages with the same name', done => {
+        it('ignores duplicate commands from LabShare packages with the same name', (done: DoneFn) => {
             cliLoader = new CliLoader(flatironAppMock, {
                 directories: [path.join(packagePath, 'node_modules', 'cli-package1'), path.join(packagePath, 'node_modules', 'cli-package1')]
             });
@@ -158,7 +158,7 @@ describe('CliLoader', () => {
             });
         });
 
-        it('logs an error if two different LabShare packages try to load a command with the same name', done => {
+        it('logs an error if two different LabShare packages try to load a command with the same name', (done: DoneFn) => {
             cliLoader.load(() => {
                 expect(flatironAppMock.log.error.calls[0].args[0])
                     .toMatch(/A command with the same name has already been loaded/);
@@ -166,7 +166,7 @@ describe('CliLoader', () => {
             });
         });
 
-        it('logs an error if an exception is thrown', done => {
+        it('logs an error if an exception is thrown', (done: DoneFn) => {
             cliLoader.options.main = 1337;
             cliLoader.load(error => {
                 expect(error.message).toContain('Failed to load CLI commands');
@@ -174,8 +174,8 @@ describe('CliLoader', () => {
             });
         });
 
-        it('logs a warning if a loaded command does not contain help text', done => {
-            var cliLoader = new CliLoader(flatironAppMock, {
+        it('logs a warning if a loaded command does not contain help text', (done: DoneFn) => {
+            let cliLoader = new CliLoader(flatironAppMock, {
                 main: packagePath,
                 directories: [path.join(packagePath, 'node_modules', 'cli-package2')]
             });
@@ -190,7 +190,7 @@ describe('CliLoader', () => {
 
     xdescribe('.init', () => {
 
-        it('runs the functions defined by the init modules of LabShare packages', done => {
+        it('runs the functions defined by the init modules of LabShare packages', (done: DoneFn) => {
             let options = {
                 main: packagePath,
                 timeout: 25
@@ -210,12 +210,12 @@ describe('CliLoader', () => {
 
     describe('.unload', () => {
 
-        it('deletes all the commands assigned to the app by .load', (done) => {
+        it('deletes all the commands assigned to the app by .load', (done: DoneFn) => {
             cliLoader.load(() => {
-                expect(_.keys(flatironAppMock.commands)).toContainAllOf(['hello', 'add', 'subtract', 'goodbye']);
+                expect(toContainAllOf(_.keys(flatironAppMock.commands), ['hello', 'add', 'subtract', 'goodbye'])).toBeTruthy();
                 expect(_.keys(cliLoader._commands).length).toBeGreaterThan(0);
                 cliLoader.unload();
-                expect(_.keys(flatironAppMock.commands)).not.toContainAllOf(['hello', 'add', 'subtract', 'goodbye']);
+                expect(toContainAllOf(_.keys(flatironAppMock.commands), ['hello', 'add', 'subtract', 'goodbye'])).toBeFalsy();
                 expect(_.keys(cliLoader._commands).length).toBe(0);
                 done();
             });
@@ -225,21 +225,22 @@ describe('CliLoader', () => {
 
     describe('.displayHelp', () => {
 
-        it('logs messages for each command found by the cliLoader', (done) => {
+        it('logs messages for each command found by the cliLoader', (done: DoneFn) => {
             cliLoader.displayHelp();
             expect(flatironAppMock.log.help.calls[0].args).toMatch(/No commands found/);
 
             cliLoader.load(() => {
                 cliLoader.displayHelp();
-                expect(allArgs(flatironAppMock.log.help)).toContainAllOf([
+                expect(toContainAllOf(allArgs(flatironAppMock.log.help), [
                     'hello', 'goodbye', 'add', 'subtract', 'cli-package1', 'cli-package2'
-                ]);
+                ]));
                 done();
             });
         });
 
         it('logs messages for uncategorized commands too', () => {
-            flatironAppMock.commands['uncategorizedCmd'] = function () { };
+            flatironAppMock.commands['uncategorizedCmd'] = function () {
+            };
             cliLoader = new CliLoader(flatironAppMock, options);
             cliLoader.displayHelp();
             expect(allArgs(flatironAppMock.log.help)).toContain('uncategorizedCmd');
