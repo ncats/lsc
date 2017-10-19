@@ -3,6 +3,7 @@
 import winston = require('winston');
 import TransportInstance = winston.TransportInstance;
 import ReadableStream = NodeJS.ReadableStream;
+import {getPackageManifest, getPackageName} from "../cli/utils";
 
 /*
  * LSC's logging configuration module.
@@ -68,14 +69,15 @@ export class Logger extends winston.Logger {
         }
 
         if (!_.isEmpty(options.fluentD)) {
+            let name: string = getPackageName(getPackageManifest(process.cwd()));
+
             options = _.defaultsDeep(options, {
                 fluentD: {
                     host: 'localhost',
                     port: 24224,
                     timeout: 3.0,
-                    tag: 'labshare'
-                },
-                logDirectory: null
+                    tag: name || 'labshare'
+                }
             });
 
             winstonTransports.push(new FluentTransport(options.fluentD.tag, options.fluentD));
