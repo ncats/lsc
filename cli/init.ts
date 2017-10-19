@@ -8,7 +8,6 @@ import _ = require('lodash')
 import path = require('path')
 import yargs = require('yargs')
 import {configLoaderSync} from '../lib/config'
-import {getPackageManifest, getPackageName} from "../lib/cli/utils";
 import {Logger} from "../lib/log/logger";
 
 const lscRoot = path.join(__dirname, '..');
@@ -26,15 +25,12 @@ export = function init() {
             main: process.cwd(),
             directories: [lscRoot],
             configFilePath: argv.configFile
-        }),
-        name: string = getPackageName(getPackageManifest(process.cwd()));
+        });
 
     global.LabShare.Config = config;
 
     let logDirectory: string = _.get(config, 'lsc.Log.Path'),
-        fluentD = _.defaults(_.get(config, 'lsc.Log.FluentD', {}), {
-            tag: name || 'labshare'
-        });
+        fluentD = _.get(config, 'lsc.Log.FluentD', {});
 
     global.LabShare.Logger = new Logger({
         logDirectory,
