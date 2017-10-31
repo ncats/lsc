@@ -48,7 +48,7 @@ export class Logger extends winston.Logger {
             logDirectory: null
         });
 
-        let winstonTransports: TransportInstance[] = [
+        let transports: TransportInstance[] = [
             new winston.transports.Console({
                 colorize: true
             })
@@ -58,13 +58,13 @@ export class Logger extends winston.Logger {
             // Create the log directory if it doesn't exist
             mkdirSync(options.logDirectory);
 
-            winstonTransports.push(new winston.transports.File({
+            transports.push(new winston.transports.File({
                 filename: path.resolve(options.logDirectory, 'lsc.log'),
-                'timestamp': true,
-                'json': false,
-                'maxfiles': 5,
-                'maxsize': 10485760,
-                'level': 'info'
+                timestamp: true,
+                json: false,
+                maxfiles: 5,
+                maxsize: 10485760,
+                level: 'info'
             }));
         }
 
@@ -80,11 +80,11 @@ export class Logger extends winston.Logger {
                 }
             });
 
-            winstonTransports.push(new FluentTransport(options.fluentD.tag, options.fluentD));
+            transports.push(new FluentTransport(options.fluentD.tag, options.fluentD));
         }
 
         super({
-            transports: winstonTransports
+            transports
         });
     }
 

@@ -6,6 +6,7 @@ test
 *.md
 *.ts
 *.map
+config.json
 package-lock.json
 .eslintrc.json
 .eslintignore
