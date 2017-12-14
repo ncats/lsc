@@ -1,7 +1,7 @@
 {
   "name": "lsc",
   "main": "./",
-  "version": "v1.17.1031",
+  "version": "v1.17.1214",
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "repository": {
@@ -19,7 +19,7 @@
   "types": "./index.d.ts",
   "license": "MIT",
   "scripts": {
-    "prepublish": "tsc",
+    "publish": "tsc",
     "pretest": "tsc",
     "test": "jasmine-node --captureExceptions --color ./test/lib/unit",
     "coverage": "istanbul cover jasmine-node ./test/lib/unit",

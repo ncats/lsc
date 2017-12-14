@@ -1,12 +1,13 @@
 'use strict';
 
-import {PackageUpdate} from "../lib/package/update";
+import * as gulp from 'gulp'
+import * as conflict from 'gulp-conflict'
+import * as template from 'gulp-template'
+import * as rename from 'gulp-rename'
+import {PackageUpdate} from '../lib/package/update'
+import {startCase} from 'lodash'
 
-const gulp = require('gulp'),
-    conflict = require('gulp-conflict'),
-    template = require('gulp-template'),
-    rename = require('gulp-rename'),
-    _ = require('underscore.string'),
+const _ = require('underscore.string'),
     inquirer = require('inquirer');
 
 function padLeft(dateValue: number) {
@@ -60,14 +61,15 @@ module.exports = {
                 (today.getMonth() + 1) + padLeft(today.getDate())
             ].join('.');
             answers.appNameSlug = _.slugify(answers.appName);
+            answers.appTitle = startCase(answers.appName).split(' ').join('');
             answers.appYear = year;
 
             gulp.src([
-                    `${__dirname}/../.eslintrc.json`,
-                    `${__dirname}/../.eslintignore`,
-                    `${__dirname}/../templates/common/**`,
-                    `${__dirname}/../templates/${answers.projectType}-package/**`
-                ])
+                `${__dirname}/../.eslintrc.json`,
+                `${__dirname}/../.eslintignore`,
+                `${__dirname}/../templates/common/**`,
+                `${__dirname}/../templates/${answers.projectType}-package/**`
+            ])
                 .pipe(template(answers))
                 .pipe(rename(file => {
                     if (file.basename[0] === '_') {
