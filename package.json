@@ -24,7 +24,9 @@
     "test": "jasmine-node --captureExceptions --color ./test/lib/unit",
     "coverage": "istanbul cover jasmine-node ./test/lib/unit",
     "build": "tsc",
-    "watch:build": "tsc --watch"
+    "watch:build": "tsc --watch",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "bin": {
     "lsc": "./lib/bin/lsc.js"
@@ -41,7 +43,7 @@
     "flatiron-cli-config": "^0.1.5",
     "fluent-logger": "^2.0.1",
     "glob": "^7.1.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-conflict": "^0.4.0",
     "gulp-rename": "^1.2.2",
     "gulp-template": "^4.0.0",
@@ -55,7 +57,8 @@
     "underscore.string": "^3.3.4",
     "untildify": "^3.0.2",
     "winston": "2.3.1",
-    "yargs": "^8.0.2"
+    "yargs": "^8.0.2",
+    "snyk": "^1.80.0"
   },
   "devDependencies": {
     "@types/jasmine": "^2.6.0",
@@ -64,5 +67,6 @@
     "jasmine-node": "^1.14.5",
     "mock-fs": "^4.4.1",
     "typescript": "^2.5.3"
-  }
+  },
+  "snyk": true
 }
