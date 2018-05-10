@@ -1,0 +1,13 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "package.json",
+        "templates/api-package/package.json",
+        "templates/cli-package/package.json",
+        "templates/ui-package/package.json",
+        "test/fixtures/main-package/package.json"
+      ]
+    }
+  }
+}
