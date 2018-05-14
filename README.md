@@ -1,7 +1,7 @@
 # LSC
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/LabShare/lsc.svg)](https://greenkeeper.io/)
-
+[![Coverage Status](https://coveralls.io/repos/github/LabShare/lsc/badge.svg?branch=master)](https://coveralls.io/github/LabShare/lsc?branch=master)
 [![Build Status](https://travis-ci.org/LabShare/lsc.svg?branch=master)](https://travis-ci.org/LabShare/lsc)
 
 ## Install
