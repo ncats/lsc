@@ -58,7 +58,7 @@
     "untildify": "^3.0.2",
     "winston": "2.4.2",
     "yargs": "^11.0.0",
-    "snyk": "^1.80.0"
+    "snyk": "^1.81.0"
   },
   "devDependencies": {
     "@types/jasmine": "^2.6.0",
