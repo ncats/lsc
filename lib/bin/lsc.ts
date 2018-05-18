@@ -5,7 +5,7 @@
 import semver = require('semver')
 import fs = require('fs')
 import path = require('path')
-import {start} from "../cli/start";
+import {start} from "../cli";
 
 const manifestPath = path.join(__dirname, '..', '..', 'package.json'),
     requiredNodeVersion = JSON.parse(fs.readFileSync(manifestPath).toString()).engines.node;

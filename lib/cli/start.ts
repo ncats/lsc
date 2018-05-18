@@ -4,7 +4,7 @@ import flatiron = require('flatiron')
 import path = require('path')
 import _ = require('lodash')
 import {isPackageSync} from "./utils"
-import {checkSelfUpdate} from "../check-self-update/index"
+import {checkVersion} from "../check-self-update"
 import labShare from '../labshare'
 import loaderPlugin = require('./loader-plugin')
 
@@ -12,13 +12,13 @@ const {app} = flatiron,
     cwd = process.cwd(),
     lscRoot = path.join(__dirname, '..', '..');
 
-interface StartOptions {
+export interface IStartOptions {
     directories: string[]
     pattern: string
     main: string
 }
 
-interface packageJson {
+interface IPackageJson {
     description: string
     version: string
 }
@@ -29,14 +29,14 @@ interface packageJson {
  * @param {Array} options.directories
  * @param {string} options.pattern
  */
-export function start(options: StartOptions = {
+export function start(options: IStartOptions = {
     main: cwd,
     directories: [lscRoot],
     pattern: '{src/cli,cli}/*.js'
 }) {
-    let pkg: packageJson;
+    let pkg: IPackageJson;
 
-    checkSelfUpdate('lsc');
+    checkVersion({name: 'lsc', logger: app.log});
 
     if (isPackageSync(options.main)) {
         app.config.file({

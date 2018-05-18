@@ -1,29 +1,15 @@
 'use strict';
 
 import path = require('path')
-import {configLoaderSync} from '../../../../lib/config/loader'
+import {configLoaderSync} from '../../../../lib/config'
 
 describe('configLoader', () => {
 
-    let packagePath,
-        config,
-        options,
-        cliPackage1ConfigExpectation,
-        cliPackage3ConfigExpectation,
-        cliPackage2ConfigExpectation;
-
-    beforeEach(() => {
-        packagePath = './test/fixtures/main-package';
-        options = {
-            main: packagePath
-        };
-    });
-
-    beforeEach(() => {
+    const packagePath = './test/fixtures/main-package',
         cliPackage1ConfigExpectation = {
             'Hello': 'World!',
             'Values': [1, 2, 3]
-        };
+        },
         cliPackage2ConfigExpectation = {
             'aKey': 'aValue',
             'Data': {
@@ -35,9 +21,17 @@ describe('configLoader', () => {
                 'Port': 9999,
                 'Url': 'Some/url'
             }
-        };
+        },
         cliPackage3ConfigExpectation = {
             'Hi': 'there!'
+        };
+
+    let config,
+        options;
+
+    beforeEach(() => {
+        options = {
+            main: packagePath
         };
     });
 

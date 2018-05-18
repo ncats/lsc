@@ -16,7 +16,6 @@
 import {getMatchingFilesSync, getPackageManifest, getPackageName, applyToNodeModulesSync} from "./utils";
 import path = require('path')
 import _ = require('lodash')
-import Q = require('q')
 import assert = require('assert')
 
 const ADDITIONAL_COMMANDS_HEADER_TITLE = 'Additional commands',
@@ -101,38 +100,39 @@ export class CliLoader {
      * An error is logged if two different packages try to load a command with the same name, a command could not be loaded, or
      * if a command module does not contain help text.
      */
-    public load(callback?: (error: Error) => void) {
+    public async load() {
         let app = this.app;
 
         // Cache all init and command modules
         try {
-            _.each(this.options.directories, this._storeCommands.bind(this));
+            _.each(this.options.directories, this.storeCommands.bind(this));
+
             if (this.options.main) {
-                applyToNodeModulesSync(this.options.main, this._storeCommands.bind(this));
+                applyToNodeModulesSync(this.options.main, this.storeCommands.bind(this));
             }
         } catch (error) {
-            return Q.reject(new Error(`Failed to load CLI commands: ${error.message}: ${error.stack}`)).nodeify(callback);
+            throw new Error(`Failed to load CLI commands: ${error.message}: ${error.stack}`);
         }
 
         // Run all the init functions
-        return this._init().then(() => {
+        await this.init();
 
-            // Load the commands into the app
-            _.each(this._commands, pkg => {
-                _.each(pkg, (modulePath, name) => {
-                    if (_.has(app.commands, name)) {
-                        return app.log.error(`Unable to load command "${name}" from "${modulePath}". A command with the same name has already been loaded by a different package.`);
-                    }
+        // Load the commands into the app
+        _.each(this._commands, pkg => {
+            _.each(pkg, (modulePath, name) => {
+                if (_.has(app.commands, name)) {
+                    return app.log.error(`Unable to load command "${name}" from "${modulePath}". A command with the same name has already been loaded by a different package.`);
+                }
 
-                    let command = require(modulePath);
-                    if (!command.usage) {
-                        app.log.warn(`The command module "${modulePath}" is missing a "usage" property that defines help text`);
-                    }
+                let command = require(modulePath);
 
-                    app.commands[name] = command;
-                });
+                if (!command.usage) {
+                    app.log.warn(`The command module "${modulePath}" is missing a "usage" property that defines help text`);
+                }
+
+                app.commands[name] = command;
             });
-        }).nodeify(callback);
+        });
     }
 
     /**
@@ -151,10 +151,11 @@ export class CliLoader {
      * @description Displays a list of available commands.
      */
     public displayHelp() {
-        let app = this.app,
-            help = [],
+        const app = this.app,
             commands = this.getStoredCommandNames(),
             additionalCommands = this.getUncategorizedCommands();
+
+        let help = [];
 
         if (_.isEmpty(commands) && _.isEmpty(additionalCommands)) {
             return app.log.help(MISSING_COMMANDS_ERROR_MESSAGE);
@@ -173,15 +174,14 @@ export class CliLoader {
 
     /**
      * @description Runs the stored LabShare CLI package init functions
-     * @param {Function} [callback]
      * @returns {Promise}
      * @private
      */
-    private _init(callback?: (error: Error) => void) {
+    private init() {
         let promises = [];
 
-        _.each(this.initModules, initModulePath => {
-            promises.push(Q.Promise((resolve, reject) => {
+        _.each(this.initModules, (initModulePath: string) => {
+            promises.push(new Promise((resolve, reject) => {
                 let init = null;
 
                 try {
@@ -209,7 +209,7 @@ export class CliLoader {
             }));
         });
 
-        return Q.all(promises).nodeify(callback);
+        return Promise.all(promises);
     }
 
     /**
@@ -218,14 +218,14 @@ export class CliLoader {
      * @param {String} directory - An absolute path to a directory
      * @private
      */
-    private _storeCommands(directory: string) {
+    private storeCommands(directory: string): void {
         let manifest = getPackageManifest(directory);
         if (!manifest) {
             return;
         }
 
         let packageName = getPackageName(manifest),
-            commands = this._getCommands(directory, this.options.pattern);
+            commands = this.getCommands(directory, this.options.pattern);
 
         _.each(commands, (command, name: string) => {
             this._commands[packageName] = this._commands[packageName] || {};
@@ -264,7 +264,7 @@ export class CliLoader {
      * @returns {{}}
      * @private
      */
-    private _getCommands(directory: string, pattern: string) {
+    private getCommands(directory: string, pattern: string) {
         let commands = {},
             commandFilePaths = getMatchingFilesSync(directory, pattern);
 

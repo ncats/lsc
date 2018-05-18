@@ -8,7 +8,8 @@ import _ = require('lodash')
 import path = require('path')
 import yargs = require('yargs')
 import {configLoaderSync} from '../lib/config'
-import {Logger} from "../lib/log/logger";
+import {Logger} from "../lib/log";
+import labShare from '../lib/labshare'
 
 const lscRoot = path.join(__dirname, '..');
 
@@ -27,6 +28,7 @@ export = function init() {
             configFilePath: argv.configFile
         });
 
+    global.LabShare = global.LabShare || labShare;
     global.LabShare.Config = config;
 
     let logDirectory: string = _.get(config, 'lsc.Log.Path'),

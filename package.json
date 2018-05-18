@@ -1,7 +1,7 @@
 {
   "name": "lsc",
   "main": "./",
-  "version": "v1.18.514",
+  "version": "v1.18.517",
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "repository": {
@@ -21,8 +21,8 @@
   "scripts": {
     "publish": "tsc",
     "pretest": "tsc",
-    "test": "jasmine-node --captureExceptions --color ./test/lib/unit",
-    "coverage": "istanbul cover jasmine-node ./test/lib/unit",
+    "test": "jasmine JASMINE_CONFIG_PATH=./test/lib/jasmine.json",
+    "coverage": "istanbul cover jasmine JASMINE_CONFIG_PATH=./test/lib/jasmine.json",
     "build": "tsc",
     "watch:build": "tsc --watch",
     "snyk-protect": "snyk protect",
@@ -51,21 +51,22 @@
     "json-override": "^0.2.0",
     "lodash": "^4.12.0",
     "q": "^1.4.1",
+    "resolve-pkg": "^1.0.0",
     "semver": "^5.3.0",
     "shelljs": "^0.8.2",
+    "snyk": "^1.80.0",
     "tiny-json-http": "^7.0.0",
     "underscore.string": "^3.3.4",
     "untildify": "^3.0.2",
     "winston": "2.4.2",
-    "yargs": "^11.0.0",
-    "snyk": "^1.80.0"
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
     "@types/jasmine": "^2.6.0",
     "coveralls": "^3.0.1",
     "istanbul": "^0.4.2",
     "jasmine-core": "^3.1.0",
-    "jasmine-node": "^1.14.5",
+    "jasmine": "2.5.3",
     "mock-fs": "^4.4.1",
     "typescript": "^2.5.3"
   },

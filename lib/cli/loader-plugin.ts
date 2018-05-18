@@ -39,20 +39,20 @@ exports.attach = function (options) {
     exports.options = options;
 };
 
-exports.init = function init(done) {
+exports.init = async function init(done) {
     exports.loader = new CliLoader(this, exports.options);
-    exports.loader.load(error => {
-        if (error) {
-            done(error);
-            return;
-        }
+
+    try {
+        await exports.loader.load();
 
         this.commands['help'] = function () {
             exports.loader.displayHelp();
         };
 
         done();
-    });
+    } catch (error) {
+        done(error);
+    }
 };
 
 exports.detach = function () {

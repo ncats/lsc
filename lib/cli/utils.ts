@@ -4,7 +4,8 @@ const fs = require('fs'),
     path = require('path'),
     _ = require('lodash'),
     assert = require('assert'),
-    glob = require('glob');
+    glob = require('glob'),
+    resolve = require('resolve-pkg');
 
 /**
  * @param manifest - A parsed LabShare package package.json file
@@ -35,7 +36,7 @@ export function getPackageName(manifest): string {
  * @param {string} filePath - The path to a JSON file
  * @returns {Object|undefined}
  */
-export function readJSON (filePath) {
+export function readJSON(filePath) {
     assert.ok(_.isString(filePath) && !_.isEmpty(filePath), 'readJSON: `filePath` must be a non-empty string');
 
     filePath = path.resolve(filePath);
@@ -123,9 +124,9 @@ export function applyToNodeModulesSync(directory: string, func: (packagePath: st
         loadedDependencies[id] = true;
 
         _.each(dependencies, dependency => {
-            let dependencyPath = path.join(directory, 'node_modules', dependency);
+            const dependencyPath = resolve(dependency, {cwd: packagePath});
 
-            if (!isPackageSync(dependencyPath)) {
+            if (!dependencyPath) {
                 throw new Error(`"${id}" depends on "${dependency}" but it does not exist in "${dependencyPath}". Make sure it is installed!`);
             }
 
@@ -133,8 +134,9 @@ export function applyToNodeModulesSync(directory: string, func: (packagePath: st
         });
 
         // Recursively search for any other dependencies
-        _.map(dependencyPaths, dependencyPath => {
+        _.map(dependencyPaths, (dependencyPath: string) => {
             let id = path.basename(dependencyPath);
+
             if (!_.has(loadedDependencies, id)) {
                 return getDependenciesRecursively(dependencyPath);
             }
