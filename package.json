@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@types/glob": "^5.0.33",
-    "@types/lodash": "^4.14.77",
+    "@types/lodash": "^4.14.109",
     "@types/q": "^1.0.5",
     "@types/semver": "^5.4.0",
     "@types/shelljs": "^0.7.4",
