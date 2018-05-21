@@ -1,6 +1,13 @@
 'use strict';
 
-import {correctVersion} from "./correct-version"
+/*
+ * @description Npm can modify latest-version to be different than what's in package.json
+ * This function "corrects" a version and can be used both with local version and
+ * latest version
+ */
+function correctVersion(version: string) {
+    return version.replace(/[a-zA-Z]/g, '').split('.').map(n => parseInt(n, 10)).join('.')
+}
 
 function hasNewerVersion(currentVersion, latestVersion) {
     return currentVersion !== latestVersion;
@@ -38,13 +45,14 @@ function message({name, currentVersion, latestVersion}) {
  *
  * @param {String} name
  * @param {Object} jsonData
+ * @param logger
  * @api public
  */
-export function promptIfNewerVersion(name: string, jsonData) {
+export function promptIfNewerVersion(name: string, jsonData, logger: {info: (message: string) => void}): void {
     const latestVersion = getLatestVersion(jsonData);
     const currentVersion = getModuleCurrentVersion();
 
     if (hasNewerVersion(currentVersion, latestVersion)) {
-        global.LabShare.Logger.info(message({name, currentVersion, latestVersion}));
+        logger.info(message({name, currentVersion, latestVersion}));
     }
 }

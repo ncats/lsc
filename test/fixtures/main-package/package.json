@@ -5,5 +5,10 @@
     "cli-package1",
     "cli-package2",
     "@scoped/cli-package3"
-  ]
+  ],
+  "dependencies": {
+    "cli-package1": "*",
+    "cli-package2": "*",
+    "@scoped/cli-package3": "*"
+  }
 }
