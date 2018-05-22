@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 8.9.0
+  - 8.11.2
 before_install:
   - git config --global url."git@github.com:".insteadOf "https://github.com/"
   - git config --global user.email "travis@travis-ci.org"
