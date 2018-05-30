@@ -16,10 +16,10 @@
   "license": "MIT",
   "scripts": {},
   "packageDependencies": {
-    "ls-shell": "*"
+    "@labshare/shell": "*"
   },
   "dependencies": {
-    "ls-shell": "https://github.com/LabShare/shell",
+    "@labshare/shell": "https://github.com/LabShare/shell",
     "lodash": "^4.6.1"
   },
   "devDependencies": {
