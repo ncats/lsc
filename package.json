@@ -1,5 +1,5 @@
 {
-  "name": "lsc",
+  "name": "@labshare/lsc",
   "main": "./",
   "version": "v1.18.520",
   "description": "Lab Share Command",
