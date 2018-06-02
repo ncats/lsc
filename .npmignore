@@ -11,4 +11,4 @@ package-lock.json
 .eslintrc.json
 .eslintignore
 node_modules/@types/*
-tsconfig.json.coveralls.yml
+tsconfig.json
