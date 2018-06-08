@@ -1,12 +1,32 @@
 language: node_js
 node_js:
   - 8.11.2
+  - '9'
 before_install:
-  - git config --global url."git@github.com:".insteadOf "https://github.com/"
+  - |-
+    if [ $TRAVIS_PULL_REQUEST == false ] && [ $TRAVIS_BRANCH == "master" ];
+     then
+        echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > ~/.npmrc;
+      else
+        echo "//registry.npmjs.org/:_authToken=\${NPM_INSTALL_TOKEN}" > ~/.npmrc;
+    fi
+  - 'git config --global url."git@github.com:".insteadOf "https://github.com/"'
   - git config --global user.email "travis@travis-ci.org"
   - git config --global user.name "Travis"
 install:
   - npm install
 script:
   - npm test
-  - npm run coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+  - >-
+    npm run coverage && cat ./coverage/lcov.info |
+    ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+cache:
+  directories:
+    - ~/.npm
+notifications:
+  email: false
+after_success:
+  - npm run travis-deploy-once "npm run semantic-release"
+branches:
+  except:
+    - /^vd+.d+.d+$/

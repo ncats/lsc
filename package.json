@@ -1,5 +1,5 @@
 {
-  "name": "lsc",
+  "name": "@labshare/lsc",
   "main": "./",
   "version": "v1.18.520",
   "description": "Lab Share Command",
@@ -72,7 +72,11 @@
     "jasmine": "3.1.0",
     "jasmine-core": "^3.1.0",
     "mock-fs": "^4.4.1",
-    "typescript": "^2.5.3"
+    "typescript": "^2.5.3",
+    "@labshare/semantic-release-config": "^1.0.0"
   },
-  "snyk": true
+  "snyk": true,
+  "release": {
+    "extends": "@labshare/semantic-release-config"
+  }
 }
