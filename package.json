@@ -27,7 +27,9 @@
     "build": "tsc",
     "watch:build": "tsc --watch",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "npm run snyk-protect",
+    "travis-deploy-once": "travis-deploy-once",
+    "semantic-release": "semantic-release"
   },
   "bin": {
     "lsc": "./lib/bin/lsc.js"
@@ -72,7 +74,13 @@
     "jasmine": "3.1.0",
     "jasmine-core": "^3.1.0",
     "mock-fs": "^4.4.1",
-    "typescript": "^2.5.3"
+    "typescript": "^2.5.3",
+    "travis-deploy-once": "^5.0.0",
+    "semantic-release": "^15.5.0",
+    "@labshare/semantic-release-config": "^1.0.0"
   },
-  "snyk": true
+  "snyk": true,
+  "release": {
+    "extends": "@labshare/semantic-release-config"
+  }
 }
