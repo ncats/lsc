@@ -1,5 +1,5 @@
 {
-  "name": "lsc",
+  "name": "@labshare/lsc",
   "main": "./",
   "version": "1.0.0",
   "description": "Lab Share Command",
@@ -28,7 +28,7 @@
     "watch:build": "tsc --watch",
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect",
-    "travis-deploy-once": "travis-deploy-once",
+    "travis-deploy-once": "travis-deploy-once --pro",
     "semantic-release": "semantic-release"
   },
   "bin": {
@@ -82,5 +82,9 @@
   "snyk": true,
   "release": {
     "extends": "@labshare/semantic-release-config"
-  }
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "peerDependencies": {}
 }
