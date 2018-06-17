@@ -13,9 +13,10 @@ const {app} = flatiron,
     lscRoot = path.join(__dirname, '..', '..');
 
 export interface IStartOptions {
-    directories: string[]
-    pattern: string
-    main: string
+    directories?: string[]
+    pattern?: string
+    main?: string
+    initFunctions?: ((error?: Error) => any)[]
 }
 
 interface IPackageJson {
@@ -24,25 +25,27 @@ interface IPackageJson {
 }
 
 /**
- * @param {object} options
- * @param {string} options.main
- * @param {Array} options.directories
- * @param {string} options.pattern
+ * @description Bootstraps the CLI
+ * @param {string} main - Root project location
+ * @param {Array<string>} [directories] - Additional project directories to search for CLI commands
+ * @param {string} pattern - The CLI module pattern to search for (glob syntax)
+ * @param {Array<Function>} initModules - Array of custom initializer functions
  */
-export function start(options: IStartOptions = {
-    main: cwd,
-    directories: [lscRoot],
-    pattern: '{src/cli,cli}/*.js'
-}) {
+export function start({
+                          main = cwd,
+                          directories = [lscRoot],
+                          pattern = '{src/cli,cli}/*.js',
+                          initFunctions = []
+                      }: IStartOptions) {
     let pkg: IPackageJson;
 
     checkVersion({name: 'lsc', logger: app.log});
 
-    if (isPackageSync(options.main)) {
+    if (isPackageSync(main)) {
         app.config.file({
-            file: path.join(options.main, 'config.json')
+            file: path.join(main, 'config.json')
         });
-        pkg = require(path.join(options.main, 'package.json'));
+        pkg = require(path.join(main, 'package.json'));
     } else {
         pkg = require(path.join(lscRoot, 'package.json'));
         app.config.file({
@@ -50,9 +53,9 @@ export function start(options: IStartOptions = {
         });
     }
 
-    app.Title = `${pkg.description}  ${pkg.version}`;
+    app.title = `${pkg.description} ${pkg.version}`;
     app.use(flatiron.plugins.cli, {
-        usage: [app.Title,
+        usage: [app.title,
             '',
             'Usage:',
             'lsc <command>            - run a command',
@@ -65,7 +68,12 @@ export function start(options: IStartOptions = {
     });
 
     app.use(require('flatiron-cli-config'));
-    app.use(loaderPlugin, options);
+    app.use(loaderPlugin, {
+        main,
+        directories,
+        pattern,
+        initFunctions
+    });
 
     global.LabShare = labShare;
 

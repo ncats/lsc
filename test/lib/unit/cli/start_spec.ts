@@ -1,5 +1,4 @@
 import {checkVersion} from "../../../../lib/check-self-update";
-const {exec} = require('child_process');
 import {start} from "../../../../lib/cli";
 
 describe('.start()', () => {
@@ -11,7 +10,7 @@ describe('.start()', () => {
     it('bootstraps the CLI', () => {
         expect(global.LabShare).toBeUndefined();
 
-        start();
+        start({});
 
         expect(global.LabShare).toBeDefined();
     });

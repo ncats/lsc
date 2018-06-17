@@ -6,7 +6,8 @@
  *  second argument to the constructor. To locate commands, specify options.main
  *  and/or a list of package directories in options.directories. View the constructor documentation below
  *  for more details on the available options.
- *  - Call .load() to locate and load all the cli commands and run the 'init' modules defined by LabShare CLI packages.
+ *  - Call .load() to locate and load all the cli commands and run the list of "initFunctions" passed to
+ *  options.initFunctions.
  *  - Call .unload() to remove all the commands assigned to the Flatiron app set by .load().
  *  - Call .displayHelp() to display the list of loaded commands to the terminal
  */
@@ -35,21 +36,23 @@ function createCommandHeader(name) {
     return ['', name, _.repeat('-', name.length)];
 }
 
-interface CliLoaderOptions {
+interface ICliLoaderOptions {
     configFilePath?: string
     main?: string
     packageDirectory?: string
     directories?: string | string[]
     timeout?: number
     pattern?: string
+    initFunctions?: ((error?: Error) => any)[]
 }
 
 export class CliLoader {
 
     public _commands;
-    private initModules: string[];
+
+    private initFunctions;
     private app;
-    private options: CliLoaderOptions;
+    private options: ICliLoaderOptions;
 
     /**
      * @throws Error if the given app is not an initialized Flatiron app.
@@ -64,13 +67,13 @@ export class CliLoader {
      *
      * @constructor
      */
-    public constructor(app, options: CliLoaderOptions) {
+    public constructor(app, options: ICliLoaderOptions) {
         assert.ok(app.commands && hasLogger(app), '`app` must be a Flatiron app with command storage and logging capabilities');
         assert.ok(app.plugins && app.plugins.cli, 'The Flatiron cli plugin must be loaded by the app');
 
         this.app = app;
-        this._commands = {};       // format: {packageName1: {cmd1Name: 'path/to/cmd1Name', cmd2Name: 'path/to/cmd2Name', ...}, packageName2: ...}
-        this.initModules = [];     // format: ['path/to/init.js', ...]
+        this._commands = {};    // format: {packageName1: {cmd1Name: 'path/to/cmd1Name', cmd2Name: 'path/to/cmd2Name', ...}, packageName2: ...}
+        this.initFunctions = options.initFunctions || [];
 
         if (_.get(options, 'main')) {
             assert.ok(_.isString(options.main), '`options.main` must be a string');
@@ -94,13 +97,12 @@ export class CliLoader {
 
     /**
      * @description Synchronously loads and caches all the LabShare package CLI command modules
-     * found in the dependencies of options.main and/or options.directories. It also caches the
-     * CLI 'init' functions defined by the modules.
+     * found in the dependencies of options.main and/or options.directories.
      *
      * An error is logged if two different packages try to load a command with the same name, a command could not be loaded, or
      * if a command module does not contain help text.
      */
-    public async load() {
+    public async load(): Promise<void> {
         let app = this.app;
 
         // Cache all init and command modules
@@ -118,13 +120,13 @@ export class CliLoader {
         await this.init();
 
         // Load the commands into the app
-        _.each(this._commands, pkg => {
+        _.each(this._commands, (pkg) => {
             _.each(pkg, (modulePath, name) => {
                 if (_.has(app.commands, name)) {
                     return app.log.error(`Unable to load command "${name}" from "${modulePath}". A command with the same name has already been loaded by a different package.`);
                 }
 
-                let command = require(modulePath);
+                const command = require(modulePath);
 
                 if (!command.usage) {
                     app.log.warn(`The command module "${modulePath}" is missing a "usage" property that defines help text`);
@@ -173,43 +175,38 @@ export class CliLoader {
     }
 
     /**
-     * @description Runs the stored LabShare CLI package init functions
+     * @description Runs the stored initializer functions
      * @returns {Promise}
      * @private
      */
-    private init() {
+    private async init() {
         let promises = [];
 
-        _.each(this.initModules, (initModulePath: string) => {
+        _.each(this.initFunctions, (initFn) => {
             promises.push(new Promise((resolve, reject) => {
-                let init = null;
-
-                try {
-                    init = require(initModulePath);
-                } catch (error) {
-                    return reject(new Error(`LSC LOAD ERROR: failed to load init module at ${initModulePath}: ${error.stack}`));
-                }
-
                 // if it has a callback parameter
-                if (init.length) {
-                    init(error => {
+                if (initFn.length) {
+                    initFn((error) => {
                         if (error) {
                             reject(error);
                         }
+
                         resolve();
                     });
 
                     setTimeout(() => {
-                        reject(new Error(`LSC TIMEOUT ERROR: init function in "${initModulePath}" failed to callback within ${this.options.timeout / 1000} seconds`));
+                        reject(new Error('LSC TIMEOUT ERROR: init function timed out. The function' +
+                            ` "${initFn.toString()}" failed to callback within ${this.options.timeout / 1000}` +
+                            ' seconds`))'));
                     }, this.options.timeout);
                 } else {
-                    init();
+                    initFn();
                     resolve();
                 }
             }));
         });
 
-        return Promise.all(promises);
+        return await Promise.all(promises);
     }
 
     /**
@@ -247,7 +244,7 @@ export class CliLoader {
             commands = this._commands;
 
         _.each(commands, (pkgCommands, pkgName: string) => {
-            let commandList = _.keys(pkgCommands);
+            const commandList = _.keys(pkgCommands);
             if (_.isEmpty(commandList)) {
                 return;
             }
@@ -268,16 +265,10 @@ export class CliLoader {
         let commands = {},
             commandFilePaths = getMatchingFilesSync(directory, pattern);
 
-        _.each(commandFilePaths, (commandFilePath: string) => {
-            let baseName = getBaseName(commandFilePath);
-
-            // Store 'init' modules separately
-            if (/^init$/i.test(baseName)) {
-                this.initModules.push(commandFilePath);
-            } else {
-                commands[baseName] = commandFilePath;
-            }
-        });
+        for (const commandFilePath of commandFilePaths) {
+            const baseName = getBaseName(commandFilePath);
+            commands[baseName] = commandFilePath;
+        }
 
         return commands;
     }
@@ -291,11 +282,10 @@ export class CliLoader {
         let appCommands = _.keys(this.app.commands),
             storedCommands = _.values(this._commands);
 
-        return _.filter(appCommands, command => {
-            return !_.some(storedCommands, storedCommand => {
+        return _.filter(appCommands, (command) => {
+            return !_.some(storedCommands, (storedCommand) => {
                 return _.has(storedCommand, command);
             });
         });
     }
 }
-
