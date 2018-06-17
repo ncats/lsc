@@ -136,7 +136,6 @@ export function applyToNodeModulesSync(packagePath: string, func: (packagePath: 
  * @returns {Array} of absolute file paths
  */
 export function getMatchingFilesSync(directory, pattern): string[] {
-    return glob.sync(pattern, {cwd: directory}).map((file) => {
-        return path.resolve(directory, file);
-    });
+    return glob.sync(pattern, {cwd: directory})
+        .map((file) => path.resolve(directory, file));
 }

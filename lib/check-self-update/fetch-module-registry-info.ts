@@ -1,7 +1,6 @@
 'use strict';
 
-import tiny = require('tiny-json-http')
-import Q = require('q')
+import tiny = require('tiny-json-http');
 
 const REGISTRY_URL = 'http://registry.npmjs.org';
 
@@ -11,5 +10,14 @@ const REGISTRY_URL = 'http://registry.npmjs.org';
  */
 export function fetchModuleRegistryInfo(name: string) {
     const url = [REGISTRY_URL, name, 'latest'].join('/');
-    return Q.nfcall(tiny.get, {url}).then((result: {body: any}) => result.body);
+
+    return new Promise((resolve, reject) => {
+        tiny.get({url}, (error, result: { body: any }) => {
+            if (error) {
+                reject(error);
+                return;
+            }
+            resolve(result.body);
+        });
+    });
 }
