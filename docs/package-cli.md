@@ -36,7 +36,8 @@ exports.hello = function (name, callback) {
 };
 
 exports.goodbye = function (name) {
-    this.log.info('Goodbye ' + name + '!');  // Note: `this` stores a reference to the initialized CLI app which contains logging capabilities
+    this.log.info('Goodbye ' + name + '!');  // Note: `this` stores a reference to the initialized CLI app which
+                                             // contains logging capabilities provided by Winston
 };
 ```
 

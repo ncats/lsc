@@ -2,18 +2,19 @@
  * @exports This module is used to initialize the global LabShare object
  */
 
+
 'use strict';
 
 import _ = require('lodash')
 import path = require('path')
 import yargs = require('yargs')
-import {configLoaderSync} from '../lib/config'
-import {Logger} from "../lib/log";
-import labShare from '../lib/labshare'
+import {configLoaderSync} from "../config";
+import {Logger} from "../log";
+import labShare from '../labshare';
 
 const lscRoot = path.join(__dirname, '..');
 
-export = function init() {
+export function init(): void {
     let argv = yargs.options({
             configFile: {
                 alias: ['config', 'conf'],
@@ -38,4 +39,4 @@ export = function init() {
         logDirectory,
         fluentD
     });
-};
+}

@@ -1,11 +1,11 @@
 'use strict';
 
-const fs = require('fs'),
-    path = require('path'),
-    _ = require('lodash'),
-    assert = require('assert'),
-    glob = require('glob'),
-    resolve = require('resolve-pkg');
+const fs = require('fs');
+const path = require('path');
+const _ = require('lodash');
+const assert = require('assert');
+const glob = require('glob');
+const resolve = require('resolve-pkg');
 
 /**
  * @param manifest - A parsed LabShare package package.json file
@@ -36,10 +36,11 @@ export function getPackageName(manifest): string {
  * @param {string} filePath - The path to a JSON file
  * @returns {Object|undefined}
  */
-export function readJSON(filePath) {
+export function readJSON(filePath: string) {
     assert.ok(_.isString(filePath) && !_.isEmpty(filePath), 'readJSON: `filePath` must be a non-empty string');
 
     filePath = path.resolve(filePath);
+
     try {
         return JSON.parse(fs.readFileSync(filePath, {encoding: 'utf8'}));
     } catch (error) {
@@ -100,50 +101,31 @@ export function getPackageConfigPath(directory: string): string {
  * If one of the packages is a symlink, it will locate the original symlink source directory
  * and call the function on it instead.
  * @throws Error if a package dependency could not be found
- * @param {String} directory - A path to a directory containing LabShare package.
+ * @param {String} packagePath - A path to a directory containing LabShare package.
  * @param {Function} func - A function that accepts a path to a LabShare project
- * @param thisArg The context of `func`
  */
-export function applyToNodeModulesSync(directory: string, func: (packagePath: string) => void, thisArg?: any): void {
-    assert.ok(_.isString(directory), 'applyToNodeModulesSync: `root` must be a non-empty string');
+export function applyToNodeModulesSync(packagePath: string, func: (packagePath: string) => void): void {
+    assert.ok(_.isString(packagePath), 'applyToNodeModulesSync: `packagePath` must be a non-empty string');
     assert.ok(_.isFunction(func), 'applyToNodeModulesSync: `func` must be a function');
 
-    let loadedDependencies = {};
-
-    if (!isPackageSync(directory)) {
+    if (!isPackageSync(packagePath)) {
         return;
     }
 
-    function getDependenciesRecursively(packagePath) {
-        let manifest = getPackageManifest(packagePath),
-            dependencies = getPackageDependencies(manifest),
-            dependencyPaths = [],
-            id = path.basename(packagePath);
+    const manifest = getPackageManifest(packagePath);
+    const dependencies = getPackageDependencies(manifest);
 
-        func.call(thisArg, packagePath);
-        loadedDependencies[id] = true;
+    func(packagePath);
 
-        _.each(dependencies, dependency => {
-            const dependencyPath = resolve(dependency, {cwd: packagePath});
+    for (const dependency of dependencies) {
+        const dependencyPath = resolve(dependency, {cwd: packagePath});
 
-            if (!dependencyPath) {
-                throw new Error(`"${id}" depends on "${dependency}" but it does not exist in "${dependencyPath}". Make sure it is installed!`);
-            }
+        if (!dependencyPath) {
+            throw new Error(`Dependency: "${dependency}" required by "${packagePath}" could not be found. Is it installed?`);
+        }
 
-            dependencyPaths.push(dependencyPath);
-        });
-
-        // Recursively search for any other dependencies
-        _.map(dependencyPaths, (dependencyPath: string) => {
-            let id = path.basename(dependencyPath);
-
-            if (!_.has(loadedDependencies, id)) {
-                return getDependenciesRecursively(dependencyPath);
-            }
-        });
+        func(dependencyPath);
     }
-
-    getDependenciesRecursively(directory);
 }
 
 /**
@@ -154,7 +136,6 @@ export function applyToNodeModulesSync(directory: string, func: (packagePath: st
  * @returns {Array} of absolute file paths
  */
 export function getMatchingFilesSync(directory, pattern): string[] {
-    return glob.sync(pattern, {cwd: directory}).map((file) => {
-        return path.resolve(directory, file);
-    });
+    return glob.sync(pattern, {cwd: directory})
+        .map((file) => path.resolve(directory, file));
 }
