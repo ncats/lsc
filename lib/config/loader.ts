@@ -18,7 +18,7 @@
 
 'use strict';
 
-import {getPackageName, readJSON, getPackageManifest, getPackageConfigPath, applyToNodeModulesSync} from "../cli/utils";
+import {getPackageName, readJSON, getPackageManifest, getPackageConfigPath, applyToNodeModulesSync} from "../cli";
 
 import _ = require('lodash')
 import path = require('path')
