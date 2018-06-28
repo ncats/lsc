@@ -5,10 +5,12 @@ node_js:
 before_install:
   - git config --global url."git@github.com:".insteadOf "https://github.com/"
 script:
+  - npm i -g codecov
   - npm test
   - >-
     npm run coverage && cat ./coverage/lcov.info |
-    ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+    ./node_modules/coveralls/bin/coveralls.js
+  - codecov
 cache:
   directories:
     - ~/.npm
