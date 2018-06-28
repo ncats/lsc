@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/LabShare/lsc/compare/v2.0.0...v2.0.1) (2018-06-28)
+
+
+### Bug Fixes
+
+* **tests:** enable CodeCov integration ([d91fda3](https://github.com/LabShare/lsc/commit/d91fda3))
+
 # [2.0.0](https://github.com/LabShare/lsc/compare/v1.0.0...v2.0.0) (2018-06-17)
 
 
