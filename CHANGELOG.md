@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/LabShare/lsc/compare/v2.0.2...v2.0.3) (2018-07-05)
+
+
+### Bug Fixes
+
+* .snyk & package.json to reduce vulnerabilities ([1473367](https://github.com/LabShare/lsc/commit/1473367))
+
 ## [2.0.2](https://github.com/LabShare/lsc/compare/v2.0.1...v2.0.2) (2018-07-04)
 
 
