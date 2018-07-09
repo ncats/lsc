@@ -2,15 +2,14 @@
 
 import flatiron = require('flatiron')
 import path = require('path')
-import _ = require('lodash')
 import {isPackageSync} from "./utils"
 import {checkVersion} from "../check-self-update"
 import labShare from '../labshare'
 import loaderPlugin = require('./loader-plugin')
 
-const {app} = flatiron,
-    cwd = process.cwd(),
-    lscRoot = path.join(__dirname, '..', '..');
+const {app} = flatiron;
+const cwd = process.cwd();
+const lscRoot = path.join(__dirname, '..', '..');
 
 export interface IStartOptions {
     directories?: string[]
@@ -31,12 +30,12 @@ interface IPackageJson {
  * @param {string} pattern - The CLI module pattern to search for (glob syntax)
  * @param {Array<Function>} initModules - Array of custom initializer functions
  */
-export function start({
-                          main = cwd,
-                          directories = [lscRoot],
-                          pattern = '{src/cli,cli}/*.js',
-                          initFunctions = []
-                      }: IStartOptions) {
+export async function start({
+                                main = cwd,
+                                directories = [lscRoot],
+                                pattern = '{src/cli,cli}/*.js',
+                                initFunctions = []
+                            }: IStartOptions) {
     let pkg: IPackageJson;
 
     checkVersion({name: 'lsc', logger: app.log});
@@ -77,9 +76,9 @@ export function start({
 
     global.LabShare = labShare;
 
-    app.start(error => {
-        if (_.isError(error)) {
-            app.log.error(error.stack);
+    app.start((error) => {
+        if (error) {
+            app.log.error(error.stack || 'Command not found!');
             process.exit(1);
         }
     });
