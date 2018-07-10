@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/LabShare/lsc/compare/v2.0.3...v2.1.0) (2018-07-10)
+
+
+### Features
+
+* **cli:** exit with error if command is not found SHELL-1570 ([872f0d8](https://github.com/LabShare/lsc/commit/872f0d8))
+
 ## [2.0.3](https://github.com/LabShare/lsc/compare/v2.0.2...v2.0.3) (2018-07-05)
 
 
