@@ -29,7 +29,8 @@
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect",
     "semantic-release": "semantic-release",
-    "prepare": "npm run snyk-protect"
+    "prepare": "npm run snyk-protect",
+    "lsc": "lsc"
   },
   "bin": {
     "lsc": "./lib/bin/lsc.js"
@@ -66,6 +67,7 @@
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
+    "@labshare/semantic-release-config": "^1.0.0",
     "@types/jasmine": "^2.6.0",
     "coveralls": "^3.0.1",
     "husky": "^0.14.3",
@@ -73,9 +75,8 @@
     "jasmine": "3.1.0",
     "jasmine-core": "^3.1.0",
     "mock-fs": "^4.4.1",
-    "typescript": "^2.5.3",
     "semantic-release": "^15.5.0",
-    "@labshare/semantic-release-config": "^1.0.0"
+    "typescript": "^2.5.3"
   },
   "snyk": true,
   "release": {
