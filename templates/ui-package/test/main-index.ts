@@ -1,5 +1,3 @@
-/* Obtained from https://github.com/LabShare/ng-qhts/blob/master/test/main-index.ts */
-
 Error.stackTraceLimit = 5;
 
 import 'core-js/es6/symbol';
