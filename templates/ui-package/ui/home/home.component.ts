@@ -2,14 +2,15 @@
 
 'use strict';
 
-import {Component} from '@angular/core'
+import {Component} from '@angular/core';
+import {OnInit} from '@angular/core';
 
 @Component({
-    selector: 'home',
+    selector: 'app-home',
     template: require('./home.component.html'),
     providers: []
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
     public message = '<%= appNameSlug %>\'s home page';
 
