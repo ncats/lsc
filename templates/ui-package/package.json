@@ -30,14 +30,14 @@
     "@labshare/ng-core": "^3.0.4",
     "lodash": "^4.6.1",
     "hammerjs": "^2.0.8",
-    "@angular/core": "6.0.4",
-    "@angular/common": "6.0.4"
+    "@angular/core": "^6.0.4",
+    "@angular/common": "^6.0.4"
   },
   "devDependencies": {
-    "@angular/compiler": "6.0.4",
-    "@angular/compiler-cli": "6.0.4",
-    "@angular/platform-browser": "6.0.4",
-    "@angular/platform-browser-dynamic": "6.0.4",
+    "@angular/compiler": "^6.0.4",
+    "@angular/compiler-cli": "^6.0.4",
+    "@angular/platform-browser": "^6.0.4",
+    "@angular/platform-browser-dynamic": "^6.0.4",
     "@commitlint/cli": "^6.2.0",
     "@commitlint/config-conventional": "^6.1.3",
     "@labshare/semantic-release-config": "^1.0.0",
