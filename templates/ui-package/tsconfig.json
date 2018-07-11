@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "inlineSourceMap": true,
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "inlineSources": true,
+    "stripInternal": true,
+    "lib": [
+      "es2015",
+      "es2017",
+      "dom"
+    ]
+  },
+  "files": [
+    "ui/app.ts"
+  ],
+  "paths": {
+    "@angular/*": [
+      "../node_modules/@angular/*"
+    ]
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test"
+  ]
+}
