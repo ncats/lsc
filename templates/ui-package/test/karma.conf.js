@@ -9,10 +9,7 @@ module.exports = function (config) {
         basePath: '../',
         frameworks: ['jasmine'],
         files: [
-            'test/main-index.ts',
-            // Include Angular Material 2 theme to address:
-            // https://github.com/angular/material2/issues/4056
-            'node_modules/@angular/material/prebuilt-themes/indigo-pink.css'
+            'test/main-index.ts'
         ],
         customLaunchers: {
             Chrome_travis_ci: {
