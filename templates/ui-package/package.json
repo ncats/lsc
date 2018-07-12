@@ -26,7 +26,6 @@
     "@labshare/shell": "*"
   },
   "dependencies": {
-    "@labshare/shell": "^3.0.8",
     "@labshare/ng-core": "^3.0.4",
     "lodash": "^4.6.1",
     "hammerjs": "^2.0.8",
@@ -34,6 +33,7 @@
     "@angular/common": "^6.0.4"
   },
   "devDependencies": {
+    "@labshare/shell": "^3.0.8",    
     "@angular/compiler": "^6.0.4",
     "@angular/compiler-cli": "^6.0.4",
     "@angular/platform-browser": "^6.0.4",
