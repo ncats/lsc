@@ -4,7 +4,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {UIRouterModule} from '@uirouter/angular';
-import {HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 import {states} from './home/states';
 import {HomeComponent} from './home/home.component';
 
@@ -16,7 +16,7 @@ import {HomeComponent} from './home/home.component';
     entryComponents: [],
     exports: [],
     imports: [
-        HttpModule,
+        HttpClientModule,
         CommonModule,
         UIRouterModule.forChild({
             states

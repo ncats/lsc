@@ -14,14 +14,54 @@
     "url": "https://github.com/LabShare/<%= appNameSlug %>/issues"
   },
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "test": "karma start ./test/karma.conf.js",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "lint:fix": "tslint --fix -p tsconfig.json -c tslint.json",
+    "build": "lsc build web",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "semantic-release": "semantic-release"
+  },
   "packageDependencies": {
     "@labshare/shell": "*"
   },
   "dependencies": {
-    "@labshare/shell": "https://github.com/LabShare/shell",
-    "lodash": "^4.6.1"
+    "@labshare/ng-core": "^3.0.4",
+    "lodash": "^4.6.1",
+    "hammerjs": "^2.0.8",
+    "@angular/core": "^6.0.4",
+    "@angular/common": "^6.0.4"
   },
   "devDependencies": {
+    "@labshare/shell": "^3.0.8",    
+    "@angular/compiler": "^6.0.4",
+    "@angular/compiler-cli": "^6.0.4",
+    "@angular/platform-browser": "^6.0.4",
+    "@angular/platform-browser-dynamic": "^6.0.4",
+    "@commitlint/cli": "^6.2.0",
+    "@commitlint/config-conventional": "^6.1.3",
+    "@labshare/semantic-release-config": "^1.0.0",
+    "@types/jasmine": "^2.5.54",
+    "hard-source-webpack-plugin": "^0.10.1",
+    "html-loader": "0.5.5",
+    "html-webpack-plugin": "3.2.0",
+    "husky": "^0.14.3",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.2",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
+    "karma-coverage-istanbul-reporter": "^2.0.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-typescript": "^3.0.8",
+    "karma-webpack": "^4.0.0-beta.0",
+    "null-loader": "^0.1.1",
+    "semantic-release": "^15.5.0",
+    "ts-loader": "^4.3.0",
+    "tslint-angular": "^1.1.0",
+    "typescript": "^2.7.2",
+    "webpack": "4.10.1"
   }
 }

@@ -1,4 +1,4 @@
-import {HomeComponent} from "./home.component";
+import {HomeComponent} from './home.component';
 
 export const states = [
     {
@@ -9,4 +9,4 @@ export const states = [
         url: '/<%= appNameSlug %>/home',
         component: HomeComponent
     }
-]; 
+];
