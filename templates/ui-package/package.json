@@ -1,7 +1,7 @@
 {
   "name": "<%= appNameSlug %>",
   "namespace": "",
-  "main": "./",
+  "main": "./ui/app.ts",
   "version": "<%= appVersion %>",
   "description": "<%= appDescription %>",
   "private": true,
