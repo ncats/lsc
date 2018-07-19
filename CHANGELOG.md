@@ -1,3 +1,17 @@
+# [2.2.0](https://github.com/LabShare/lsc/compare/v2.1.0...v2.2.0) (2018-07-19)
+
+
+### Bug Fixes
+
+* add app.ts to main package json property ([0510459](https://github.com/LabShare/lsc/commit/0510459))
+* add winston-transport to dependencies ([0ce97ea](https://github.com/LabShare/lsc/commit/0ce97ea))
+* SHELL-1316 #done add commitlint config to ui-template ([c89f167](https://github.com/LabShare/lsc/commit/c89f167))
+
+
+### Features
+
+* update template for UI packages SHELL-1316 ([#84](https://github.com/LabShare/lsc/issues/84)) ([66b22fd](https://github.com/LabShare/lsc/commit/66b22fd))
+
 # [2.1.0](https://github.com/LabShare/lsc/compare/v2.0.3...v2.1.0) (2018-07-10)
 
 
