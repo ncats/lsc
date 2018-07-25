@@ -45,7 +45,7 @@
     "@types/yargs": "^11.0.0",
     "flatiron": "^0.4.2",
     "flatiron-cli-config": "^0.1.5",
-    "fluent-logger": "^2.0.1",
+    "fluent-logger": "^3.0.0",
     "glob": "^7.1.1",
     "gulp": "^4.0.0",
     "gulp-conflict": "^0.4.0",
