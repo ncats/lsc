@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/LabShare/lsc/compare/v2.2.0...v2.2.1) (2018-07-25)
+
+
+### Bug Fixes
+
+* **package:** update fluent-logger to version 3.0.0 ([dd9e166](https://github.com/LabShare/lsc/commit/dd9e166))
+
 # [2.2.0](https://github.com/LabShare/lsc/compare/v2.1.0...v2.2.0) (2018-07-19)
 
 
