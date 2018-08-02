@@ -7,8 +7,8 @@ import * as rename from 'gulp-rename'
 import {PackageUpdate} from '../lib/package/update'
 import {startCase} from 'lodash'
 
-const _ = require('underscore.string'),
-    inquirer = require('inquirer');
+const _ = require('underscore.string');
+const inquirer = require('inquirer');
 
 function padLeft(dateValue: number) {
     return (dateValue < 10) ? '0' + dateValue : dateValue.toString();
@@ -65,8 +65,6 @@ module.exports = {
             answers.appYear = year;
 
             gulp.src([
-                `${__dirname}/../.eslintrc.json`,
-                `${__dirname}/../.eslintignore`,
                 `${__dirname}/../templates/common/**`,
                 `${__dirname}/../templates/${answers.projectType}-package/**`
             ])
