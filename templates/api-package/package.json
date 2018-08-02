@@ -14,10 +14,10 @@
     "url": "https://github.com/LabShare/<%= appNameSlug %>/issues"
   },
   "license": "MIT",
-  "packageDependencies": {
-    "services": "*"
-  },
+  "packageDependencies": [
+    "@labshare/services"
+  ],
   "dependencies": {
-    "@labshare/services": "https://github.com/LabShare/services"
+    "@labshare/services": "^3.0.0"
   }
 }
