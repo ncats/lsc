@@ -2,8 +2,7 @@
 
 import winston = require('winston');
 import TransportInstance = winston.TransportInstance;
-import ReadableStream = NodeJS.ReadableStream;
-import {getPackageManifest, getPackageName} from "../cli/utils";
+import {getPackageManifest, getPackageName} from "../cli";
 
 /*
  * LSC's logging configuration module.
@@ -90,7 +89,7 @@ export class Logger extends winston.Logger {
 
     // Workaround to support the Morgan request logging middleware
     stream(): any {
-        let self = this;
+        let self: any = this;
 
         return {
             write(options?: any): void {
