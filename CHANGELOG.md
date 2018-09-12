@@ -1,3 +1,10 @@
+## [2.2.3](https://github.com/LabShare/lsc/compare/v2.2.2...v2.2.3) (2018-09-12)
+
+
+### Bug Fixes
+
+* package.json to reduce vulnerabilities ([d9ce207](https://github.com/LabShare/lsc/commit/d9ce207))
+
 ## [2.2.2](https://github.com/LabShare/lsc/compare/v2.2.1...v2.2.2) (2018-08-02)
 
 
