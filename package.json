@@ -42,7 +42,7 @@
     "@types/semver": "^5.4.0",
     "@types/shelljs": "^0.8.0",
     "@types/winston": "^2.3.6",
-    "@types/yargs": "^11.0.0",
+    "@types/yargs": "^12.0.0",
     "flatiron": "^0.4.2",
     "flatiron-cli-config": "^0.1.5",
     "fluent-logger": "^3.0.0",
