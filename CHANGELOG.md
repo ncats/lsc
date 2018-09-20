@@ -1,3 +1,11 @@
+## [2.2.4](https://github.com/LabShare/lsc/compare/v2.2.3...v2.2.4) (2018-09-20)
+
+
+### Bug Fixes
+
+* **package:** update [@types](https://github.com/types)/glob to version 7.1.0 ([9dbb3a1](https://github.com/LabShare/lsc/commit/9dbb3a1))
+* **package:** update [@types](https://github.com/types)/yargs to version 12.0.0 ([de5322b](https://github.com/LabShare/lsc/commit/de5322b))
+
 ## [2.2.3](https://github.com/LabShare/lsc/compare/v2.2.2...v2.2.3) (2018-09-12)
 
 
