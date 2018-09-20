@@ -1,3 +1,10 @@
+## [2.2.5](https://github.com/LabShare/lsc/compare/v2.2.4...v2.2.5) (2018-09-20)
+
+
+### Bug Fixes
+
+* **loader:** resolves "callback already called" exception SHELL-1614 ([0c8a48e](https://github.com/LabShare/lsc/commit/0c8a48e))
+
 ## [2.2.4](https://github.com/LabShare/lsc/compare/v2.2.3...v2.2.4) (2018-09-20)
 
 
