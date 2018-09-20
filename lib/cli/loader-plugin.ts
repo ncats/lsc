@@ -51,7 +51,8 @@ exports.init = async function init(done) {
 
         done();
     } catch (error) {
-        done(error);
+        // TODO: workaround for async/await incompatibility with callbacks in the Flatiron CLI library
+        console.error(error);
     }
 };
 
