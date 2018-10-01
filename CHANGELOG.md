@@ -1,3 +1,10 @@
+## [2.2.6](https://github.com/LabShare/lsc/compare/v2.2.5...v2.2.6) (2018-10-01)
+
+
+### Bug Fixes
+
+* **pkg:** remove deprecated prepublish hook ([1ae0acf](https://github.com/LabShare/lsc/commit/1ae0acf))
+
 ## [2.2.5](https://github.com/LabShare/lsc/compare/v2.2.4...v2.2.5) (2018-09-20)
 
 
