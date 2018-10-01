@@ -27,7 +27,6 @@
     "build": "tsc",
     "watch:build": "tsc --watch",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect",
     "semantic-release": "semantic-release",
     "prepare": "npm run snyk-protect",
     "lsc": "lsc"
