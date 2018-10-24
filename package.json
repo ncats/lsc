@@ -1,6 +1,7 @@
 {
-  "name": "lsc",
-  "main": "./",
+  "name": "@labshare/lsc",
+  "namespace": "lsc",
+  "main": "./lib/bin/lsc.js",
   "version": "2.2.6",
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
@@ -14,7 +15,7 @@
   },
   "engines": {
     "npm": ">=3.7.0",
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "types": "./index.d.ts",
   "license": "MIT",
