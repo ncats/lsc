@@ -1,3 +1,11 @@
+## [2.2.7](https://github.com/LabShare/lsc/compare/v2.2.6...v2.2.7) (2018-10-24)
+
+
+### Bug Fixes
+
+* **docs:** update install command after renaming package to [@labshare](https://github.com/labshare)/lsc ([03c7d9d](https://github.com/LabShare/lsc/commit/03c7d9d))
+* **pkg:** rename package to [@labshare](https://github.com/labshare)/lsc to fix publishing errors ([abe8e76](https://github.com/LabShare/lsc/commit/abe8e76))
+
 ## [2.2.6](https://github.com/LabShare/lsc/compare/v2.2.5...v2.2.6) (2018-10-01)
 
 
