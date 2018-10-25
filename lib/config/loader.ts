@@ -50,8 +50,7 @@ function loadConfig(directory: string, config): void {
 
 interface ConfigLoaderOptions {
     configFilePath?: string
-    main?: string
-    packageDirectory?: string
+    cwd?: string
     directories?: string[]
 }
 
@@ -59,13 +58,11 @@ interface ConfigLoaderOptions {
  * @throws an exception if invalid options are provided.
  *
  * @param {Object} options
- * @param {string} [options.packageDirectory] - A relative or absolute path to a directory containing LabShare
- * packages as subdirectories. Default: ''
- * @param {string} [options.main] - The current, top-level project directory
+ * @param {string} [options.cwd] - The current, top-level project directory
  * @param {Array} [directories] - A list of paths to LabShare packages that should be searched for CLI commands. Each directory
  * must contain a package.json to be considered valid. Default: []
  * @param {string} [configFilePath] - A path to a configuration file. Configuration data in the file will be loaded
- * first then any configuration files found in 'main' or 'directories' will be loaded next.
+ * first then any configuration files found in 'cwd' or 'directories' will be loaded next.
  * @constructor
  */
 export class ConfigLoader {
@@ -73,8 +70,7 @@ export class ConfigLoader {
 
     constructor(options: ConfigLoaderOptions = {
         configFilePath: null,
-        main: null,
-        packageDirectory: null,
+        cwd: null,
         directories: []
     }) {
         if (options.configFilePath) {
@@ -82,14 +78,9 @@ export class ConfigLoader {
             options.configFilePath = path.resolve(untildify(options.configFilePath));
         }
 
-        if (options.main) {
-            assert.ok(_.isString(options.main), '`options.main` must be a string');
-            options.main = path.resolve(options.main);
-        }
-
-        if (options.packageDirectory) {
-            assert.ok(_.isString(options.packageDirectory), '`options.packageDirectory` must be a string');
-            options.packageDirectory = path.resolve(options.packageDirectory);
+        if (options.cwd) {
+            assert.ok(_.isString(options.cwd), '`options.cwd` must be a string');
+            options.cwd = path.resolve(options.cwd);
         }
 
         if (options.directories) {
@@ -117,8 +108,8 @@ export class ConfigLoader {
         }
 
         try {
-            if (this.options.main) {
-                applyToNodeModulesSync(this.options.main, directory => {
+            if (this.options.cwd) {
+                applyToNodeModulesSync(this.options.cwd, directory => {
                     loadConfig(directory, config);
                 });
             }

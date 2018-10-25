@@ -3,6 +3,9 @@
 import winston = require('winston');
 import TransportInstance = winston.TransportInstance;
 import {getPackageManifest, getPackageName} from "../cli";
+import path = require('path');
+import fs = require('fs');
+import _ = require('lodash');
 
 /*
  * LSC's logging configuration module.
@@ -13,11 +16,7 @@ import {getPackageManifest, getPackageName} from "../cli";
  * logger.error('an error');
  * logger.warn('a warning');
  */
-
-const path = require('path'),
-    fs = require('fs'),
-    _ = require('lodash'),
-    FluentTransport = require('fluent-logger').support.winstonTransport();
+const FluentTransport = require('fluent-logger').support.winstonTransport();
 
 function mkdirSync(path: string): void {
     try {
@@ -35,7 +34,8 @@ interface LoggerOptions {
         port?: number
         timeout?: number
         tag?: string
-    }
+    },
+    cwd?: string
     logDirectory?: string
 }
 
@@ -44,7 +44,8 @@ export class Logger extends winston.Logger {
     constructor(options: LoggerOptions) {
         options = _.defaultsDeep(options || {}, {
             fluentD: {},
-            logDirectory: null
+            logDirectory: null,
+            cwd: process.cwd()
         });
 
         let transports: TransportInstance[] = [
@@ -68,7 +69,7 @@ export class Logger extends winston.Logger {
         }
 
         if (!_.isEmpty(options.fluentD)) {
-            let name: string = getPackageName(getPackageManifest(process.cwd()));
+            let name: string = getPackageName(getPackageManifest(options.cwd));
 
             options = _.defaultsDeep(options, {
                 fluentD: {

@@ -3,7 +3,7 @@
  *
  * How to use:
  *  - Construct a CliLoader with a valid Flatiron app. An options object can be passed as a
- *  second argument to the constructor. To locate commands, specify options.main
+ *  second argument to the constructor. To locate commands, specify options.cwd
  *  and/or a list of package directories in options.directories. View the constructor documentation below
  *  for more details on the available options.
  *  - Call .load() to locate and load all the cli commands and run the list of "initFunctions" passed to
@@ -38,7 +38,7 @@ function createCommandHeader(name) {
 
 interface ICliLoaderOptions {
     configFilePath?: string
-    main?: string
+    cwd?: string
     packageDirectory?: string
     directories?: string | string[]
     timeout?: number
@@ -60,7 +60,7 @@ export class CliLoader {
      * @param {Object} app - An initialized Flatiron app with command storage and logging capabilities
      * @param {Object} options - Overrides default settings
      * @param {String} [options.pattern] - The pattern used to match files that contain cli commands. Default: 'cli/*.js'
-     * @param {String} [options.main] - A relative or absolute path to a directory containing a LabShare packages. Default: ''
+     * @param {String} [options.cwd] - A relative or absolute path to a directory containing a LabShare packages. Default: ''
      * @param {Array} [options.directories] - A list of paths to LabShare packages that should be searched for CLI commands. Each directory
      * must contain a package.json to be considered valid. Default: []
      * @param {Number} [options.timeout] - How long to wait for the optional callback to be called in CLI package init functions
@@ -75,9 +75,9 @@ export class CliLoader {
         this._commands = {};    // format: {packageName1: {cmd1Name: 'path/to/cmd1Name', cmd2Name: 'path/to/cmd2Name', ...}, packageName2: ...}
         this.initFunctions = options.initFunctions || [];
 
-        if (_.get(options, 'main')) {
-            assert.ok(_.isString(options.main), '`options.main` must be a string');
-            options.main = path.resolve(options.main);
+        if (_.get(options, 'cwd')) {
+            assert.ok(_.isString(options.cwd), '`options.cwd` must be a string');
+            options.cwd = path.resolve(options.cwd);
         }
 
         if (_.get(options, 'directories')) {
@@ -88,7 +88,7 @@ export class CliLoader {
         }
 
         this.options = _.defaults(options || {}, {
-            main: '',
+            cwd: '',
             pattern: 'cli/*.js',
             directories: [],
             timeout: INIT_TIMEOUT
@@ -97,7 +97,7 @@ export class CliLoader {
 
     /**
      * @description Synchronously loads and caches all the LabShare package CLI command modules
-     * found in the dependencies of options.main and/or options.directories.
+     * found in the dependencies of options.cwd and/or options.directories.
      *
      * An error is logged if two different packages try to load a command with the same name, a command could not be loaded, or
      * if a command module does not contain help text.
@@ -109,8 +109,8 @@ export class CliLoader {
         try {
             _.each(this.options.directories, this.storeCommands.bind(this));
 
-            if (this.options.main) {
-                applyToNodeModulesSync(this.options.main, this.storeCommands.bind(this));
+            if (this.options.cwd) {
+                applyToNodeModulesSync(this.options.cwd, this.storeCommands.bind(this));
             }
         } catch (error) {
             throw new Error(`Failed to load CLI commands: ${error.message}: ${error.stack}`);

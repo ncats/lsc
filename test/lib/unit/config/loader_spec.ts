@@ -3,44 +3,35 @@
 import path = require('path')
 import {configLoaderSync} from '../../../../lib/config'
 
-describe('configLoader', () => {
+describe('ConfigLoader', () => {
 
-    const packagePath = './test/fixtures/main-package',
-        cliPackage1ConfigExpectation = {
-            'Hello': 'World!',
-            'Values': [1, 2, 3]
+    const packagePath = './test/fixtures/main-package';
+    const cliPackage1ConfigExpectation = {
+        'Hello': 'World!',
+        'Values': [1, 2, 3]
+    };
+    const cliPackage2ConfigExpectation = {
+        'aKey': 'aValue',
+        'Data': {
+            'Data1': 1,
+            'Data2': 2,
+            'Data3': 3
         },
-        cliPackage2ConfigExpectation = {
-            'aKey': 'aValue',
-            'Data': {
-                'Data1': 1,
-                'Data2': 2,
-                'Data3': 3
-            },
-            'Listen': {
-                'Port': 9999,
-                'Url': 'Some/url'
-            }
-        },
-        cliPackage3ConfigExpectation = {
-            'Hi': 'there!'
-        };
+        'Listen': {
+            'Port': 9999,
+            'Url': 'Some/url'
+        }
+    };
+    const cliPackage3ConfigExpectation = {
+        'Hi': 'there!'
+    };
+    const options = {
+        cwd: packagePath
+    };
 
-    let config,
-        options;
-
-    beforeEach(() => {
-        options = {
-            main: packagePath
-        };
-    });
+    let config;
 
     it('throws an exception when invalid arguments and/or options are provided', () => {
-        expect(() => {
-            configLoaderSync({
-                packageDirectory: [123]
-            } as any);
-        }).toThrow();
         expect(() => {
             configLoaderSync({
                 directories: ['a/directory', 5]
@@ -86,7 +77,7 @@ describe('configLoader', () => {
 
         beforeEach(() => {
             config = configLoaderSync({
-                main: packagePath,
+                cwd: packagePath,
                 configFilePath: path.join('test', 'fixtures', 'local-config.json')
             });
         });
