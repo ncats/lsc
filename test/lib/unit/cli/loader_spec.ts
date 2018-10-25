@@ -38,7 +38,7 @@ describe('CliLoader', () => {
             cli: {}
         };
         options = {
-            main: packagePath
+            cwd: packagePath
         };
 
         cliLoader = new CliLoader(flatironAppMock, options);
@@ -53,7 +53,7 @@ describe('CliLoader', () => {
 
         expect(function () {
             new CliLoader(flatironAppMock, {
-                main: []
+                cwd: []
             } as any);
         }).toThrow();
 
@@ -133,7 +133,7 @@ describe('CliLoader', () => {
         it('times out if the functions passed to the "initFunctions" option exceed the timeout limit',
             async (done: DoneFn) => {
                 let options = {
-                    main: packagePath,
+                    cwd: packagePath,
                     timeout: 25,
                     initFunctions: [
                         (done) => {
@@ -175,7 +175,7 @@ describe('CliLoader', () => {
         });
 
         it('logs an error if an exception is thrown', async (done: DoneFn) => {
-            cliLoader.options.main = 1337;
+            cliLoader.options.cwd = 1337;
 
             try {
                 await cliLoader.load();
@@ -189,7 +189,7 @@ describe('CliLoader', () => {
 
         it('logs a warning if a loaded command does not contain help text', async () => {
             const cliLoader = new CliLoader(flatironAppMock, {
-                main: packagePath,
+                cwd: packagePath,
                 directories: [path.join(packagePath, 'node_modules', 'cli-package2')]
             });
 
