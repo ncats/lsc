@@ -59,7 +59,7 @@ export class Logger extends winston.Logger {
             mkdirSync(options.logDirectory);
 
             transports.push(new winston.transports.File({
-                filename: path.resolve(options.logDirectory, 'lsc.log'),
+                filename: path.resolve(options.logDirectory, 'app.log'),
                 timestamp: true,
                 json: false,
                 maxfiles: 5,
