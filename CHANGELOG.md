@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/LabShare/lsc/compare/v2.2.7...v2.3.0) (2018-10-25)
+
+
+### Features
+
+* **api:** export logger and config loader classes ([2f0e680](https://github.com/LabShare/lsc/commit/2f0e680))
+
 ## [2.2.7](https://github.com/LabShare/lsc/compare/v2.2.6...v2.2.7) (2018-10-24)
 
 
