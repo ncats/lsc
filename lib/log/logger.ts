@@ -42,7 +42,7 @@ interface LoggerOptions {
     logDirectory?: string
 }
 // default format for Console, error at winston: if not json is specified is not logging in console
-export const LoggerFormat = format.printf(({level, message }) => {
+const loggerFormat = format.printf(({level, message }) => {
     return `${level}: ${message}`;
 });
 export const Logger = (options: LoggerOptions) => {
@@ -64,7 +64,7 @@ export const Logger = (options: LoggerOptions) => {
     // special case: if json is not defined , use by default the custom format 
     if (options.format.json === false) {
         // going to global
-        styleFormats.push( global.LabShare.LoggerFormat);
+        styleFormats.push( loggerFormat);
     }
     else{
         styleFormats.push(format.json());
