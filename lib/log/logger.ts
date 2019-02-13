@@ -106,7 +106,7 @@ export const Logger = (options: LoggerOptions) => {
 
         _logger.add(new FluentTransport(options.fluentD.tag, options.fluentD));
     }
-    // work arround for 
+    // Workaround to support the Morgan request logging middleware
     return _.assign(_logger, {
         stream: () => {
             let self: any = this;
