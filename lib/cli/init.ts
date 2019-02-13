@@ -9,7 +9,7 @@ import _ = require('lodash')
 import path = require('path')
 import yargs = require('yargs')
 import {configLoaderSync} from "../config";
-import {Logger} from "../log";
+import {Logger , LoggerFormat} from "../log";
 import labShare from '../labshare';
 
 const lscRoot = path.join(__dirname, '..');
@@ -34,9 +34,14 @@ export function init(): void {
 
     let logDirectory: string = _.get(config, 'lsc.Log.Path');
     let fluentD = _.get(config, 'lsc.Log.FluentD', {});
+    let format = _.get(config, 'lsc.Log.Format', {});
 
-    global.LabShare.Logger = new Logger({
+    // default logger format - for text
+    global.LabShare.LoggerFormat = LoggerFormat;
+    // default logger
+    global.LabShare.Logger = Logger({
         logDirectory,
-        fluentD
+        fluentD,
+        format
     });
 }

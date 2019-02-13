@@ -1,8 +1,7 @@
 'use strict';
 
-import winston = require('winston');
-import TransportInstance = winston.TransportInstance;
-import {getPackageManifest, getPackageName} from "../cli";
+const { createLogger, format, transports } = require('winston');
+import { getPackageManifest, getPackageName } from "../cli";
 import path = require('path');
 import fs = require('fs');
 import _ = require('lodash');
@@ -27,7 +26,6 @@ function mkdirSync(path: string): void {
         }
     }
 }
-
 interface LoggerOptions {
     fluentD?: {
         host?: string
@@ -35,67 +33,89 @@ interface LoggerOptions {
         timeout?: number
         tag?: string
     },
+    format?: {
+        timestamp?: boolean,
+        json?: boolean,
+        colorize?: boolean
+    },
     cwd?: string
     logDirectory?: string
 }
+// default format for Console, error at winston: if not json is specified is not logging in console
+export const LoggerFormat = format.printf(({level, message }) => {
+    return `${level}: ${message}`;
+});
+export const Logger = (options: LoggerOptions) => {
 
-export class Logger extends winston.Logger {
+    options = _.defaultsDeep(options || {}, {
+        fluentD: {},
+        logDirectory: null,
+        format: {
+            timestamp: true,
+            json: false,
+            colorize: false
+        },
+        cwd: process.cwd()
+    });
 
-    constructor(options: LoggerOptions) {
-        options = _.defaultsDeep(options || {}, {
-            fluentD: {},
-            logDirectory: null,
-            cwd: process.cwd()
-        });
+    // Defining custom formats 
+    const styleFormats = [];
 
-        let transports: TransportInstance[] = [
-            new winston.transports.Console({
-                colorize: true
-            })
-        ];
-
-        if (options.logDirectory) {
-            // Create the log directory if it doesn't exist
-            mkdirSync(options.logDirectory);
-
-            transports.push(new winston.transports.File({
-                filename: path.resolve(options.logDirectory, 'app.log'),
-                timestamp: true,
-                json: false,
-                maxfiles: 5,
-                maxsize: 10485760,
-                level: 'info'
-            }));
-        }
-
-        if (!_.isEmpty(options.fluentD)) {
-            let name: string = getPackageName(getPackageManifest(options.cwd));
-
-            options = _.defaultsDeep(options, {
-                fluentD: {
-                    host: 'localhost',
-                    port: 24224,
-                    timeout: 3.0,
-                    tag: name || 'labshare'
-                }
-            });
-
-            transports.push(new FluentTransport(options.fluentD.tag, options.fluentD));
-        }
-
-        super({
-            transports
-        });
+    // special case: if json is not defined , use by default the custom format 
+    if (options.format.json === false) {
+        // going to global
+        styleFormats.push( global.LabShare.LoggerFormat);
     }
+    else{
+        styleFormats.push(format.json());
+    }
+    // TODO: enable dynamic formats and parameters , for  now it is only using basic types with no parameters    
+    _.forEach(['colorize', 'timestamp'], (value) => {
+        if (_.get(options.format, `${value}`) === true) {
+            styleFormats.push(format[`${value}`]());
+        }
+    });
+    const _logger = createLogger({
+        format: format.combine(...styleFormats)
+    });
+    // Adding a new Console transport
+    _logger.add(new transports.Console());
+    if (options.logDirectory) {
+        // Create the log directory if it doesn't exist
+        mkdirSync(options.logDirectory);
 
-    // Workaround to support the Morgan request logging middleware
-    stream(): any {
-        let self: any = this;
+        _logger.add(new transports.File({
+            filename: path.resolve(options.logDirectory, 'app.log'),
+            maxFiles: 5,
+            maxsize: 10485760,
+            level: 'info'
+        }));
+    }
+    // Adding fluentD transport
+    if (!_.isEmpty(options.fluentD)) {
+        let name: string = getPackageName(getPackageManifest(options.cwd));
 
-        return {
-            write(options?: any): void {
-                self.info(options);
+        options = _.defaultsDeep(options, {
+            fluentD: {
+                host: 'localhost',
+                port: 24224,
+                timeout: 3.0,
+                tag: name || 'labshare'
             }
-        };
+        });
+
+        _logger.add(new FluentTransport(options.fluentD.tag, options.fluentD));
     }
+    // work arround for 
+    return _.assign(_logger, {
+        stream: () => {
+            let self: any = this;
+            return {
+                write(options?: any): void {
+                    self.info(options);
+                }
+            }
+        }
+    });;
+
 }
