@@ -34,9 +34,12 @@ export function init(): void {
 
     let logDirectory: string = _.get(config, 'lsc.Log.Path');
     let fluentD = _.get(config, 'lsc.Log.FluentD', {});
+    let format = _.get(config, 'lsc.Log.Format', {});
 
-    global.LabShare.Logger = new Logger({
+    // default logger
+    global.LabShare.Logger = Logger({
         logDirectory,
-        fluentD
+        fluentD,
+        format
     });
 }
