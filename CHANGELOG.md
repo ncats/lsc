@@ -1,3 +1,15 @@
+# [2.4.0](https://github.com/LabShare/lsc/compare/v2.3.1...v2.4.0) (2019-02-13)
+
+
+### Bug Fixes
+
+* format global method removed ([f03de87](https://github.com/LabShare/lsc/commit/f03de87))
+
+
+### Features
+
+* fluent logger and winston upgrade ([295c2e1](https://github.com/LabShare/lsc/commit/295c2e1))
+
 ## [2.3.1](https://github.com/LabShare/lsc/compare/v2.3.0...v2.3.1) (2018-11-01)
 
 
