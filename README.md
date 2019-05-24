@@ -6,7 +6,7 @@
 # LSC
 
 ## Install
-`npm i -g lsc`
+`npm i -g @labshare/lsc`
 
 ## Usage
 Run `lsc help` to display a list of available commands.

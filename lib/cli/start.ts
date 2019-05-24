@@ -8,13 +8,12 @@ import labShare from '../labshare'
 import loaderPlugin = require('./loader-plugin')
 
 const {app} = flatiron;
-const cwd = process.cwd();
 const lscRoot = path.join(__dirname, '..', '..');
 
 export interface IStartOptions {
     directories?: string[]
     pattern?: string
-    main?: string
+    cwd?: string
     initFunctions?: ((error?: Error) => any)[]
 }
 
@@ -25,13 +24,13 @@ interface IPackageJson {
 
 /**
  * @description Bootstraps the CLI
- * @param {string} main - Root project location
+ * @param {string} cwd - Root project location
  * @param {Array<string>} [directories] - Additional project directories to search for CLI commands
  * @param {string} pattern - The CLI module pattern to search for (glob syntax)
  * @param {Array<Function>} initModules - Array of custom initializer functions
  */
 export async function start({
-                                main = cwd,
+                                cwd = process.cwd(),
                                 directories = [lscRoot],
                                 pattern = '{src/cli,cli}/*.js',
                                 initFunctions = []
@@ -40,11 +39,11 @@ export async function start({
 
     checkVersion({name: 'lsc', logger: app.log});
 
-    if (isPackageSync(main)) {
+    if (isPackageSync(cwd)) {
         app.config.file({
-            file: path.join(main, 'config.json')
+            file: path.join(cwd, 'config.json')
         });
-        pkg = require(path.join(main, 'package.json'));
+        pkg = require(path.join(cwd, 'package.json'));
     } else {
         pkg = require(path.join(lscRoot, 'package.json'));
         app.config.file({
@@ -68,7 +67,7 @@ export async function start({
 
     app.use(require('flatiron-cli-config'));
     app.use(loaderPlugin, {
-        main,
+        cwd,
         directories,
         pattern,
         initFunctions

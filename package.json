@@ -1,7 +1,8 @@
 {
-  "name": "lsc",
-  "main": "./",
-  "version": "2.2.2",
+  "name": "@labshare/lsc",
+  "namespace": "lsc",
+  "main": "./index.js",
+  "version": "2.4.1",
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "repository": {
@@ -14,7 +15,7 @@
   },
   "engines": {
     "npm": ">=3.7.0",
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "types": "./index.d.ts",
   "license": "MIT",
@@ -27,7 +28,6 @@
     "build": "tsc",
     "watch:build": "tsc --watch",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect",
     "semantic-release": "semantic-release",
     "prepare": "npm run snyk-protect",
     "lsc": "lsc"
@@ -36,13 +36,12 @@
     "lsc": "./lib/bin/lsc.js"
   },
   "dependencies": {
-    "@types/glob": "^5.0.33",
+    "@types/glob": "^7.1.0",
     "@types/lodash": "^4.14.109",
     "@types/q": "^1.0.5",
     "@types/semver": "^5.4.0",
-    "@types/shelljs": "^0.8.0",
     "@types/winston": "^2.3.6",
-    "@types/yargs": "^11.0.0",
+    "@types/yargs": "^12.0.0",
     "flatiron": "^0.4.2",
     "flatiron-cli-config": "^0.1.5",
     "fluent-logger": "^3.0.0",
@@ -56,14 +55,13 @@
     "lodash": "^4.12.0",
     "resolve-pkg": "^1.0.0",
     "semver": "^5.3.0",
-    "shelljs": "^0.8.2",
     "snyk": "^1.88.0",
     "tiny-json-http": "^7.0.0",
     "underscore.string": "^3.3.4",
     "untildify": "^3.0.3",
-    "winston": "2.4.2",
-    "winston-transport": "4.2.0",
-    "yargs": "^11.0.0"
+    "winston": "3.2.1",
+    "winston-transport": "4.3.0",
+    "yargs": "^12.0.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",

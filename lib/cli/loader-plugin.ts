@@ -23,7 +23,7 @@
  *
  * {Object} options
  * {String} [options.pattern] - The pattern used to match files that contain cli commands (e.g. 'src/cli/*.js')
- * {String} [options.main] - A relative or absolute path to a directory containing a LabShare package with 0 or more dependencies to other LabShare packages. Default: ''
+ * {String} [options.cwd] - A relative or absolute path to a directory containing a LabShare package with 0 or more dependencies to other LabShare packages. Default: ''
  * {Array} [options.directories] - A list of paths to LabShare packages that should be searched for CLI commands. Each directory
  * must contain a package.json to be considered valid. Default: []
  * @param {Number} [options.timeout] - How long to wait for the optional callback to be called in CLI package init functions
@@ -51,7 +51,8 @@ exports.init = async function init(done) {
 
         done();
     } catch (error) {
-        done(error);
+        // TODO: workaround for async/await incompatibility with callbacks in the Flatiron CLI library
+        console.error(error);
     }
 };
 

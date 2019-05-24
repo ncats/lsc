@@ -15,28 +15,31 @@ import labShare from '../labshare';
 const lscRoot = path.join(__dirname, '..');
 
 export function init(): void {
-    let argv = yargs.options({
-            configFile: {
-                alias: ['config', 'conf'],
-                describe: 'A path to a local configuration file',
-                type: 'string',
-                'default': null
-            }
-        }).argv,
-        config = configLoaderSync({
-            main: process.cwd(),
-            directories: [lscRoot],
-            configFilePath: argv.configFile
-        });
+    const argv = yargs.options({
+        configFile: {
+            alias: ['config', 'conf'],
+            describe: 'A path to a local configuration file',
+            type: 'string',
+            'default': null
+        }
+    }).argv;
+    const config = configLoaderSync({
+        cwd: process.cwd(),
+        directories: [lscRoot],
+        configFilePath: argv.configFile
+    });
 
     global.LabShare = global.LabShare || labShare;
     global.LabShare.Config = config;
 
-    let logDirectory: string = _.get(config, 'lsc.Log.Path'),
-        fluentD = _.get(config, 'lsc.Log.FluentD', {});
+    let logDirectory: string = _.get(config, 'lsc.Log.Path');
+    let fluentD = _.get(config, 'lsc.Log.FluentD', {});
+    let format = _.get(config, 'lsc.Log.Format', {});
 
-    global.LabShare.Logger = new Logger({
+    // default logger
+    global.LabShare.Logger = Logger({
         logDirectory,
-        fluentD
+        fluentD,
+        format
     });
 }

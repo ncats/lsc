@@ -1,3 +1,73 @@
+## [2.4.1](https://github.com/LabShare/lsc/compare/v2.4.0...v2.4.1) (2019-05-24)
+
+
+### Bug Fixes
+
+* **pkg:** resolve Snyk vulnerabilities ([602a756](https://github.com/LabShare/lsc/commit/602a756))
+
+# [2.4.0](https://github.com/LabShare/lsc/compare/v2.3.1...v2.4.0) (2019-02-13)
+
+
+### Bug Fixes
+
+* format global method removed ([f03de87](https://github.com/LabShare/lsc/commit/f03de87))
+
+
+### Features
+
+* fluent logger and winston upgrade ([295c2e1](https://github.com/LabShare/lsc/commit/295c2e1))
+
+## [2.3.1](https://github.com/LabShare/lsc/compare/v2.3.0...v2.3.1) (2018-11-01)
+
+
+### Bug Fixes
+
+* **logs:** update log file name to "app.log" instead of "lsc.log" ([7f89f7a](https://github.com/LabShare/lsc/commit/7f89f7a))
+
+# [2.3.0](https://github.com/LabShare/lsc/compare/v2.2.7...v2.3.0) (2018-10-25)
+
+
+### Features
+
+* **api:** export logger and config loader classes ([2f0e680](https://github.com/LabShare/lsc/commit/2f0e680))
+
+## [2.2.7](https://github.com/LabShare/lsc/compare/v2.2.6...v2.2.7) (2018-10-24)
+
+
+### Bug Fixes
+
+* **docs:** update install command after renaming package to [@labshare](https://github.com/labshare)/lsc ([03c7d9d](https://github.com/LabShare/lsc/commit/03c7d9d))
+* **pkg:** rename package to [@labshare](https://github.com/labshare)/lsc to fix publishing errors ([abe8e76](https://github.com/LabShare/lsc/commit/abe8e76))
+
+## [2.2.6](https://github.com/LabShare/lsc/compare/v2.2.5...v2.2.6) (2018-10-01)
+
+
+### Bug Fixes
+
+* **pkg:** remove deprecated prepublish hook ([1ae0acf](https://github.com/LabShare/lsc/commit/1ae0acf))
+
+## [2.2.5](https://github.com/LabShare/lsc/compare/v2.2.4...v2.2.5) (2018-09-20)
+
+
+### Bug Fixes
+
+* **loader:** resolves "callback already called" exception SHELL-1614 ([0c8a48e](https://github.com/LabShare/lsc/commit/0c8a48e))
+
+## [2.2.4](https://github.com/LabShare/lsc/compare/v2.2.3...v2.2.4) (2018-09-20)
+
+
+### Bug Fixes
+
+* **package:** update [@types](https://github.com/types)/glob to version 7.1.0 ([9dbb3a1](https://github.com/LabShare/lsc/commit/9dbb3a1))
+* **package:** update [@types](https://github.com/types)/yargs to version 12.0.0 ([de5322b](https://github.com/LabShare/lsc/commit/de5322b))
+
+## [2.2.3](https://github.com/LabShare/lsc/compare/v2.2.2...v2.2.3) (2018-09-12)
+
+
+### Bug Fixes
+
+* package.json to reduce vulnerabilities ([d9ce207](https://github.com/LabShare/lsc/commit/d9ce207))
+
 ## [2.2.2](https://github.com/LabShare/lsc/compare/v2.2.1...v2.2.2) (2018-08-02)
 
 
