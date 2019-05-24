@@ -1,7 +1,6 @@
 'use strict';
 
 import * as gulp from 'gulp'
-import * as conflict from 'gulp-conflict'
 import * as template from 'gulp-template'
 import * as rename from 'gulp-rename'
 import {PackageUpdate} from '../lib/package/update'
@@ -74,7 +73,6 @@ module.exports = {
                         file.basename = '.' + file.basename.slice(1);
                     }
                 }))
-                .pipe(conflict('./'))
                 .pipe(gulp.dest('./'))
                 .on('end', () => {
                     this.log.info(`Successfully created LabShare ${answers.projectType} package...`);
