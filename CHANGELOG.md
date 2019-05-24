@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/LabShare/lsc/compare/v2.4.0...v2.4.1) (2019-05-24)
+
+
+### Bug Fixes
+
+* **pkg:** resolve Snyk vulnerabilities ([602a756](https://github.com/LabShare/lsc/commit/602a756))
+
 # [2.4.0](https://github.com/LabShare/lsc/compare/v2.3.1...v2.4.0) (2019-02-13)
 
 
