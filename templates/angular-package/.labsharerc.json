@@ -1,0 +1,10 @@
+{
+    "build": {
+        "main": "ui/main",
+        "polyfills": "ui/polyfills",
+        "index": "ui/index.ejs"
+    },
+    "electron":{
+        "debug":false
+    }
+}

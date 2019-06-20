@@ -28,7 +28,7 @@ module.exports = {
                 message: 'Which type of LabShare package do you want to create?',
                 type: 'list',
                 default: 'cli',
-                choices: ['cli', 'ui', 'api']
+                choices: ['cli', 'ui', 'api' , 'angular']
             },
             {
                 name: 'appName',
