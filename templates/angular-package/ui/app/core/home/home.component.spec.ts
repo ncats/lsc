@@ -1,4 +1,5 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ConfigService} from '@labshare/ngx-core-services';
 import {HomeComponent} from './home.component';
 
 describe('HomeComponent', () => {
@@ -9,6 +10,7 @@ describe('HomeComponent', () => {
     TestBed.configureTestingModule({
       imports: [],
       declarations: [HomeComponent],
+      providers: [ConfigService]
     }).compileComponents();
   }));
 

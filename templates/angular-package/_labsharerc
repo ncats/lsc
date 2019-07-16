@@ -1,10 +1,17 @@
 {
+    "tsConfig" : "tsconfig.json",
     "build": {
         "main": "ui/main",
         "polyfills": "ui/polyfills",
+        "assets": "ui/assets",
+        "app": "ui/app",
         "index": "ui/index.ejs"
     },
-    "electron":{
-        "debug":false
+    "serve":{
+        "open": true,
+        "hot": true,
+        "port": 8080,
+        "historyApiFallback": true,
+        "stats": "minimal"
     }
 }

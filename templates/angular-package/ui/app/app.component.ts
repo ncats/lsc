@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '@labshare/ngx-core-services';
 
 @Component({
   selector: 'app-root',
-  template: require('./app.component.html'),
-  styles: [require('./app.component.css').toString()],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(private authService: AuthService) {}
   title = '<%= appNameSlug %>';
+  ngOnInit(): void {
+    this.authService.configure().subscribe(done => {
+      this.authService.onAuthCallback();
+    });
+  }
 }

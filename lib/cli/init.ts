@@ -32,9 +32,9 @@ export function init(): void {
     global.LabShare = global.LabShare || labShare;
     global.LabShare.Config = config;
 
-    let logDirectory: string = _.get(config, 'lsc.Log.Path');
-    let fluentD = _.get(config, 'lsc.Log.FluentD', {});
-    let format = _.get(config, 'lsc.Log.Format', {});
+    let logDirectory: string = _.get(config, 'lsc.Log.Path' ,_.get(config, 'lsc.log.path')); 
+    let fluentD =_.get(config, 'lsc.Log.FluentD', _.get(config, 'lsc.log.fluentD', {}));
+    let format = _.get(config, 'lsc.Log.Format', _.get(config, 'lsc.log.format', {}));
 
     // default logger
     global.LabShare.Logger = Logger({

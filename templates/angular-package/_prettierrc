@@ -1,8 +1,8 @@
 {
   "bracketSpacing": false,
   "singleQuote": true,
-  "printWidth": 80,
-  "trailingComma": "all",
+  "printWidth": 120,
+  "trailingComma": "none",
   "overrides": [
     {
       "files": "**/*.md",

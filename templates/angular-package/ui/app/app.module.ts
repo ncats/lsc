@@ -1,53 +1,22 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {CommonModule} from '@angular/common';
-import {NgModule, APP_INITIALIZER} from '@angular/core';
-import {UIRouterModule} from '@uirouter/angular';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import {
-  AuthService,
-  AuthInterceptor,
-  OidcNavigationService,
-  NgxCoreServicesModule,
-  Config,
-} from '@labshare/ngx-core-services';
-import {UIRouterService} from './shared/ui-router.services';
-import {routes} from './app.routes';
-import {HomeComponent} from './home/home.component';
+import {NgModule} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from './app-routing.module';
+import {CoreModule} from './core/core.module';
 import {AppComponent} from './app.component';
+import {ThemeModule} from './theme/theme.module';
+import {ShellModule} from './shell/shell.module';
+import '../assets/styles.scss';
+import '../favicon.ico';
 
-// app initializer for Auth
-export function initializeAuth(auth: AuthService): () => Promise<any> {
-  return async () => {
-    return auth.configure().toPromise();
-  };
-}
-
-// Export Angular 4 feature module
+// Export Angular 6 feature module
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent],
   entryComponents: [],
   exports: [],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    CommonModule,
-    NgxCoreServicesModule.forRoot(APP_CONF),
-    UIRouterModule.forRoot(routes),
-  ],
-  providers: [
-    // App initializer
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeAuth,
-      deps: [AuthService],
-      multi: true,
-    },
-    // Enable the interceptors
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    // Enable UIRouting Navigation for Auth Service
-    {provide: OidcNavigationService, useClass: UIRouterService},
-  ],
-  bootstrap: [AppComponent],
+  imports: [BrowserModule, HttpClientModule, CommonModule, ShellModule, CoreModule, ThemeModule, AppRoutingModule],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-
-export class <%= appTitle %>Module {}
+export class AppModule {}

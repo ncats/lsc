@@ -1,10 +1,16 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-
+import {TestBed, async} from '@angular/core/testing';
+import {AppComponent} from './app.component';
+import {ThemeModule} from './theme/theme.module';
+import {AuthService} from '@labshare/ngx-core-services';
+import {AppRoutingModule} from './app-routing.module';
+import {HomeComponent} from './core/home/home.component';
+import {APP_BASE_HREF} from '@angular/common';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      imports: [ThemeModule, AppRoutingModule],
+      declarations: [AppComponent, HomeComponent],
+      providers: [AuthService, {provide: APP_BASE_HREF, useValue: '/'}]
     }).compileComponents();
   }));
 
@@ -18,12 +24,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('<%= appNameSlug %>');
-  });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to <%= appNameSlug %>!');
   });
 });

@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
     "moduleResolution": "node",
-    "inlineSourceMap": true,
     "target": "es5",
     "module": "commonjs",
     "declaration": false,
-    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "allowJs": true,
     "skipLibCheck": true,
     "suppressImplicitAnyIndexErrors": true,
-    "inlineSources": true,
     "stripInternal": true,
     "lib": [
       "es2015",
@@ -19,7 +17,8 @@
     ]
   },
   "files": [
-    "ui/main.ts"
+    "ui/main.ts",
+    "ui/index.d.ts"
   ],
   "paths": {
     "@angular/*": [
@@ -32,5 +31,11 @@
     "node_modules",
     "dist",
     "test"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true,
+    "skipCodeGeneration": false,
+    "skipTemplateCodegen": true,
+    "debug": true
+  }
 }

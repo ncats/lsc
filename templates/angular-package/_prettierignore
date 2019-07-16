@@ -5,3 +5,4 @@
 *.json
 CHANGELOG.md
 *.yml
+index.js
