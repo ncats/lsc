@@ -3,8 +3,8 @@
 import * as gulp from 'gulp'
 import * as template from 'gulp-template'
 import * as rename from 'gulp-rename'
-import {PackageUpdate} from '../lib/package/update'
-import {startCase} from 'lodash'
+import { PackageUpdate } from '../lib/package/update'
+import { startCase } from 'lodash'
 
 const _ = require('underscore.string');
 const inquirer = require('inquirer');
@@ -28,7 +28,7 @@ module.exports = {
                 message: 'Which type of LabShare package do you want to create?',
                 type: 'list',
                 default: 'cli',
-                choices: ['cli', 'ui', 'api']
+                choices: ['cli', 'ui', 'api', 'angular']
             },
             {
                 name: 'appName',
@@ -77,6 +77,21 @@ module.exports = {
                 .on('end', () => {
                     this.log.info(`Successfully created LabShare ${answers.projectType} package...`);
                 });
+            if (answers.projectType === 'angular') {
+                gulp.src([
+                    `${__dirname}/../templates/inmutable/ui/**`
+                ])
+                    .pipe(rename(file => {
+                        if (file.basename[0] === '_') {
+                            file.basename = '.' + file.basename.slice(1);
+                        }
+                    }))
+                    .pipe(gulp.dest('./'))
+                    .on('end', () => {
+                        this.log.info(`Successfully moved inmutable LabShare ${answers.projectType} package's files...`);
+                    });
+
+            }
         });
     },
     update() {
