@@ -66,7 +66,5 @@ export class ThemeComponent extends StatefulComponent {
         this.router.navigate(['version']);
         break;
     }
-
-    console.log(selected);
   }
 }
