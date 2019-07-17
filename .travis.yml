@@ -11,8 +11,12 @@ before_install:
         echo "//registry.npmjs.org/:_authToken=\${NPM_INSTALL_TOKEN}" > ~/.npmrc;
     fi
   - 'git config --global url."git@github.com:".insteadOf "https://github.com/"'
+  
+install:
+  - npm install -g codecov
+  - npm install
+  - npm run build
 script:
-  - npm i -g codecov
   - npm test
   - >-
     npm run coverage && cat ./coverage/lcov.info |
