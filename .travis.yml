@@ -3,7 +3,14 @@ node_js:
   - lts/*
   - node
 before_install:
-  - git config --global url."git@github.com:".insteadOf "https://github.com/"
+  - |-
+    if [ $TRAVIS_PULL_REQUEST == false ] && [ $TRAVIS_BRANCH == "master" ];
+     then
+        echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > ~/.npmrc;
+      else
+        echo "//registry.npmjs.org/:_authToken=\${NPM_INSTALL_TOKEN}" > ~/.npmrc;
+    fi
+  - 'git config --global url."git@github.com:".insteadOf "https://github.com/"'
 script:
   - npm i -g codecov
   - npm test
@@ -16,8 +23,21 @@ cache:
     - ~/.npm
 notifications:
   email: false
-after_success:
-  - npm run semantic-release
+matrix:
+  allow_failures:
+    - node_js: node
 branches:
   except:
     - /^vd+.d+.d+$/
+jobs:
+  include:
+    - stage: release
+      if: branch = master
+      language: node_js
+      node_js: lts/*
+      script: skip
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          - npm run semantic-release
