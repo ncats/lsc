@@ -1,0 +1,17 @@
+{
+    "tsConfig" : "tsconfig.json",
+    "build": {
+        "main": "ui/main",
+        "polyfills": "ui/polyfills",
+        "assets": "ui/assets",
+        "app": "ui/app",
+        "index": "ui/index.ejs"
+    },
+    "serve":{
+        "open": true,
+        "hot": true,
+        "port": 8080,
+        "historyApiFallback": true,
+        "stats": "minimal"
+    }
+}
