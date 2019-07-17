@@ -1,3 +1,12 @@
+## [2.5.1](https://github.com/LabShare/lsc/compare/v2.5.0...v2.5.1) (2019-07-17)
+
+
+### Bug Fixes
+
+* forcing deployment to npm ([3423bc6](https://github.com/LabShare/lsc/commit/3423bc6))
+* travis ([869570e](https://github.com/LabShare/lsc/commit/869570e))
+* travis ([c6ab7b9](https://github.com/LabShare/lsc/commit/c6ab7b9))
+
 # [2.5.0](https://github.com/LabShare/lsc/compare/v2.4.1...v2.5.0) (2019-07-17)
 
 
