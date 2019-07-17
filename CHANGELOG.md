@@ -1,3 +1,20 @@
+# [2.5.0](https://github.com/LabShare/lsc/compare/v2.4.1...v2.5.0) (2019-07-17)
+
+
+### Bug Fixes
+
+* angular template ([9fba310](https://github.com/LabShare/lsc/commit/9fba310))
+* env var file changed ([f236ec9](https://github.com/LabShare/lsc/commit/f236ec9))
+* shell  module missing ([686c483](https://github.com/LabShare/lsc/commit/686c483))
+* snyk error ([5926aec](https://github.com/LabShare/lsc/commit/5926aec))
+* template file ([175de2b](https://github.com/LabShare/lsc/commit/175de2b))
+
+
+### Features
+
+* angular template ([2414079](https://github.com/LabShare/lsc/commit/2414079))
+* angular template ([12cd5b8](https://github.com/LabShare/lsc/commit/12cd5b8))
+
 ## [2.4.1](https://github.com/LabShare/lsc/compare/v2.4.0...v2.4.1) (2019-05-24)
 
 
