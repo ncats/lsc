@@ -1,3 +1,10 @@
+## [2.5.4](https://github.com/LabShare/lsc/compare/v2.5.3...v2.5.4) (2019-07-18)
+
+
+### Bug Fixes
+
+* template files ([599828d](https://github.com/LabShare/lsc/commit/599828d))
+
 ## [2.5.3](https://github.com/LabShare/lsc/compare/v2.5.2...v2.5.3) (2019-07-18)
 
 
