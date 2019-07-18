@@ -1,3 +1,10 @@
+## [2.5.3](https://github.com/LabShare/lsc/compare/v2.5.2...v2.5.3) (2019-07-18)
+
+
+### Bug Fixes
+
+* adding tsconfig for angular template ([29af22b](https://github.com/LabShare/lsc/commit/29af22b))
+
 ## [2.5.2](https://github.com/LabShare/lsc/compare/v2.5.1...v2.5.2) (2019-07-17)
 
 
