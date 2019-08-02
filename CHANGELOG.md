@@ -1,3 +1,10 @@
+# [2.6.0](https://github.com/LabShare/lsc/compare/v2.5.4...v2.6.0) (2019-08-02)
+
+
+### Features
+
+* new create command and angular template ([e69056c](https://github.com/LabShare/lsc/commit/e69056c))
+
 ## [2.5.4](https://github.com/LabShare/lsc/compare/v2.5.3...v2.5.4) (2019-07-18)
 
 

@@ -2,7 +2,7 @@
   "name": "@labshare/lsc",
   "namespace": "lsc",
   "main": "./index.js",
-  "version": "2.5.4",
+  "version": "2.6.0",
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "repository": {
