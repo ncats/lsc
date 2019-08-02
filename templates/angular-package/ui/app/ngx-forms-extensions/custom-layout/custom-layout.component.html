@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-12">
+        <div *ngFor="let field of formConfig.fields" class="mb-2">
+            <ng-container *ngIf="!field.hidden">
+                <label>{{ field.label }}
+                    <span [hidden]="(field.required || field.requiredTrue)"class="sub-label" >(Optional)</span>
+                </label>
+                <div dynamicField [field]="field" [group]="group" [model]="model"></div>
+            </ng-container>
+        </div>
+    </div>
+</div>

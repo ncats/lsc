@@ -23,6 +23,7 @@ This is a template project with all the LabShare's features, such as Authenticat
 - **Core**: Main Functionality module, all the current's project logic should go here.
 - **Shell**: Shell Module, all the default routes, and services initialization goes here.
 - **Theme**: UI Module, all the settings for the main ui module goes here.
+- **Ngx Forms Extension**: UI Module for creating dynamic forms based on json.
 - **app-routing**: Main Routing module.
 - **App Module**: Main module.
 
