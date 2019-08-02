@@ -25,7 +25,15 @@ export const STATE = () => ({
       icon: 'http://placekitten.com/80/80'
     }
   ],
-  items: [{name: 'home', link: 'home', icon: 'th'}, {name: 'version', link: 'version', icon: 'th-large'}]
+  items: [
+    {name: 'login', link: 'login', icon: 'th'},
+    {name: 'logout', link: 'logout', icon: 'th'},
+    {name: 'home', link: 'home', icon: 'th'},
+    {name: 'usage', link: 'usage', icon: 'th'},
+    {name: 'forms', link: 'custom-forms', icon: 'th'},
+    {name: 'forms extension', link: 'custom-forms-extension', icon: 'th'},
+    {name: 'version', link: 'version', icon: 'th-large'}
+  ]
 });
 
 export const UTILS = {};
@@ -62,8 +70,23 @@ export class ThemeComponent extends StatefulComponent {
       case 'home':
         this.router.navigate(['']);
         break;
+      case 'usage':
+        this.router.navigate(['usage']);
+        break;
+      case 'login':
+        this.router.navigate(['login']);
+        break;
+      case 'logout':
+        this.router.navigate(['logout']);
+        break;
       case 'version':
         this.router.navigate(['version']);
+        break;
+      case 'custom-forms':
+        this.router.navigate(['custom-forms']);
+        break;
+      case 'custom-forms-extension':
+        this.router.navigate(['custom-forms-extension']);
         break;
     }
   }
