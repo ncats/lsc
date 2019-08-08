@@ -59,6 +59,10 @@ export async function start({
             'lsc <command>            - run a command',
             'lsc help                 - list all commands',
             'lsc help <command>       - display help for a specific command',
+            'lsc create app           - creates a LabShare application based on a template',
+            'lsc package create       - creates a LabShare application based on a template (legacy)',
+            'lsc help start           - will show all the commands for starting (if project)' ,
+            'lsc help build           - will show all the commands for building (if project)' ,
             '',
             '   --config <file-path>  - load a JSON configuration file (optional)'
         ],
