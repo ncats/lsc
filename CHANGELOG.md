@@ -1,3 +1,10 @@
+## [2.6.1](https://github.com/LabShare/lsc/compare/v2.6.0...v2.6.1) (2019-08-08)
+
+
+### Bug Fixes
+
+* commands and jenkins template ([2019337](https://github.com/LabShare/lsc/commit/2019337))
+
 # [2.6.0](https://github.com/LabShare/lsc/compare/v2.5.4...v2.6.0) (2019-08-02)
 
 
