@@ -22,7 +22,7 @@ export const create = function () {
             message: 'Which type of LabShare package do you want to create?',
             type: 'list',
             default: 'cli',
-            choices: ['cli', 'ui', 'api', 'angular']
+            choices: ['cli', 'ui', 'api', 'angular', 'library']
         },
         {
             name: 'appName',
