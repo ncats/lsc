@@ -49,6 +49,3 @@ bower_components
 
 # Releases
 dist
-
-# Package Lock for NPM
-package-lock.json

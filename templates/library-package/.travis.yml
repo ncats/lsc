@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+  - lts/*
+sudo: required
+addons:
+  chrome: stable
+before_install:
+  - 'git config --global url."https://github.com/".insteadOf "git@github.com:"'
+install:
+  - npm i -g @labshare/lsc codecov
+  - npm ci
+script:
+  - npm run build
+  - npm run lint
+notifications:
+  email: false
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
+jobs:
+  include:
+    - stage: release
+      if: branch = master
+      node_js: lts/*
+      script: skip
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          - bash scripts/deploy.sh

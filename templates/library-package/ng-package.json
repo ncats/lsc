@@ -1,9 +1,14 @@
 {
   "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
-  "whitelistedNonPeerDependencies": [],
+  "whitelistedNonPeerDependencies": ["@iplab/ngx-file-upload","@labshare/data-structures","@labshare/ngx-core-services","@uirouter/angular"],
   "lib": {
     "entryFile": "public_api.ts",
-    "umdModuleIds": {}
+    "umdModuleIds": {
+      "@labshare/ngx-core-services" : "ngxCoreServices",
+        "@uirouter/angular": "angular",
+        "@uirouter/core": "core$1",
+        "@iplab/ngx-file-upload": "ngxFileUpload"
+    }
   },
   "dest": "dist"    
 }
