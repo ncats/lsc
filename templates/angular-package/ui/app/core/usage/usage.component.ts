@@ -4,7 +4,7 @@
 
 import {Component} from '@angular/core';
 import {OnInit} from '@angular/core';
-import {UsageService} from '@labshare/ngx-core-services';
+import {LoggingService} from '@labshare/ngx-core-services';
 
 @Component({
   selector: 'app-usage',
@@ -15,14 +15,14 @@ export class UsageComponent implements OnInit {
   public message = `Newapp2's usage page`;
   public isUsageEnable = false;
 
-  constructor(private usage: UsageService) {}
+  constructor(private loggingService: LoggingService) {}
 
   ngOnInit() {
-    this.isUsageEnable = this.usage.hasUrl();
+    this.isUsageEnable = this.loggingService.hasUrl();
     this.message = `Usage is ` + (this.isUsageEnable === true ? `On` : `Off`);
   }
 
   onSendUsage() {
-    this.usage.send({event: 'test', info: 'sending data'});
+    this.loggingService.info({event: 'test', message: 'sending data'});
   }
 }
