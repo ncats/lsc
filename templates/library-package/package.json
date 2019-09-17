@@ -9,7 +9,7 @@
     "url": "https://github.com/LabShare/<%= appNameSlug %>.git"
   },
   "scripts": {
-    "build": "ng-packagr -p ng-package.json",
+    "build": "lsc build lib",
     "test": "karma start ./test/karma.conf.js",
     "coverage": "karma start ./test/karma.conf.js --singleRun=true",
     "commitmsg": "commitlint -e $GIT_PARAMS",
