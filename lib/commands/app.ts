@@ -60,17 +60,18 @@ export const create = function () {
           gulp.src([
             `${__dirname}/../../templates/${answers.projectType}-package/**`
           ])
-              .pipe(rename(file => {
-                  if (file.basename[0] === '_') {
-                      file.basename = '.' + file.basename.slice(1);
-                  }
-              }))
-              .pipe(gulp.dest('./'))
-              .on('end', () => {
-                  this.log.info(`Successfully moved inmutable LabShare ${answers.projectType} package's files...`);
-              });
-              return;
-      }
+          .pipe(template(answers))
+          .pipe(rename(file => {
+              if (file.basename[0] === '_') {
+                  file.basename = '.' + file.basename.slice(1);
+              }
+          }))
+          .pipe(gulp.dest('./'))
+          .on('end', () => {
+              this.log.info(`Successfully moved inmutable LabShare ${answers.projectType} package's files...`);
+          });
+          return;
+        }
         gulp.src([
             `${__dirname}/../../templates/common/**`,
             `${__dirname}/../../templates/${answers.projectType}-package/**`

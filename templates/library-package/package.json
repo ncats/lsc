@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "main": "dist/<%= appNameSlug %>",
   "description": "<%= appDescription %>",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LabShare/<%= appNameSlug %>.git"
+  },
   "scripts": {
     "build": "ng-packagr -p ng-package.json",
     "test": "karma start ./test/karma.conf.js",
@@ -18,6 +23,9 @@
     "prettier:cli": "npm run prettier -- -c",
     "prettier:fix": "npm run prettier:cli -- --write"
   },
+  "packageDependencies": [
+    "@labshare/shell-ui"
+  ],
   "dependencies": {
     "@labshare/ngx-core-services": "^1.0.0"
   },
@@ -34,7 +42,8 @@
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^7.0.1",
     "@labshare/semantic-release-config": "^1.1.0", 
-    "@ngtools/webpack": "^1.3.3",
+    "@labshare/shell-ui": "^1.5.0",
+    "@ngtools/webpack": "^8.3.3",
     "@semantic-release/changelog": "^3.0.4",
     "@semantic-release/commit-analyzer": "^6.3.0",
     "@semantic-release/exec": "^3.3.6",
@@ -44,10 +53,12 @@
     "@semantic-release/release-notes-generator": "^7.3.0",
     "@types/jasmine": "^3.0.0",
     "@types/node": "^11.9.0",
+    "angular-router-loader": "~0.8",
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^5.2.1",
     "core-js": "^2.4.1",
-    "css-loader": "^2.1.0",
+    "css-loader": "^3.0.0",
+    "file-loader": "^4.0.0",
     "fork-ts-checker-webpack-plugin": "^1.2.0",
     "html-loader": "0.5.5",
     "html-webpack-plugin": "3.2.0",
@@ -63,6 +74,9 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-typescript": "^4.0.0",
     "karma-webpack": "^4.0.0-beta.0",
+    "less-loader": "^5.0.0",
+    "ng-annotate-loader": "^0.6.1",
+    "ng-annotate-patched": "^1.10.0",
     "ng-packagr": "^5.4.3",
     "node-sass": "^4.9.0",
     "null-loader": "^0.1.1",
@@ -77,12 +91,15 @@
     "to-string-loader": "^1.1.5",
     "ts-loader": "^4.3.0",
     "tslint-angular": "^1.1.0",
-    "typescript": "^3.2.2",
-    "url-loader": "1.1.1",
-    "webpack": "^4.10.2",
+    "typescript": "^3.5.0",
+    "url-loader": "2.0.0",
+    "webpack": "4.25.1",
     "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.7.2",
+    "webpack-hot-middleware": "^2.21.1",
+    "webpack-merge": "^4.2.1",
     "webpack-node-externals": "^1.7.2",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1"    
   },
   "peerDependencies": {
     "@angular/animations": "^8.0.2",
