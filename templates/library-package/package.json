@@ -1,6 +1,6 @@
 {
   "name": "@labshare/<%= appNameSlug %>",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "dist/<%= appNameSlug %>",
   "description": "<%= appDescription %>",
   "private": true,

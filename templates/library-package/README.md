@@ -27,7 +27,7 @@ This is a template project that will create a base library.
 
 ## Contents
 
-- **scripts** - Any sctipts needed for your library.
+- **scripts** - Any scripts needed for your library.
 - **src** - Where the main bulk of your code will live.
 - **assests**: Any public assests, such as images, go here.
 - **base-lib**: Where you will add your libraries components.
