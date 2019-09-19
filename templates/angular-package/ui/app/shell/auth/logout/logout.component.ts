@@ -7,8 +7,6 @@ import {AuthService} from '@labshare/ngx-core-services';
 export class LogoutComponent implements OnInit {
   constructor(private authService: AuthService) {}
   ngOnInit() {
-    this.authService.configure().subscribe(done => {
-      this.authService.logout();
-    });
+    this.authService.logout();
   }
 }

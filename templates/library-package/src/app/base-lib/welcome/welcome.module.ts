@@ -6,6 +6,6 @@ import {WelcomeComponent} from './welcome.component';
   imports: [CommonModule],
   providers: [],
   declarations: [WelcomeComponent],
-  exports: [WelcomeComponent]
+  exports: [WelcomeComponent],
 })
 export class WelcomeModule {}

@@ -10,8 +10,6 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
   title = '<%= appNameSlug %>';
   ngOnInit(): void {
-    this.authService.configure().subscribe(done => {
-      this.authService.onAuthCallback();
-    });
+    this.authService.onAuthCallback();
   }
 }
