@@ -1,3 +1,11 @@
+## [2.8.1](https://github.com/LabShare/lsc/compare/v2.8.0...v2.8.1) (2019-09-19)
+
+
+### Bug Fixes
+
+* logging service in angular-template ([553d41b](https://github.com/LabShare/lsc/commit/553d41b))
+* template formating ([23bc546](https://github.com/LabShare/lsc/commit/23bc546))
+
 # [2.8.0](https://github.com/LabShare/lsc/compare/v2.7.0...v2.8.0) (2019-09-19)
 
 
