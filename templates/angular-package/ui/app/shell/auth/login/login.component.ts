@@ -7,8 +7,6 @@ import {AuthService} from '@labshare/ngx-core-services';
 export class LoginComponent implements OnInit {
   constructor(private authService: AuthService) {}
   ngOnInit() {
-    this.authService.configure().subscribe(done => {
-      this.authService.login();
-    });
+    this.authService.login();
   }
 }

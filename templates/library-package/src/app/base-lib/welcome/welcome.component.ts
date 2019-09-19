@@ -11,7 +11,6 @@ export class WelcomeComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log('Hello World!')
+    console.log('Hello World!');
   }
-
 }
