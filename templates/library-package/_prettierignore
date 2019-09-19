@@ -1,0 +1,7 @@
+/coverage
+/build
+/dist
+/images
+*.json
+CHANGELOG.md
+*.yml
