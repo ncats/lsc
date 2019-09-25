@@ -1,3 +1,19 @@
+# [2.8.0](https://github.com/LabShare/lsc/compare/v2.7.0...v2.8.0) (2019-09-19)
+
+
+### Features
+
+* add boilerplate app ([45e750e](https://github.com/LabShare/lsc/commit/45e750e))
+* add package dependecies ([26c08f4](https://github.com/LabShare/lsc/commit/26c08f4))
+* add travis and release files. updated pack.json ([9da30af](https://github.com/LabShare/lsc/commit/9da30af))
+* added library template as well updated lsc command ([7c99c95](https://github.com/LabShare/lsc/commit/7c99c95))
+* PR comments ([2c6291c](https://github.com/LabShare/lsc/commit/2c6291c))
+* remove unused dependencies ([e858de5](https://github.com/LabShare/lsc/commit/e858de5))
+* remove unused dependencies ([25d70c3](https://github.com/LabShare/lsc/commit/25d70c3))
+* update build command ([173077e](https://github.com/LabShare/lsc/commit/173077e))
+* update library readMe ([b398653](https://github.com/LabShare/lsc/commit/b398653))
+* update library so it builds in ng-packgr ([7cbc207](https://github.com/LabShare/lsc/commit/7cbc207))
+
 # [2.7.0](https://github.com/LabShare/lsc/compare/v2.6.1...v2.7.0) (2019-08-15)
 
 
