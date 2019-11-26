@@ -9,7 +9,7 @@ export function fetchModuleRegistryInfo(name: string) {
     const url = [REGISTRY_URL, name, 'latest'].join('/');
 
     return new Promise((resolve, reject) => {
-        request({ url, method: 'GET' , json:true}, (error, response, body) => {
+        request({ url, method: 'GET', json: true }, (error, response, body) => {
             if (error) {
                 reject(error);
                 return;
