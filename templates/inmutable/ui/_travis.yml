@@ -15,7 +15,7 @@ before_install:
     fi
   - 'git config --global url."git@github.com:".insteadOf "https://github.com/"'
 install:
-  - npm i -g lsc codecov
+  - npm i -g @labshare/lsc codecov
   - npm install
   - npm rebuild
 script:

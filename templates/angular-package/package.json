@@ -41,7 +41,7 @@
     "@angular/forms": "^8.0.2",
     "@angular/router": "^8.0.2",
     "@labshare/ngx-core-services": "^1.0.0",
-    "@labshare/ngx-forms": "^8.0.0",
+    "@labshare/ngx-forms": "^9.0.0",
     "@labshare/ngx-stateful": "^2.0.9",
     "@labshare/stateful-components": "^2.0.1",
     "@ng-bootstrap/ng-bootstrap": "^4.1.0",
