@@ -1,0 +1,27 @@
+{
+    "routes": [
+        {
+            "path": "noleft",
+            "component": "LayoutComponent",
+            "resolve": { 
+                "items": "ConfigResolverService"
+            },
+            "children": [
+            {
+                "path": "",
+                "component": "LabShareComponent",
+                "outlet": "center"
+            },
+            {
+              "path": "",
+              "component": "HeaderComponent",
+              "outlet": "header"
+            },
+            {
+              "path": "",
+              "component": "TenantNavComponent",
+              "outlet": "tenant"
+            }]
+        }
+    ]
+}

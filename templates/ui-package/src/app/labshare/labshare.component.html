@@ -1,0 +1,22 @@
+<!-- Content for the middle of the main center component -->
+<div class="main-content">
+    <h1>LabShare Template</h1>
+<p>
+   Welcome to the LabShare's UI Template, here you will find an example app with most of the ui features and services.
+</p>
+<div>
+    <h3>Code</h3>
+    <pre class="language-ts" ><code [innerHTML]="sourceCode"></code></pre>
+    <h3>Routing Configuration</h3>
+    <pre class="language-ts" ><code [innerHTML]="routingConfigurationCode"></code></pre>
+    </div>
+    <button (click)="changeTitle()">Change Title</button>
+    <div  [hidden]="hideContent">
+        <div>Main Content Area</div>
+    </div>
+    <div class="inner-main" [hidden]="hideContent">
+        <div class="container-right outlet">
+            <router-outlet name="center-main"></router-outlet>
+        </div>
+    </div>
+</div>
