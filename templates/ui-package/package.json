@@ -17,6 +17,15 @@
     "prettier:fix": "npm run prettier:cli -- --write",
     "commitmsg": "commitlint -e $GIT_PARAMS"
   },
+  "contributors": "https://github.com/LabShare/<%= appNameSlug %>/graphs/contributors",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LabShare/<%= appNameSlug %>.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LabShare/c<%= appNameSlug %>/issues"
+  },
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@angular/animations": "~8.2.11",
