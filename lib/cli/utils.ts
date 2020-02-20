@@ -7,10 +7,12 @@ const assert = require('assert');
 const glob = require('glob');
 const resolve = require('resolve-pkg');
 
+interface PackageDependencies {
 
-interface ILSCSettings {
+}
+interface LscSettings {
     cliDir?: string
-    packageDependencies?: any|string[]
+    packageDependencies?: PackageDependencies|string[]
 }
 
 /**
@@ -18,14 +20,11 @@ interface ILSCSettings {
  * @returns {Array} A list of LabShare package dependencies or an empty array
  * @private
  */
-function getPackageDependencies(manifest): any|string[] {
+function getPackageDependencies(manifest): PackageDependencies|string[] {
     return (_.isObject(manifest) && _.isObject(manifest.packageDependencies))
         ? (_.isArray(manifest.packageDependencies) ? manifest.packageDependencies : Object.keys(manifest.packageDependencies))
         : [];
 }
-
- "<%= appNameSlug %>"
-
 /**
  * @description Retrieves the LabShare package's name
  * @param {Object} manifest - A package.json parsed into a JS object
@@ -40,7 +39,7 @@ export function getPackageName(manifest): string {
  * @description Retrieves the LabShare package's lsc settings
  * @param {Object} manifest - A package.json parsed into a JS object
  */
-export function getPackageLSCSettings(manifest): ILSCSettings {
+export function getPackageLSCSettings(manifest): LscSettings {
     if (!manifest || !(manifest.lsc)) {
         return null;
     }
