@@ -45,7 +45,7 @@ export function getPackageName(manifest): string {
  * @description Retrieves the LabShare package's lsc settings
  * @param {Object} manifest - A package.json parsed into a JS object
  */
-export function getPackageLSCSettings(manifest): LscSettings {
+export function getPackageLscSettings(manifest): LscSettings {
     if (!manifest || !(manifest.lsc)) {
         return null;
     }
@@ -139,7 +139,7 @@ export function applyToNodeModulesSync(packagePath: string, func: (packagePath: 
     }
 
     const manifest = getPackageManifest(packagePath);
-    const lscSettings =  getPackageLSCSettings(manifest);
+    const lscSettings =  getPackageLscSettings(manifest);
 
     const dependencies = (lscSettings)?lscSettings.packageDependencies : getPackageDependencies(manifest);
 

@@ -14,7 +14,7 @@
 
 'use strict';
 
-import {getMatchingFilesSync, getPackageManifest, getPackageName, applyToNodeModulesSync, getPackageLSCSettings} from "./utils";
+import {getMatchingFilesSync, getPackageManifest, getPackageName, applyToNodeModulesSync, getPackageLscSettings} from "./utils";
 import path = require('path')
 import _ = require('lodash')
 import assert = require('assert')
@@ -222,7 +222,7 @@ export class CliLoader {
         }
 
         const packageName = getPackageName(manifest);
-        const lscSettings = getPackageLSCSettings(manifest);
+        const lscSettings = getPackageLscSettings(manifest);
         const pattern = (lscSettings &&  lscSettings.cliDir) ? `${lscSettings.cliDir}/*.js` : this.options.pattern;
         const commands = this.getCommands(directory, pattern);
         _.each(commands, (command, name: string) => {
