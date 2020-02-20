@@ -7,9 +7,15 @@ const assert = require('assert');
 const glob = require('glob');
 const resolve = require('resolve-pkg');
 
-interface PackageDependencies {
-
+interface Iterator<T> {
+    next(value?: any): IteratorResult<T>;
+    return?(value?: any): IteratorResult<T>;
+    throw?(e?: any): IteratorResult<T>;
 }
+interface PackageDependencies {
+    [Symbol.iterator](): Iterator<PackageDependencies>;
+}
+
 interface LscSettings {
     cliDir?: string
     packageDependencies?: PackageDependencies|string[]
