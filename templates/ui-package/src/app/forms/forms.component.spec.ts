@@ -5,6 +5,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {FormlyModule} from '@ngx-formly/core';
 import {NgxJsonViewerModule} from 'ngx-json-viewer';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {FormlyBootstrapModule} from '@ngx-formly/bootstrap';
 
 describe('FormsComponent', () => {
   let component: FormsComponent;
@@ -13,7 +14,13 @@ describe('FormsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FormsComponent],
-      imports: [HttpClientTestingModule, ReactiveFormsModule, FormlyModule.forRoot(), NgxJsonViewerModule]
+      imports: [
+        HttpClientTestingModule,
+        ReactiveFormsModule,
+        FormlyModule.forRoot(),
+        NgxJsonViewerModule,
+        FormlyBootstrapModule
+      ]
     }).compileComponents();
   }));
 

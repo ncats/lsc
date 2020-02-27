@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule, APP_INITIALIZER} from '@angular/core';
-import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {UsersRouting} from './app-routing.module';
 import {NgxCoreComponentsModule} from '@labshare/ngx-core-components';
 import {CenterHeaderComponent} from './center-header/center-header.component';
@@ -18,21 +18,26 @@ import {
   NgxCoreServicesModule,
   AuthService,
   ConfigService,
-  initializerFromUrl,
-  AuthInterceptor
+  initializeFromAppConf,
+  AppType,
+  EventService
 } from '@labshare/ngx-core-services';
 // this editor should be removed for a real project
 import {LoggingComponent} from './logging/logging.component';
 import {AuthComponent} from './auth/auth.component';
+import {Router} from '@angular/router';
 
 const customThemes = [labshare];
-
 // Export Angular 8 feature module
 // app initializer for Auth
 // app initializer
 function initialize(http: HttpClient, config: ConfigService, auth: AuthService): () => Promise<any> {
   return async () => {
-    return initializerFromUrl(http, config, auth);
+    if (APP_TYPE === AppType.Site) {
+      return initializeFromAppConf(http, config, auth);
+    } else {
+      return auth.configure().toPromise();
+    }
   };
 }
 @NgModule({
@@ -46,7 +51,7 @@ function initialize(http: HttpClient, config: ConfigService, auth: AuthService):
   ],
   imports: [
     BrowserModule,
-    NgxCoreServicesModule.forRoot(APP_CONF),
+    NgxCoreServicesModule.forRoot({appConf: APP_CONF, appType: APP_TYPE, appBuildVersion: APP_BUILD_VERSION}),
     NgxCoreComponentsModule.forRoot(customThemes),
     CommonModule,
     UsersRouting,
@@ -66,4 +71,8 @@ function initialize(http: HttpClient, config: ConfigService, auth: AuthService):
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private authService: AuthService, private router: Router, private eventService: EventService) {
+    this.authService.onAuthCallback();
+  }
+}

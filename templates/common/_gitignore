@@ -10,9 +10,6 @@
 *.iml
 *.iws
 
-# Mac
-.DS_Store
-
 # Logs
 logs
 *.log
@@ -49,6 +46,12 @@ bower_components
 # Users Environment Variables
 .lock-wscript
 
-# Releases
-dist
+# misc
+/typings
 
+# System Files
+.DS_Store
+Thumbs.db
+
+#env vars
+.env
