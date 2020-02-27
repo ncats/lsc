@@ -2,8 +2,25 @@
   "name": "<%= appNameSlug %>",
   "namespace": "",
   "main": "./",
-  "version": "<%= appVersion %>",
-  "description": "<%= appDescription %>",
+  "version": "v0.20.218",
+  "lsc": {
+    "cliDir": "dist/cli"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "npm run prettier:check && npm run eslint",
+    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
+    "prettier:cli": "prettier \"**/*.ts\" \"**/*.js\"",
+    "prettier:check": "npm run prettier:cli -- -l",
+    "prettier:fix": "npm run prettier:cli -- --write",
+    "eslint": "eslint --report-unused-disable-directives .",
+    "eslint:fix": "npm run eslint -- --fix",
+    "pretest": "npm run build",
+    "test": "mocha --allow-console-logs",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "coverage": "nyc npm run test"
+  },
+  "description": "",
   "private": true,
   "contributors": "https://github.com/LabShare/<%= appNameSlug %>/graphs/contributors",
   "repository": {
@@ -11,7 +28,25 @@
     "url": "https://github.com/LabShare/<%= appNameSlug %>.git"
   },
   "bugs": {
-    "url": "https://github.com/LabShare/<%= appNameSlug %>/issues"
+    "url": "https://github.com/LabShare/c<%= appNameSlug %>/issues"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "inquirer": "^7.0.4",
+    "typescript": "^3.7.5",
+    "yargs": "^15.1.0"
+  },
+  "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@types/yargs": "^15.0.3",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-eslint-plugin": "^2.2.1",
+    "eslint-plugin-mocha": "^6.2.2",
+    "mocha": "^7.0.1",
+    "nyc": "^15.0.0",
+    "prettier": "1.19.1"
+  }
 }

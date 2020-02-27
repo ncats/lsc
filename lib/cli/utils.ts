@@ -7,17 +7,30 @@ const assert = require('assert');
 const glob = require('glob');
 const resolve = require('resolve-pkg');
 
+interface Iterator<T> {
+    next(value?: any): IteratorResult<T>;
+    return?(value?: any): IteratorResult<T>;
+    throw?(e?: any): IteratorResult<T>;
+}
+interface PackageDependencies {
+    [Symbol.iterator](): Iterator<PackageDependencies>;
+}
+
+interface LscSettings {
+    cliDir?: string
+    packageDependencies?: PackageDependencies|string[]
+}
+
 /**
  * @param manifest - A parsed LabShare package package.json file
  * @returns {Array} A list of LabShare package dependencies or an empty array
  * @private
  */
-function getPackageDependencies(manifest): string[] {
+function getPackageDependencies(manifest): PackageDependencies|string[] {
     return (_.isObject(manifest) && _.isObject(manifest.packageDependencies))
         ? (_.isArray(manifest.packageDependencies) ? manifest.packageDependencies : Object.keys(manifest.packageDependencies))
         : [];
 }
-
 /**
  * @description Retrieves the LabShare package's name
  * @param {Object} manifest - A package.json parsed into a JS object
@@ -27,6 +40,19 @@ export function getPackageName(manifest): string {
         return null;
     }
     return (manifest.namespace || manifest.name).toLowerCase();
+}
+/**
+ * @description Retrieves the LabShare package's lsc settings
+ * @param {Object} manifest - A package.json parsed into a JS object
+ */
+export function getPackageLscSettings(manifest): LscSettings {
+    if (!manifest || !(manifest.lsc)) {
+        return null;
+    }
+    const lsc =  manifest.lsc;
+    //format package dependencies 
+    lsc.packageDependencies = getPackageDependencies(lsc);
+    return lsc;
 }
 
 /**
@@ -113,7 +139,9 @@ export function applyToNodeModulesSync(packagePath: string, func: (packagePath: 
     }
 
     const manifest = getPackageManifest(packagePath);
-    const dependencies = getPackageDependencies(manifest);
+    const lscSettings =  getPackageLscSettings(manifest);
+
+    const dependencies = (lscSettings)?lscSettings.packageDependencies : getPackageDependencies(manifest);
 
     func(packagePath);
 
@@ -139,3 +167,4 @@ export function getMatchingFilesSync(directory, pattern): string[] {
     return glob.sync(pattern, {cwd: directory})
         .map((file) => path.resolve(directory, file));
 }
+

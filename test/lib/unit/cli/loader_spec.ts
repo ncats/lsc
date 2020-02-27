@@ -99,16 +99,20 @@ describe('CliLoader', () => {
         it('adds CLI commands to the app and caches command information', async () => {
             expect(cliLoader._commands['cli-package1']).toBeUndefined();
             expect(cliLoader._commands['cli-package2']).toBeUndefined();
+            expect(cliLoader._commands['cli-package4']).toBeUndefined();
             expect(_.isEmpty(_.keys(flatironAppMock.commands))).toBeTruthy();
 
             await cliLoader.load();
 
             let commandInfo1 = cliLoader._commands['cli-package1'],
-                commandInfo2 = cliLoader._commands['cli-package2'];
-
+                commandInfo2 = cliLoader._commands['cli-package2'],
+                commandInfo4 = cliLoader._commands['cli-package4'];
+                
             expect(toContainAllOf(_.keys(commandInfo1).concat(_.keys(commandInfo2)), ['hello', 'add', 'subtract', 'goodbye']))
                 .toBeTruthy();
-            expect(toContainAllOf(_.keys(flatironAppMock.commands), ['hello', 'add', 'subtract', 'goodbye']))
+            expect(toContainAllOf(_.keys(commandInfo1).concat(_.keys(commandInfo4)), ['hello', 'world', 'goodbye']))
+                .toBeTruthy();
+            expect(toContainAllOf(_.keys(flatironAppMock.commands), ['hello', 'add','world', 'subtract', 'goodbye']))
                 .toBeTruthy();
         });
 

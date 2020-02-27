@@ -61,6 +61,7 @@ export const create = function () {
             `${__dirname}/../../templates/common/**`,
             `${__dirname}/../../templates/${answers.projectType}-package/**`
         ])
+             //  the following regex is for ignoring ${} and only use <%= %> for the templates    
             .pipe(template(answers , {'interpolate' : /<%=([\s\S]+?)%>/g}))
             .pipe(rename(file => {
                 if (file.basename[0] === '_') {

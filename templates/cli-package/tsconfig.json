@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+      "removeComments": true,
+      "module": "commonjs",
+      "declaration": true,
+      "target": "es6",
+      "sourceMap": true,
+      "noImplicitAny": false,
+      "noImplicitThis": false,
+      "outDir": "./dist",
+      "rootDir":"./",
+      "moduleResolution": "node",
+      "pretty": true
+    },
+    "compileOnSave": true,
+    "exclude": [
+      "node_modules",
+      "dist"
+    ],
+    "files": ["global.d.ts"],
+    "include":[
+        "cli",
+        "lib",
+        "test"
+    ]
+}
