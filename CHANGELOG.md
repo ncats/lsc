@@ -1,3 +1,12 @@
+## [2.8.3](https://github.com/LabShare/lsc/compare/v2.8.2...v2.8.3) (2020-02-27)
+
+
+### Bug Fixes
+
+* invalid tab ([d383bd1](https://github.com/LabShare/lsc/commit/d383bd19912399318e33fb7aa8d3c1bcf160fedb))
+* removing windows ([9025f31](https://github.com/LabShare/lsc/commit/9025f31faca0bd44952e9e90636a541d13aaf803))
+* travis file ([0acfab0](https://github.com/LabShare/lsc/commit/0acfab0126a81943d7a0c0e7b8c7cc4caebb9585))
+
 ## [2.8.2](https://github.com/LabShare/lsc/compare/v2.8.1...v2.8.2) (2019-11-26)
 
 
