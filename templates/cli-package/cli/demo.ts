@@ -8,31 +8,31 @@ export const usage = [
   `demo`,
   ``,
   `lsc demo hello - Executes hello command`,
-  `   e.g  lsc demo hello --world=world`,
-  `lsc demo world - Executes world command`,
-  `   e.g  lsc demo world`,
-  `lsc demo example - Executes world example`,
+  `   e.g  lsc demo hello --name=world`,
+  `lsc demo question - Executes question command`,
+  `   e.g  lsc demo question`,
+  `lsc demo example - Executes lib example`,
   `   e.g  lsc demo example`,
   `lsc demo configuration - Executes configuration command`,
   `   e.g  lsc demo configuration`,
 ];
 export function hello() {
-  const {world}: any = yargs.options({
-    world: {
+  const {name}: any = yargs.options({
+    name: {
       desc: 'This is an optional value',
-      default: 'world',
+      default: 'name',
     },
   });
   // using built-in logging
-  logger.info('Hello: ' + world);
+  logger.info('Hello: ' + name);
 }
 
-export function world() {
+export function question() {
   // using inquirer
   const prompts = [
     {
       name: 'firstTime',
-      message: 'It is your first time using lsc?',
+      message: 'Is this your first time using lsc?',
       type: 'confirm',
       default: 'yes',
     },

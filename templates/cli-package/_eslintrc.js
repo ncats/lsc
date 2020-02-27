@@ -90,7 +90,7 @@ module.exports = {
     '@typescript-eslint/adjacent-overload-signatures': 'error', // tslint:adjacent-overload-signatures
     '@typescript-eslint/prefer-for-of': 'error', // tslint:prefer-for-of
     '@typescript-eslint/unified-signatures': 'error', // tslint:unified-signatures
-    '@typescript-eslint/no-explicit-any': 'error', // tslint:no-any
+    '@typescript-eslint/no-explicit-any': 'off', // tslint:no-any
 
     'no-unused-labels': 'error', // tslint:label-position
     'no-caller': 'error', // tslint:no-arg
