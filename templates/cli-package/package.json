@@ -13,7 +13,7 @@
     "prettier:cli": "prettier \"**/*.ts\" \"**/*.js\"",
     "prettier:check": "npm run prettier:cli -- -l",
     "prettier:fix": "npm run prettier:cli -- --write",
-    "eslint": "eslint -c .eslintrc.js --ext '.js,.ts' --report-unused-disable-directives --cache .",
+    "eslint": "eslint -c .eslintrc.js --ext '.js,.ts' --report-unused-disable-directives .",
     "eslint:fix": "npm run eslint -- --fix",
     "pretest": "npm run build",
     "test": "mocha --allow-console-logs",
