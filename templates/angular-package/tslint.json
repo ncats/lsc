@@ -1,8 +1,0 @@
-{
-    "extends": ["tslint-angular"],
-    "rules": {
-      "max-line-length": {
-        "options": [300]
-      }
-    }
-  }

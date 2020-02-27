@@ -1,0 +1,51 @@
+{
+    "class": "global-layout",
+    "tenant": {
+        "applist": [
+            {
+                "id": "one",
+                "route": "/labshare",
+                "text": "Labshare 1",
+                "selected": false
+            },
+            {
+                "id": "one",
+                "route": "/labshare/(right:test)",
+                "text": "Labshare 2",
+                "selected": false
+            },
+            {
+                "id": "one",
+                "route": "polus",
+                "text": "Polus Layout / Theme",
+                "selected": true
+            },
+            {
+                "id": "one",
+                "route": "/noleft",
+                "text": "No Left Nav",
+                "selected": false
+            }
+        ],
+        "adminlist": [
+            {
+                "id": "one",
+                "route": "polus",
+                "text": "Fifth App",
+                "selected": false
+            },
+            {
+                "id": "one",
+                "route": "polus",
+                "text": "Fifth App",
+                "selected": false
+            },
+            {
+                "id": "one",
+                "route": "polus",
+                "text": "Fifth App",
+                "selected": false
+            }
+        ]
+    }
+}

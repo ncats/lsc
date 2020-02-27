@@ -2,6 +2,8 @@
 .classpath
 .project
 .settings/
+# VSCode
+.vscode/
 
 # Intellij
 .idea/
@@ -50,5 +52,3 @@ bower_components
 # Releases
 dist
 
-# Package Lock for NPM
-package-lock.json

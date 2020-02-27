@@ -22,7 +22,7 @@ export const create = function () {
             message: 'Which type of LabShare package do you want to create?',
             type: 'list',
             default: 'cli',
-            choices: ['cli', 'ui', 'api', 'angular', 'library']
+            choices: ['cli', 'api', 'ui']
         },
         {
             name: 'appName',
@@ -56,27 +56,13 @@ export const create = function () {
         answers.appTitle = startCase(answers.appName).split(' ').join('');
         answers.appYear = year;
 
-        if (answers.projectType === 'library') {
-          gulp.src([
-            `${__dirname}/../../templates/${answers.projectType}-package/**`
-          ])
-          .pipe(template(answers))
-          .pipe(rename(file => {
-              if (file.basename[0] === '_') {
-                  file.basename = '.' + file.basename.slice(1);
-              }
-          }))
-          .pipe(gulp.dest('./'))
-          .on('end', () => {
-              this.log.info(`Successfully moved inmutable LabShare ${answers.projectType} package's files...`);
-          });
-          return;
-        }
+
         gulp.src([
             `${__dirname}/../../templates/common/**`,
             `${__dirname}/../../templates/${answers.projectType}-package/**`
         ])
-            .pipe(template(answers))
+             //  the following regex is for ignoring ${} and only use <%= %> for the templates    
+            .pipe(template(answers , {'interpolate' : /<%=([\s\S]+?)%>/g}))
             .pipe(rename(file => {
                 if (file.basename[0] === '_') {
                     file.basename = '.' + file.basename.slice(1);
@@ -86,21 +72,6 @@ export const create = function () {
             .on('end', () => {
                 this.log.info(`Successfully created LabShare ${answers.projectType} package...`);
             });
-        if (answers.projectType === 'angular') {
-            gulp.src([
-                `${__dirname}/../../templates/inmutable/ui/**`
-            ])
-                .pipe(rename(file => {
-                    if (file.basename[0] === '_') {
-                        file.basename = '.' + file.basename.slice(1);
-                    }
-                }))
-                .pipe(gulp.dest('./'))
-                .on('end', () => {
-                    this.log.info(`Successfully moved inmutable LabShare ${answers.projectType} package's files...`);
-                });
-
-        }
     });
 }
 
