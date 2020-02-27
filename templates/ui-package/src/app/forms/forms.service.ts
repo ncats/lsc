@@ -10,6 +10,6 @@ const exampleForm = require('./example-form.json');
 export class FormsService {
   constructor(private http: HttpClient) {}
   getFields() {
-    return of((exampleForm as any).default);
+    return of(exampleForm as any);
   }
 }
