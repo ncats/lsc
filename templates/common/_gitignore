@@ -2,14 +2,13 @@
 .classpath
 .project
 .settings/
+# VSCode
+.vscode/
 
 # Intellij
 .idea/
 *.iml
 *.iws
-
-# Mac
-.DS_Store
 
 # Logs
 logs
@@ -47,8 +46,12 @@ bower_components
 # Users Environment Variables
 .lock-wscript
 
-# Releases
-dist
+# misc
+/typings
 
-# Package Lock for NPM
-package-lock.json
+# System Files
+.DS_Store
+Thumbs.db
+
+#env vars
+.env

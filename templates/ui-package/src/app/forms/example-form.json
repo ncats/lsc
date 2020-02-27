@@ -1,0 +1,37 @@
+[
+    {
+        "key": "firstName",
+        "type": "input",
+        "templateOptions": {
+            "label": "First Name"
+        }
+    },
+    {
+        "key": "lastName",
+        "type": "input",
+        "templateOptions": {
+            "label": "Last Name"
+        }
+    },
+    {
+        "key": "laboratory",
+        "type": "radio",
+        "templateOptions": {
+            "label": "Assigned Laboratory",
+            "options": [
+                {
+                    "label": "NONE",
+                    "value": null
+                },
+                {
+                    "label": "LAB-01",
+                    "value": "LAB-01"
+                },
+                {
+                    "label": "LAB-02",
+                    "value": "LAB-02"
+                }
+            ]
+        }
+    }
+]
