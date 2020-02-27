@@ -6,7 +6,7 @@ import {environment} from './environments/environment';
 // remove this for real apps
 import 'prismjs';
 
-if (environment.production) {
+if (APP_CONF.production) {
   enableProdMode();
 }
 

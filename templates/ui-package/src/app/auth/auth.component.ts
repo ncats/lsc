@@ -12,6 +12,10 @@ export class AuthComponent implements OnInit {
   module.exports = {
     services: {
       logging: {
+        // for apps with no signup page you need to enable
+        silentRenew :true,
+        // for changing auth flows  - implicit is the default one
+        authFlowType : 'code',
         url: process.env.SERVICES_LOG_URL,
         application: process.env.SERVICES_LOG_APP,
         environment: process.env.SERVICES_LOG_ENV,
