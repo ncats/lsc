@@ -1,0 +1,166 @@
+@import "node_modules/@labshare/ngx-core-components/scss/variables.scss";
+
+$main-container-color: "#321771";
+$main-text-color: "#c2c2c2";
+
+* {
+  color: $main-text-color;
+}
+
+.local-footer {
+  height: 40px;
+  background-color: $main-container-color;
+}
+.main-content {
+  flex: 1;
+}
+.inner-main {
+  background-color: white;
+  flex: 1;
+  display: flex;
+}
+
+.local-footer {
+  margin: 2px 0 0 0;
+  border: 1px solid #444444;
+  border-bottom: none;
+}
+
+.action-buttons {
+  background-color: white;
+  height: 34px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3px;
+}
+.action-buttons > div {
+  align-items: center;
+}
+.left-action {
+  display: flex;
+}
+.center-action,
+.center-action > div {
+  display: flex;
+}
+
+.left-action {
+  margin-left: 10px;
+}
+.action-buttons img {
+  width: 35px;
+  margin: 0px 3px 0px 3px;
+}
+.file-name-title {
+  margin-left: 15px;
+}
+
+.center-action > div {
+  margin: 0 15px 0 15px;
+}
+.center-action img,
+.center-action select {
+  margin: 0 3px 0 3px;
+}
+.center-action button {
+  margin: 0 3px 0 5px;
+  padding: 0 17px 0 17px;
+}
+.center-action select {
+  padding: 0 0 0 8px;
+}
+select,
+button {
+  
+  border-radius: 4px;
+  font-size: 14px;
+  border-color: #656565;
+  color: #656565;
+  font-weight: bold;
+}
+button {
+  border: 1px solid #656565;
+  padding: 0 3px 0 3px;
+}
+
+.local-footer {
+  display: flex;
+  align-items: center;
+}
+.local-footer > div {
+  padding: 4px 30px 4px 30px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.local-footer > div.active {
+  background-color: #292929;
+  border-bottom: none;
+}
+
+.drawer {
+  background-color: #292929;
+  height: 160px;
+  border-left: 1px solid #444444;
+}
+
+.drawer-container {
+  display: flex;
+}
+.right-inner {
+  width: 22px;
+  background-color: #444444;
+}
+.left-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-action {
+  margin-right: 7px;
+}
+
+.drawer {
+  flex: 1;
+}
+.theme-btn {
+  border: none;
+  
+  padding: 5px 13px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.main-content {
+  padding: 30px;
+}
+
+.main-content {
+  position: relative;
+}
+
+.temp-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.search-toggle {
+  font-size: 25px;
+}
+.component-nav {
+  padding: 20px 0;
+}
+.component-nav > a {
+  padding-right: 10px;
+}
+
+.left-click-text {
+  text-align: center;
+}

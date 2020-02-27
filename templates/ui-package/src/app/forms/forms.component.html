@@ -1,0 +1,21 @@
+<!-- Content for the middle of the main center component -->
+<div class="main-content">
+    <h1>Forms Example</h1>
+<p>
+    For adding forms at your application you can use <a href="https://github.com/ngx-formly/ngx-formly">ngx-formly</a>.
+  
+</p>
+    <h3>Code</h3>
+    <pre class="language-ts" ><code [innerHTML]="sourceCode"></code></pre>
+<h1>Scientist's Labs</h1>
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
+    <button type="submit" class="btn btn-primary submit-button">Submit</button>
+</form>
+<div>
+    <br />
+    <h2>Result:</h2>
+
+    <ngx-json-viewer [json]="data"></ngx-json-viewer>
+</div>
+</div>

@@ -1,3 +1,42 @@
+# [2.10.0](https://github.com/LabShare/lsc/compare/v2.9.0...v2.10.0) (2020-02-27)
+
+
+### Bug Fixes
+
+* casing issues with interfaces ([1e9974c](https://github.com/LabShare/lsc/commit/1e9974cc8918ee564d4bbcbc649d394512fcc867))
+* iterators and comments ([097ecf7](https://github.com/LabShare/lsc/commit/097ecf75ef472e65d9ae88b79d3be969d6399fd2))
+* method name ([fc42b97](https://github.com/LabShare/lsc/commit/fc42b974a7b00953b389bfeaada82a3fae8a030b))
+
+
+### Features
+
+* cli template ([2555dd4](https://github.com/LabShare/lsc/commit/2555dd49dac7dd954db37c86e1340f9d28cbc55a))
+* support for changing the default cli commands directory ([8fbe174](https://github.com/LabShare/lsc/commit/8fbe174a1ce502264680df016dc3a5d2dba41b46))
+
+# [2.9.0](https://github.com/LabShare/lsc/compare/v2.8.3...v2.9.0) (2020-02-27)
+
+
+### Bug Fixes
+
+* angular template ([d2e3d86](https://github.com/LabShare/lsc/commit/d2e3d86af5cf519c18d503d88dc35487a397b4c0))
+* bootstrap and dockerfile ([0609e4e](https://github.com/LabShare/lsc/commit/0609e4ecd41ae3af8e1d38dfc436ba42a4861232))
+* html template names ([5e72875](https://github.com/LabShare/lsc/commit/5e728759951a8bb5edd9d94ed5aa91004ff01d83))
+* shell-ui template ([0702ecd](https://github.com/LabShare/lsc/commit/0702ecdde4883b057ccfe2ea266450758f4ab155))
+
+
+### Features
+
+* angular ui package ([358e33c](https://github.com/LabShare/lsc/commit/358e33ca91b29fc2a1b32d9fa8c3b7ab708bdf5c))
+
+## [2.8.3](https://github.com/LabShare/lsc/compare/v2.8.2...v2.8.3) (2020-02-27)
+
+
+### Bug Fixes
+
+* invalid tab ([d383bd1](https://github.com/LabShare/lsc/commit/d383bd19912399318e33fb7aa8d3c1bcf160fedb))
+* removing windows ([9025f31](https://github.com/LabShare/lsc/commit/9025f31faca0bd44952e9e90636a541d13aaf803))
+* travis file ([0acfab0](https://github.com/LabShare/lsc/commit/0acfab0126a81943d7a0c0e7b8c7cc4caebb9585))
+
 ## [2.8.2](https://github.com/LabShare/lsc/compare/v2.8.1...v2.8.2) (2019-11-26)
 
 

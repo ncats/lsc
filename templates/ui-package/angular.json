@@ -1,0 +1,175 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "<%= appNameSlug %>": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@labshare/shell-ui:browser",
+          "options": {
+            "outputPath": "dist/<%= appNameSlug %>",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@labshare/shell-ui:dev-server",
+          "options": {
+            "browserTarget": "<%= appNameSlug %>:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "<%= appNameSlug %>:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "<%= appNameSlug %>:build"
+          }
+        },
+        "test": {
+          "builder": "@labshare/shell-ui:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "<%= appNameSlug %>:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "<%= appNameSlug %>:serve:production"
+            }
+          }
+        },
+        "electron": {
+          "builder": "@labshare/shell-ui:electron",
+          "options": {
+            "browserTarget": "<%= appNameSlug %>:build",
+            "baseHref": "./"
+          }
+        },
+        "pack-electron": {
+          "builder": "@labshare/shell-ui:pack-electron",
+          "options": {
+            "browserTarget": "<%= appNameSlug %>:build",
+            "outputPath": "dist/<%= appNameSlug %>/electron",
+            "plaform": "mac",
+            "baseHref": "./"
+          }
+        },
+        "pack-cordova": {
+          "builder": "@labshare/shell-ui:pack-cordova",
+          "options": {
+            "browserTarget": "<%= appNameSlug %>:build",
+            "outputPath": "dist/<%= appNameSlug %>/cordova",
+            "plaform": "ios",
+            "baseHref": "./",
+            "cordovaAssets": false
+          }
+        },
+        "pack-sharepoint": {
+          "builder": "@labshare/shell-ui:pack-sharepoint",
+          "options": {
+            "browserTarget": "<%= appNameSlug %>:build",
+            "baseHref": "./",
+            "outputPath": "dist/<%= appNameSlug %>/sharepoint",
+            "spVersion": "online",
+            "sharepoint": {
+              "solutionName": "<%= appNameSlug %>",
+              "solutionGuid": "4c874b09-7940-4c1c-9203-d1b6c3f1d74d",
+              "zippedPackage": "solution/<%= appNameSlug %>.sppkg",
+              "webPartGuid": "c3ad6298-a085-4269-9b94-357640cdcf69",
+              "webPartAlias": "<%= appNameSlug %>",
+              "webPartTitle": "<%= appNameSlug %>",
+              "webPartDescription": "<%= appNameSlug %> description",
+              "webPartPropertiesDescription": "<%= appNameSlug %> properties description"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "<%= appNameSlug %>"
+}

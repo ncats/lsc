@@ -1,0 +1,20 @@
+<!-- Content for the middle of the main center component -->
+<div class="main-content">
+<h1>Authentication Example</h1>
+<p>
+    For adding authentication at your application you will need to have an auth tenant at  <a href="https://a.labshare.org">LabShare Auth</a> 
+    and you can use following setup:
+  
+</p>
+
+<div>
+    <h3>config/default.js</h3>
+    <pre  class="language-json5"><code [innerHTML]="configurationCode"></code></pre>
+    <h3>Code</h3>
+    <pre class="language-ts" ><code [innerHTML]="sourceCode"></code></pre>
+    <h3>AppComponent Code</h3>
+    <pre class="language-ts" ><code [innerHTML]="appComponentSourceCode"></code></pre>
+    <button type="button" (click)="authenticate()"  class="btn btn-primary btn-sm">Login</button>
+    <button type="button" (click)="logout()" [disabled]="isLoggingEnable ==false" class="btn btn-danger btn-sm">Logout</button>
+</div>
+</div>

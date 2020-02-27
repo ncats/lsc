@@ -1,4 +1,0 @@
-{
-  "home": "/<%= appNameSlug %>/home",
-  "page": {}
-}

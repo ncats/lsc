@@ -1,0 +1,32 @@
+@import "node_modules/@labshare/ngx-core-components/scss/variables.scss";
+$main-container-color: "#321771";
+
+$main-text-color: "#c2c2c2";
+
+* {
+  color: $main-text-color;
+}
+
+
+.catalog div {
+  margin: 7px;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 0px 40px 0px 40px;
+  font-weight: bold;
+}
+
+.catalog {
+  justify-content: center;
+  flex: 1;
+  display: flex;
+  height: 44px;
+  background-color: $main-container-color; 
+  margin: 0 2px 2px 1px;
+  border: 1px solid #444444; 
+}
+
+.catalog div.active {
+  border: 1px solid $main-text-color;
+  background-color: #1f1f1f;
+}

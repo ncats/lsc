@@ -1,8 +1,0 @@
-{
-  "extends": [
-      "tslint-angular"
-  ],
-  "rules" : {
-      "max-classes-per-file" : false
-  }
-}
