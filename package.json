@@ -1,10 +1,13 @@
 {
   "name": "@labshare/lsc",
   "namespace": "lsc",
-  "main": "./index.js",
+  "main": "./dist/index.js",
   "version": "2.10.0",
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
+  "lsc": {
+    "cliDir": "dist/cli"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/LabShare/lsc.git"
@@ -17,14 +20,14 @@
     "npm": ">=3.7.0",
     "node": ">=8.0.0"
   },
-  "types": "./index.d.ts",
+  "types": "./dist/index.d.ts",
   "license": "MIT",
   "scripts": {
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "publish": "tsc",
     "pretest": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=./test/lib/jasmine.json",
-    "coverage": "istanbul cover jasmine JASMINE_CONFIG_PATH=./test/lib/jasmine.json",
+    "test": "jasmine JASMINE_CONFIG_PATH=./dist/test/lib/jasmine.json",
+    "coverage": "istanbul cover jasmine JASMINE_CONFIG_PATH=./dist/test/lib/jasmine.json",
     "build": "tsc",
     "watch:build": "tsc --watch",
     "snyk-protect": "snyk protect",
@@ -33,7 +36,7 @@
     "lsc": "lsc"
   },
   "bin": {
-    "lsc": "./lib/bin/lsc.js"
+    "lsc": "./dist/lib/bin/lsc.js"
   },
   "dependencies": {
     "@types/glob": "^7.1.0",
