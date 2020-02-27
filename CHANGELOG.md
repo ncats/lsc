@@ -1,3 +1,18 @@
+# [2.9.0](https://github.com/LabShare/lsc/compare/v2.8.3...v2.9.0) (2020-02-27)
+
+
+### Bug Fixes
+
+* angular template ([d2e3d86](https://github.com/LabShare/lsc/commit/d2e3d86af5cf519c18d503d88dc35487a397b4c0))
+* bootstrap and dockerfile ([0609e4e](https://github.com/LabShare/lsc/commit/0609e4ecd41ae3af8e1d38dfc436ba42a4861232))
+* html template names ([5e72875](https://github.com/LabShare/lsc/commit/5e728759951a8bb5edd9d94ed5aa91004ff01d83))
+* shell-ui template ([0702ecd](https://github.com/LabShare/lsc/commit/0702ecdde4883b057ccfe2ea266450758f4ab155))
+
+
+### Features
+
+* angular ui package ([358e33c](https://github.com/LabShare/lsc/commit/358e33ca91b29fc2a1b32d9fa8c3b7ab708bdf5c))
+
 ## [2.8.3](https://github.com/LabShare/lsc/compare/v2.8.2...v2.8.3) (2020-02-27)
 
 
