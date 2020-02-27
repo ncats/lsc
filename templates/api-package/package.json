@@ -18,6 +18,6 @@
     "@labshare/services"
   ],
   "dependencies": {
-    "@labshare/services": "^3.0.0"
+    "@labshare/services": "^4.0.10"
   }
 }
