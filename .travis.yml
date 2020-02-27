@@ -1,4 +1,7 @@
 language: node_js
+os:
+  - linux
+  - osx
 node_js:
   - lts/*
   - node
@@ -27,13 +30,12 @@ cache:
     - ~/.npm
 notifications:
   email: false
-matrix:
-  allow_failures:
-    - node_js: node
 branches:
   except:
     - /^vd+.d+.d+$/
 jobs:
+  allow_failures:
+    - node_js: node
   include:
     - stage: release
       if: branch = master
@@ -43,5 +45,4 @@ jobs:
       deploy:
         provider: script
         skip_cleanup: true
-        script:
-          - npm run semantic-release
+        script: npm run semantic-release

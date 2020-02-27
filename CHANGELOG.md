@@ -1,3 +1,27 @@
+## [2.8.3](https://github.com/LabShare/lsc/compare/v2.8.2...v2.8.3) (2020-02-27)
+
+
+### Bug Fixes
+
+* invalid tab ([d383bd1](https://github.com/LabShare/lsc/commit/d383bd19912399318e33fb7aa8d3c1bcf160fedb))
+* removing windows ([9025f31](https://github.com/LabShare/lsc/commit/9025f31faca0bd44952e9e90636a541d13aaf803))
+* travis file ([0acfab0](https://github.com/LabShare/lsc/commit/0acfab0126a81943d7a0c0e7b8c7cc4caebb9585))
+
+## [2.8.2](https://github.com/LabShare/lsc/compare/v2.8.1...v2.8.2) (2019-11-26)
+
+
+### Bug Fixes
+
+* codacy ([1711ee4](https://github.com/LabShare/lsc/commit/1711ee40628e6d9397345c7c60548f4eaecdbc54))
+* format ([0a0ef41](https://github.com/LabShare/lsc/commit/0a0ef417d656483c0cc3586a3e1e7a377a983983))
+* json true ([63d4790](https://github.com/LabShare/lsc/commit/63d4790d9cdc26298b58612e95a73da2da48338b))
+* labshare version ([e0c9b33](https://github.com/LabShare/lsc/commit/e0c9b333f2dadb37440ef859bcaec148bba2fa5c))
+* removal of extra space ([e630310](https://github.com/LabShare/lsc/commit/e630310d46ec20bb21da44ccae8d429ef64fb2ae))
+* removed space ([9322c76](https://github.com/LabShare/lsc/commit/9322c76d5c26272fe3bccf23dc2dc4c73bef87bc))
+* request instead of tiny-json ([5534f8a](https://github.com/LabShare/lsc/commit/5534f8aaa9f9259dd4dcb9c6778c60896bbd8b3c))
+* tiny-json removal ([4e24454](https://github.com/LabShare/lsc/commit/4e244549726adf3eccd428f7a632e0c508cf7530))
+* tsconfig for angular app ([0e0bffd](https://github.com/LabShare/lsc/commit/0e0bffdee6af73f67c12440f2c2d61106d4d2e76))
+
 ## [2.8.1](https://github.com/LabShare/lsc/compare/v2.8.0...v2.8.1) (2019-09-19)
 
 
