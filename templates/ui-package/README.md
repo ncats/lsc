@@ -54,7 +54,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Env Vars
 
 For adding env vars , you can use the .env file. For more information check
-[Shell CLI README](https://github.com/angular/shell-ui/blob/master/README.md).
+[Shell CLI README](https://github.com/angular/shell-ui/blob/master/README.md)..
 
 ## Further help
 

@@ -9,11 +9,7 @@ import {filter} from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router, private eventService: EventService) {
-    this.authService.configure().subscribe(done => {
-      this.authService.onAuthCallback();
-    });
-  }
+  constructor(private router: Router, private eventService: EventService) {}
   title = '<%= appNameSlug %>';
   ngOnInit(): void {
     this.eventService
