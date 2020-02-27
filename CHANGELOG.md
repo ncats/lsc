@@ -1,3 +1,18 @@
+# [2.10.0](https://github.com/LabShare/lsc/compare/v2.9.0...v2.10.0) (2020-02-27)
+
+
+### Bug Fixes
+
+* casing issues with interfaces ([1e9974c](https://github.com/LabShare/lsc/commit/1e9974cc8918ee564d4bbcbc649d394512fcc867))
+* iterators and comments ([097ecf7](https://github.com/LabShare/lsc/commit/097ecf75ef472e65d9ae88b79d3be969d6399fd2))
+* method name ([fc42b97](https://github.com/LabShare/lsc/commit/fc42b974a7b00953b389bfeaada82a3fae8a030b))
+
+
+### Features
+
+* cli template ([2555dd4](https://github.com/LabShare/lsc/commit/2555dd49dac7dd954db37c86e1340f9d28cbc55a))
+* support for changing the default cli commands directory ([8fbe174](https://github.com/LabShare/lsc/commit/8fbe174a1ce502264680df016dc3a5d2dba41b46))
+
 # [2.9.0](https://github.com/LabShare/lsc/compare/v2.8.3...v2.9.0) (2020-02-27)
 
 
