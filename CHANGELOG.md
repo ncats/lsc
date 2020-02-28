@@ -1,3 +1,10 @@
+## [2.10.2](https://github.com/LabShare/lsc/compare/v2.10.1...v2.10.2) (2020-02-28)
+
+
+### Bug Fixes
+
+* cli template ([1775468](https://github.com/LabShare/lsc/commit/1775468106818265bba4ac2ba444acc5323e38b0))
+
 ## [2.10.1](https://github.com/LabShare/lsc/compare/v2.10.0...v2.10.1) (2020-02-28)
 
 
