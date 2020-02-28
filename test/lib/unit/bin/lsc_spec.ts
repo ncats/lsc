@@ -4,7 +4,7 @@ import {getPackageManifest} from "../../../../lib/cli";
 
 describe('LSC', () => {
 
-    const cwd = path.join(__dirname, '..', '..', '..', '..');
+    const cwd = path.join(__dirname,'..', '..', '..', '..', '..');
     const binPath = getPackageManifest(cwd).bin.lsc;
 
     it('runs commands', (done: DoneFn) => {
