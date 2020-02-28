@@ -22,7 +22,8 @@ export function hello() {
       desc: 'This is an optional value',
       default: 'name',
     },
-  });
+  }).argv;
+
   // using built-in logging
   logger.info('Hello: ' + name);
 }
