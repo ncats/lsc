@@ -1,6 +1,5 @@
 {
     "recursive": true,
     "spec": "dist/test",
-    "require": "source-map-support/register",
     "timeout": 20000
   }
