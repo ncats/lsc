@@ -1,7 +1,4 @@
-import {Logger} from "./lib/log";
-import {ConfigLoader} from "./lib/config";
+import { Logger } from "./lib/log";
+import { ConfigLoader } from "./lib/config";
 
-export {
-    Logger,
-    ConfigLoader
-}
+export { Logger, ConfigLoader };

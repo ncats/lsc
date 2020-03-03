@@ -1,9 +1,9 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {AuthComponent} from './auth.component';
-import {AuthService} from '@labshare/ngx-core-services';
-import {of} from 'rxjs';
-describe('AuthComponent', () => {
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { AuthComponent } from "./auth.component";
+import { AuthService } from "@labshare/ngx-core-services";
+import { of } from "rxjs";
+describe("AuthComponent", () => {
   let component: AuthComponent;
   let fixture: ComponentFixture<AuthComponent>;
 
@@ -22,7 +22,7 @@ describe('AuthComponent', () => {
               return of({});
             },
             onAuthorizationResult() {
-              return of('authorized');
+              return of("authorized");
             },
             isAuthorized() {
               return of(true);
@@ -39,7 +39,7 @@ describe('AuthComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

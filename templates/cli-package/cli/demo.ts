@@ -1,6 +1,6 @@
-import * as yargs from 'yargs';
-import inquirer = require('inquirer');
-import {sum} from '../lib';
+import * as yargs from "yargs";
+import inquirer = require("inquirer");
+import { sum } from "../lib";
 const logger = global.LabShare.Logger;
 const config = global.LabShare.Config;
 // Important for adding help
@@ -14,29 +14,29 @@ export const usage = [
   `lsc demo example - Executes lib example`,
   `   e.g  lsc demo example`,
   `lsc demo configuration - Executes configuration command`,
-  `   e.g  lsc demo configuration`,
+  `   e.g  lsc demo configuration`
 ];
 export function hello() {
-  const {name}: any = yargs.options({
+  const { name }: any = yargs.options({
     name: {
-      desc: 'This is an optional value',
-      default: 'name',
-    },
+      desc: "This is an optional value",
+      default: "name"
+    }
   }).argv;
 
   // using built-in logging
-  logger.info('Hello: ' + name);
+  logger.info("Hello: " + name);
 }
 
 export function question() {
   // using inquirer
   const prompts = [
     {
-      name: 'firstTime',
-      message: 'Is this your first time using lsc?',
-      type: 'confirm',
-      default: 'yes',
-    },
+      name: "firstTime",
+      message: "Is this your first time using lsc?",
+      type: "confirm",
+      default: "yes"
+    }
   ];
   inquirer.prompt(prompts).then(answers => {
     logger.info(answers.firstTime);

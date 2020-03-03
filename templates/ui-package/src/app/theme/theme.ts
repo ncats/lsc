@@ -1,10 +1,10 @@
-import {Theme} from '@labshare/ngx-core-components';
+import { Theme } from "@labshare/ngx-core-components";
 
 export const labshare: Theme = {
-  name: 'labshare',
-  extend: 'default',
+  name: "labshare",
+  extend: "default",
   properties: {
-    'main-background-color': '#ffffff',
-    'header-background-color': '#321771'
+    "main-background-color": "#ffffff",
+    "header-background-color": "#321771"
   }
 };

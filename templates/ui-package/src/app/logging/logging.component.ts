@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {LoggingService} from '@labshare/ngx-core-services';
+import { Component, OnInit } from "@angular/core";
+import { LoggingService } from "@labshare/ngx-core-services";
 
 @Component({
-  selector: 'app-logging',
-  templateUrl: './logging.component.html',
-  styleUrls: ['./logging.component.scss']
+  selector: "app-logging",
+  templateUrl: "./logging.component.html",
+  styleUrls: ["./logging.component.scss"]
 })
 export class LoggingComponent implements OnInit {
   isLoggingEnable = false;
@@ -38,12 +38,12 @@ export class LoggingComponent implements OnInit {
 
   onSendInfoUsage() {
     if (this.isLoggingEnable) {
-      this.loggingService.info({event: 'test', message: 'sending data'});
+      this.loggingService.info({ event: "test", message: "sending data" });
     }
   }
   onSendErrorUsage() {
     if (this.isLoggingEnable) {
-      this.loggingService.error({event: 'test', message: 'sending data'});
+      this.loggingService.error({ event: "test", message: "sending data" });
     }
   }
 }

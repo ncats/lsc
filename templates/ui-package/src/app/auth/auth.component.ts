@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '@labshare/ngx-core-services';
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "@labshare/ngx-core-services";
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  selector: "app-auth",
+  templateUrl: "./auth.component.html",
+  styleUrls: ["./auth.component.scss"]
 })
 export class AuthComponent implements OnInit {
   isLoggingEnable = false;
@@ -73,14 +73,14 @@ export class AuthComponent implements OnInit {
     // Observable for receiving the auth's events, also you can use the default behaviour
     // which is redirect
     this.authService.onAuthorizationResult().subscribe(result => {
-      if (result.authorizationState === 'authorized') {
+      if (result.authorizationState === "authorized") {
         console.log(`authorized`);
       }
     });
     // Observable to determine if is authorized or not
     this.authService.isAuthorized().subscribe(authorized => {
       this.isLoggingEnable = authorized;
-      console.log('is authorized: ' + authorized);
+      console.log("is authorized: " + authorized);
     });
   }
 

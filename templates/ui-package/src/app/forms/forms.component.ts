@@ -1,11 +1,11 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {FormlyFormOptions, FormlyFieldConfig} from '@ngx-formly/core';
-import {FormsService} from './forms.service';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { FormlyFormOptions, FormlyFieldConfig } from "@ngx-formly/core";
+import { FormsService } from "./forms.service";
 @Component({
-  selector: 'app-forms',
-  templateUrl: './forms.component.html',
-  styleUrls: ['./forms.component.scss']
+  selector: "app-forms",
+  templateUrl: "./forms.component.html",
+  styleUrls: ["./forms.component.scss"]
 })
 export class FormsComponent implements OnInit {
   sourceCode = `
@@ -34,7 +34,7 @@ export class FormsComponent implements OnInit {
   constructor(private formsService: FormsService) {}
   submit() {
     if (this.form.valid) {
-      this.data = {...this.model};
+      this.data = { ...this.model };
     }
   }
   ngOnInit() {

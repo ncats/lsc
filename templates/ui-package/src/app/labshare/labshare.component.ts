@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {EventService} from '@labshare/ngx-core-services';
-import {Title} from '@angular/platform-browser';
-import {EventKeys} from '@labshare/ngx-core-components';
+import { Component, OnInit } from "@angular/core";
+import { EventService } from "@labshare/ngx-core-services";
+import { Title } from "@angular/platform-browser";
+import { EventKeys } from "@labshare/ngx-core-components";
 
 @Component({
-  selector: 'app-labshare',
-  templateUrl: './labshare.component.html',
-  styleUrls: ['./labshare.component.scss']
+  selector: "app-labshare",
+  templateUrl: "./labshare.component.html",
+  styleUrls: ["./labshare.component.scss"]
 })
 export class LabShareComponent implements OnInit {
-  theme = 'labshare';
+  theme = "labshare";
   hideContent: boolean;
   selectedDirectory;
 
@@ -68,24 +68,24 @@ export class LabShareComponent implements OnInit {
 
   constructor(private eventService: EventService, private titleService: Title) {
     this.hideContent = false;
-    const searchEvent = this.eventService.get('search-click');
+    const searchEvent = this.eventService.get("search-click");
     searchEvent.subscribe(val => {
       if (val !== null) {
         this.hideContent = !this.hideContent;
       }
     });
-    this.selectedDirectory = 'Click left nav';
-    this.eventService.get('left-nav-click').subscribe(val => {
+    this.selectedDirectory = "Click left nav";
+    this.eventService.get("left-nav-click").subscribe(val => {
       if (val) {
         this.selectedDirectory = val.id;
       }
     });
-    this.titleService.setTitle('My Title');
+    this.titleService.setTitle("My Title");
   }
   ngOnInit() {}
 
   changeTitle() {
-    this.titleService.setTitle('Next Title');
-    this.eventService.get(EventKeys.Title).next('Test');
+    this.titleService.setTitle("Next Title");
+    this.eventService.get(EventKeys.Title).next("Test");
   }
 }

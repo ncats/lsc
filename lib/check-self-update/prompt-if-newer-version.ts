@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /*
  * @description Npm can modify latest-version to be different than what's in package.json
@@ -6,11 +6,15 @@
  * latest version
  */
 function correctVersion(version: string) {
-    return version.replace(/[a-zA-Z]/g, '').split('.').map(n => parseInt(n, 10)).join('.')
+  return version
+    .replace(/[a-zA-Z]/g, "")
+    .split(".")
+    .map(n => parseInt(n, 10))
+    .join(".");
 }
 
 function hasNewerVersion(currentVersion, latestVersion) {
-    return currentVersion !== latestVersion;
+  return currentVersion !== latestVersion;
 }
 
 /**
@@ -19,11 +23,11 @@ function hasNewerVersion(currentVersion, latestVersion) {
  * @private
  */
 function getLatestVersion(json) {
-    return correctVersion(json['version']);
+  return correctVersion(json["version"]);
 }
 
 function getModuleCurrentVersion() {
-    return correctVersion(require('../../package.json').version)
+  return correctVersion(require("../../package.json").version);
 }
 
 /**
@@ -34,11 +38,11 @@ function getModuleCurrentVersion() {
  * @returns {string}
  * @private
  */
-function message({name, currentVersion, latestVersion}) {
-    return [
-        `${name.toUpperCase()} has a new version available: ${latestVersion} (yours is ${currentVersion}).`,
-        '      You can update it using `npm install -g lsc`'
-    ].join('\n');
+function message({ name, currentVersion, latestVersion }) {
+  return [
+    `${name.toUpperCase()} has a new version available: ${latestVersion} (yours is ${currentVersion}).`,
+    "      You can update it using `npm install -g lsc`"
+  ].join("\n");
 }
 
 /**
@@ -48,11 +52,15 @@ function message({name, currentVersion, latestVersion}) {
  * @param logger
  * @api public
  */
-export function promptIfNewerVersion(name: string, jsonData, logger: {info: (message: string) => void}): void {
-    const latestVersion = getLatestVersion(jsonData);
-    const currentVersion = getModuleCurrentVersion();
+export function promptIfNewerVersion(
+  name: string,
+  jsonData,
+  logger: { info: (message: string) => void }
+): void {
+  const latestVersion = getLatestVersion(jsonData);
+  const currentVersion = getModuleCurrentVersion();
 
-    if (hasNewerVersion(currentVersion, latestVersion)) {
-        logger.info(message({name, currentVersion, latestVersion}));
-    }
+  if (hasNewerVersion(currentVersion, latestVersion)) {
+    logger.info(message({ name, currentVersion, latestVersion }));
+  }
 }

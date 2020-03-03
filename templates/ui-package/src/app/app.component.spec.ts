@@ -1,9 +1,12 @@
-import {TestBed, async} from '@angular/core/testing';
-import {AppComponent} from './app.component';
-import {RouterModule} from '@angular/router';
-import {AuthService, NgxCoreServicesModule} from '@labshare/ngx-core-services';
-import {of} from 'rxjs';
-describe('AppComponent', () => {
+import { TestBed, async } from "@angular/core/testing";
+import { AppComponent } from "./app.component";
+import { RouterModule } from "@angular/router";
+import {
+  AuthService,
+  NgxCoreServicesModule
+} from "@labshare/ngx-core-services";
+import { of } from "rxjs";
+describe("AppComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
@@ -27,7 +30,7 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
-  it('should create the app', () => {
+  it("should create the app", () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
@@ -36,6 +39,6 @@ describe('AppComponent', () => {
   it(`should have as title '<%= appNameSlug %>'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('<%= appNameSlug %>');
+    expect(app.title).toEqual("<%= appNameSlug %>");
   });
 });

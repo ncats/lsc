@@ -1,9 +1,12 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {LoggingComponent} from './logging.component';
-import {NgxCoreServicesModule, LoggingService} from '@labshare/ngx-core-services';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {of} from 'rxjs';
-describe('LoggingComponent', () => {
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { LoggingComponent } from "./logging.component";
+import {
+  NgxCoreServicesModule,
+  LoggingService
+} from "@labshare/ngx-core-services";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { of } from "rxjs";
+describe("LoggingComponent", () => {
   let component: LoggingComponent;
   let fixture: ComponentFixture<LoggingComponent>;
 
@@ -36,7 +39,7 @@ describe('LoggingComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

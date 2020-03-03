@@ -1,207 +1,233 @@
-import {RouterModule, Routes} from '@angular/router';
-import {LayoutComponent, LeftNavComponent, HeaderComponent, TenantNavComponent} from '@labshare/ngx-core-components';
-import {LabShareComponent} from './labshare/labshare.component';
-import {ConfigResolverService} from '@labshare/ngx-core-components';
-import {FormsComponent} from './forms/forms.component';
-import {LoggingComponent} from './logging/logging.component';
-import {AuthComponent} from './auth/auth.component';
+import { RouterModule, Routes } from "@angular/router";
+import {
+  LayoutComponent,
+  LeftNavComponent,
+  HeaderComponent,
+  TenantNavComponent
+} from "@labshare/ngx-core-components";
+import { LabShareComponent } from "./labshare/labshare.component";
+import { ConfigResolverService } from "@labshare/ngx-core-components";
+import { FormsComponent } from "./forms/forms.component";
+import { LoggingComponent } from "./logging/logging.component";
+import { AuthComponent } from "./auth/auth.component";
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'labshare',
-    pathMatch: 'full'
+    path: "",
+    redirectTo: "labshare",
+    pathMatch: "full"
   },
   {
-    path: 'labshare',
+    path: "labshare",
     data: {
-      theme: 'labshare'
+      theme: "labshare"
     },
     component: LayoutComponent,
-    resolve: {items: ConfigResolverService},
+    resolve: { items: ConfigResolverService },
     children: [
       {
-        path: '',
+        path: "",
         component: LeftNavComponent,
         data: {
           items: [
-            {id: 'left.home', icon: 'icon-Pages', text: `Home`, link: '#'},
-            {id: 'left.forms', icon: 'icon-Pages', text: `Forms Example`, link: '#'},
-            {id: 'left.auth', icon: 'icon-Pages', text: `Auth Example`, link: '#'},
-            {id: 'left.logging', icon: 'icon-Pages', text: `Logging Example`, link: '#'},
-            {id: 'left.version', icon: 'icon-Pages', text: `Version Example`, link: '#'}
+            { id: "left.home", icon: "icon-Pages", text: `Home`, link: "#" },
+            {
+              id: "left.forms",
+              icon: "icon-Pages",
+              text: `Forms Example`,
+              link: "#"
+            },
+            {
+              id: "left.auth",
+              icon: "icon-Pages",
+              text: `Auth Example`,
+              link: "#"
+            },
+            {
+              id: "left.logging",
+              icon: "icon-Pages",
+              text: `Logging Example`,
+              link: "#"
+            },
+            {
+              id: "left.version",
+              icon: "icon-Pages",
+              text: `Version Example`,
+              link: "#"
+            }
           ]
         },
-        outlet: 'left'
+        outlet: "left"
       },
 
       {
-        path: '',
+        path: "",
         children: [
           {
-            path: '',
+            path: "",
             component: LabShareComponent
           },
           {
-            path: '',
+            path: "",
             component: LabShareComponent,
-            outlet: 'center'
+            outlet: "center"
           }
         ]
       },
       {
-        path: 'auth',
+        path: "auth",
         children: [
           {
-            path: '',
+            path: "",
             component: AuthComponent
           },
           {
-            path: '',
+            path: "",
             component: AuthComponent,
-            outlet: 'center'
+            outlet: "center"
           }
         ]
       },
       {
-        path: 'forms',
+        path: "forms",
         children: [
           {
-            path: '',
+            path: "",
             component: FormsComponent
           },
           {
-            path: '',
+            path: "",
             component: FormsComponent,
-            outlet: 'center'
+            outlet: "center"
           }
         ]
       },
       {
-        path: 'logging',
+        path: "logging",
         children: [
           {
-            path: '',
+            path: "",
             component: LoggingComponent
           },
           {
-            path: '',
+            path: "",
             component: LoggingComponent,
-            outlet: 'center'
+            outlet: "center"
           }
         ]
       },
       {
-        path: 'shell',
-        loadChildren: () => import('./shell/shell.module').then(m => m.ShellModule)
+        path: "shell",
+        loadChildren: () =>
+          import("./shell/shell.module").then(m => m.ShellModule)
       },
       {
-        path: '',
+        path: "",
         component: HeaderComponent,
-        outlet: 'header',
+        outlet: "header",
         data: {
           config: {
-            icon: 'icon-LsStorageIcon',
-            text: 'Storage',
+            icon: "icon-LsStorageIcon",
+            text: "Storage",
             leftNavList: [],
             centerNavList: [],
             rightNavList: [
               {
-                click: 'search-click',
-                type: 'i',
-                icon: 'icon-lsi-search'
+                click: "search-click",
+                type: "i",
+                icon: "icon-lsi-search"
               },
               {
-                click: 'search-click',
-                type: 'i',
-                icon: 'icon-lsi-bell'
+                click: "search-click",
+                type: "i",
+                icon: "icon-lsi-bell"
               },
               {
-                click: 'search-click',
-                type: 'i',
-                icon: 'icon-lsi-settings'
+                click: "search-click",
+                type: "i",
+                icon: "icon-lsi-settings"
               },
               {
-                click: 'search-click',
-                type: 'i',
-                icon: 'icon-lsi-user'
+                click: "search-click",
+                type: "i",
+                icon: "icon-lsi-user"
               }
             ]
           }
         }
       },
       {
-        path: '',
+        path: "",
         component: TenantNavComponent,
-        outlet: 'tenant',
+        outlet: "tenant",
         data: {
           apps: [
             {
-              id: '1',
-              route: '/labshare/(right:test)',
-              text: 'Instrumentation',
-              click: 'tenant-switch',
-              icon: 'icon-lsi-instrumentation'
+              id: "1",
+              route: "/labshare/(right:test)",
+              text: "Instrumentation",
+              click: "tenant-switch",
+              icon: "icon-lsi-instrumentation"
             },
             {
-              id: '2',
-              route: '/noleft',
-              text: 'Project Tracking',
-              click: 'tenant-switch',
-              icon: 'icon-lsi-publications'
+              id: "2",
+              route: "/noleft",
+              text: "Project Tracking",
+              click: "tenant-switch",
+              icon: "icon-lsi-publications"
             }
           ],
           settings: [
             {
-              id: '1',
-              route: '/labshare',
-              text: 'Add App',
-              click: 'tenant-switch',
-              icon: 'icon-lsi-applications'
+              id: "1",
+              route: "/labshare",
+              text: "Add App",
+              click: "tenant-switch",
+              icon: "icon-lsi-applications"
             },
             {
-              id: '2',
-              route: 'polus',
-              text: 'LS Storage',
-              click: 'tenant-switch',
-              icon: 'icon-lsi-storage'
+              id: "2",
+              route: "polus",
+              text: "LS Storage",
+              click: "tenant-switch",
+              icon: "icon-lsi-storage"
             },
             {
-              id: '3',
-              route: '/labshare/(right:test)',
-              text: 'Manage',
-              click: 'tenant-switch',
-              icon: 'icon-lsi-auth'
+              id: "3",
+              route: "/labshare/(right:test)",
+              text: "Manage",
+              click: "tenant-switch",
+              icon: "icon-lsi-auth"
             },
             {
-              id: '4',
-              route: '/noleft',
-              text: 'Pages',
-              click: 'tenant-switch',
-              icon: 'icon-lsi-pages'
+              id: "4",
+              route: "/noleft",
+              text: "Pages",
+              click: "tenant-switch",
+              icon: "icon-lsi-pages"
             },
             {
-              id: '5',
-              route: '/noleft',
-              text: 'List',
-              click: 'tenant-switch',
-              icon: 'icon-lsi-list-view'
+              id: "5",
+              route: "/noleft",
+              text: "List",
+              click: "tenant-switch",
+              icon: "icon-lsi-list-view"
             },
             {
-              id: '5',
-              route: '/noleft',
-              text: 'Groups',
-              click: 'tenant-switch',
-              icon: 'icon-lsi-groups'
+              id: "5",
+              route: "/noleft",
+              text: "Groups",
+              click: "tenant-switch",
+              icon: "icon-lsi-groups"
             }
           ]
         }
       },
 
       {
-        path: '',
+        path: "",
         component: LayoutComponent,
-        outlet: 'right'
+        outlet: "right"
       }
     ]
   }
