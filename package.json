@@ -30,7 +30,10 @@
     "snyk-protect": "snyk protect",
     "semantic-release": "semantic-release",
     "prepare": "npm run snyk-protect",
-    "lsc": "lsc"
+    "lsc": "lsc",
+    "prettier:cli": "prettier \"**/*.ts\"",
+    "prettier:check": "npm run prettier:cli -- -l",
+    "prettier:fix": "npm run prettier:cli -- --write"
   },
   "bin": {
     "lsc": "./lib/bin/lsc.js"
@@ -49,7 +52,6 @@
     "gulp": "^4.0.0",
     "gulp-rename": "^1.2.3",
     "gulp-template": "^5.0.0",
-    "i": "^0.3.6",
     "inquirer": "^6.0.0",
     "json-override": "^0.2.0",
     "lodash": "^4.12.0",
@@ -70,16 +72,29 @@
     "@labshare/semantic-release-config": "^1.0.0",
     "@types/jasmine": "^2.6.0",
     "coveralls": "^3.0.1",
-    "husky": "^0.14.3",
+    "husky": "^4.2.3",
     "istanbul": "^0.4.2",
     "jasmine": "3.2.0",
     "jasmine-core": "^3.1.0",
+    "lint-staged": "^10.0.8",
     "mock-fs": "^4.4.1",
+    "prettier": "^1.19.1",
     "semantic-release": "^15.5.0",
     "typescript": "^2.5.3"
   },
   "snyk": true,
   "release": {
     "extends": "@labshare/semantic-release-config"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,css,md}": [
+      "npm run prettier:fix"
+    ]
   }
 }
