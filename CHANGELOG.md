@@ -1,3 +1,18 @@
+## [2.10.2](https://github.com/LabShare/lsc/compare/v2.10.1...v2.10.2) (2020-02-28)
+
+
+### Bug Fixes
+
+* cli template ([1775468](https://github.com/LabShare/lsc/commit/1775468106818265bba4ac2ba444acc5323e38b0))
+
+## [2.10.1](https://github.com/LabShare/lsc/compare/v2.10.0...v2.10.1) (2020-02-28)
+
+
+### Bug Fixes
+
+* removing cache from eslint ([32f262f](https://github.com/LabShare/lsc/commit/32f262fc3d2e9f8e7042f6ebbf614cdaacb27d0b))
+* template error ([f7a4c4d](https://github.com/LabShare/lsc/commit/f7a4c4d9c7b0f70b3abf7dbeb030b6d4aa0dd569))
+
 # [2.10.0](https://github.com/LabShare/lsc/compare/v2.9.0...v2.10.0) (2020-02-27)
 
 
