@@ -1,0 +1,11 @@
+{
+   "extends": "@istanbuljs/nyc-config-typescript",
+    "report-dir": "./coverage/",
+    "reporter": [
+    "text",
+    "lcov"
+    ],
+    "exclude": [
+    "test/"
+    ]
+}

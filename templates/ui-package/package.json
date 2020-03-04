@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "lsc start site",
     "build": "lsc build site",
     "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
     "e2e": "ng e2e",
     "prettier": "prettier \"**/*.ts\" \"**/*.js\" \"**/*.md\"",
     "lint": "npm run prettier:check && ng lint",
@@ -15,7 +16,8 @@
     "prettier:check": "npm run prettier -- -l",
     "prettier:cli": "npm run prettier -- -c",
     "prettier:fix": "npm run prettier:cli -- --write",
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "coverage": "npm run test:ci -- --code-coverage"
   },
   "contributors": "https://github.com/LabShare/<%= appNameSlug %>/graphs/contributors",
   "repository": {

@@ -2,21 +2,21 @@
  * @exports PackageUpdate
  */
 
-"use strict";
+'use strict';
 
-import assert = require("assert");
-import rimraf = require("rimraf");
-import path = require("path");
-import { EventEmitter } from "events";
-import { isPackageSync } from "../cli/utils";
-import { execSync, exec, ChildProcess } from "child_process";
+import assert = require('assert');
+import rimraf = require('rimraf');
+import path = require('path');
+import {EventEmitter} from 'events';
+import {isPackageSync} from '../cli/utils';
+import {execSync, exec, ChildProcess} from 'child_process';
 
 function gitPull(directory: string): void {
   execSync(
     `git --git-dir=${path.join(
       directory,
-      ".git"
-    )} --work-tree=${directory} pull`
+      '.git',
+    )} --work-tree=${directory} pull`,
   );
 }
 
@@ -25,8 +25,8 @@ function npmInstall(directory: string): ChildProcess {
 }
 
 function cleanModuleDirectories(directory: string): void {
-  rimraf.sync(path.join(directory, "node_modules"));
-  rimraf.sync(path.join(directory, "ui", "bower_components"));
+  rimraf.sync(path.join(directory, 'node_modules'));
+  rimraf.sync(path.join(directory, 'ui', 'bower_components'));
 }
 
 interface PackageUpdateOptions {
@@ -42,50 +42,50 @@ export class PackageUpdate extends EventEmitter {
    * @param {string} options.cwd
    * @constructor
    */
-  constructor(options: PackageUpdateOptions = { cwd: null }) {
+  constructor(options: PackageUpdateOptions = {cwd: null}) {
     super();
     this.cwd = options.cwd || process.cwd();
     assert.ok(
       isPackageSync(this.cwd),
-      `PackageUpdater: ${this.cwd} does not contain a LabShare package!`
+      `PackageUpdater: ${this.cwd} does not contain a LabShare package!`,
     );
   }
 
   updateSync() {
     this.emit(
-      "status",
-      "Attempting to clean the global NPM and Bower caches..."
+      'status',
+      'Attempting to clean the global NPM and Bower caches...',
     );
 
-    execSync("npm cache clean");
-    execSync(`${path.join("node_modules", ".bin", "bower")} cache clean`);
+    execSync('npm cache clean');
+    execSync(`${path.join('node_modules', '.bin', 'bower')} cache clean`);
 
     this.emit(
-      "status",
-      `Pulling the latest code from ${this.cwd}\'s Git repository...`
+      'status',
+      `Pulling the latest code from ${this.cwd}\'s Git repository...`,
     );
 
     gitPull(this.cwd);
 
     this.emit(
-      "status",
-      `Removing ${this.cwd}\'s node_modules and bower_components...`
+      'status',
+      `Removing ${this.cwd}\'s node_modules and bower_components...`,
     );
 
     cleanModuleDirectories(this.cwd);
 
     // install all the NPM and Bower modules
     this.emit(
-      "status",
-      `Installing ${this.cwd}\'s NPM and Bower dependencies...`
+      'status',
+      `Installing ${this.cwd}\'s NPM and Bower dependencies...`,
     );
 
-    let child = npmInstall(this.cwd);
-    child.stdout.on("data", data => {
-      this.emit("status", data);
+    const child = npmInstall(this.cwd);
+    child.stdout.on('data', data => {
+      this.emit('status', data);
     });
-    child.stdout.on("end", () => {
-      this.emit("status", "Finished installing project dependencies...");
+    child.stdout.on('end', () => {
+      this.emit('status', 'Finished installing project dependencies...');
     });
   }
 }
