@@ -20,6 +20,7 @@ install:
   - npm install
   - npm run build
 script:
+  - npm run lint
   - npm test
   - >-
     npm run coverage && cat ./coverage/lcov.info |
