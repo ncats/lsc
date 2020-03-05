@@ -31,33 +31,33 @@
 
 'use strict';
 
-import {CliLoader} from './loader'
+import {CliLoader} from './loader';
 
 exports.name = 'cli-loader-plugin';
 
-exports.attach = function (options) {
-    exports.options = options;
+exports.attach = function(options) {
+  exports.options = options;
 };
 
 exports.init = async function init(done) {
-    exports.loader = new CliLoader(this, exports.options);
+  exports.loader = new CliLoader(this, exports.options);
 
-    try {
-        await exports.loader.load();
+  try {
+    await exports.loader.load();
 
-        this.commands['help'] = function () {
-            exports.loader.displayHelp();
-        };
+    this.commands['help'] = function() {
+      exports.loader.displayHelp();
+    };
 
-        done();
-    } catch (error) {
-        // TODO: workaround for async/await incompatibility with callbacks in the Flatiron CLI library
-        console.error(error);
-    }
+    done();
+  } catch (error) {
+    // TODO: workaround for async/await incompatibility with callbacks in the Flatiron CLI library
+    console.error(error);
+  }
 };
 
-exports.detach = function () {
-    delete this.commands['help'];
-    exports.loader.unload();
-    exports.loader = null;
+exports.detach = function() {
+  delete this.commands['help'];
+  exports.loader.unload();
+  exports.loader = null;
 };

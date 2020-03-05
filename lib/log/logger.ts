@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-import { createLogger, format, transports } from "winston";
-import { getPackageManifest, getPackageName } from "../cli";
-import path = require("path");
-import fs = require("fs");
-import _ = require("lodash");
+import {createLogger, format, transports} from 'winston';
+import {getPackageManifest, getPackageName} from '../cli';
+import path = require('path');
+import fs = require('fs');
+import _ = require('lodash');
 
 /*
  * LSC's logging configuration module.
@@ -15,13 +15,13 @@ import _ = require("lodash");
  * logger.error('an error');
  * logger.warn('a warning');
  */
-const FluentTransport = require("fluent-logger").support.winstonTransport();
+const FluentTransport = require('fluent-logger').support.winstonTransport();
 
-function mkdirSync(path: string): void {
+function mkdirSync(dir: string): void {
   try {
-    fs.mkdirSync(path);
+    fs.mkdirSync(dir);
   } catch (error) {
-    if (error.code !== "EEXIST") {
+    if (error.code !== 'EEXIST') {
       throw error;
     }
   }
@@ -41,7 +41,7 @@ interface LoggerOptions {
   logDirectory?: string;
 }
 // default format for Console, error at winston: if not json is specified is not logging in console
-const loggerFormat = format.printf(({ timestamp, level, message }) => {
+const loggerFormat = format.printf(({timestamp, level, message}) => {
   return `${timestamp} ${level}: ${message}`;
 });
 export const Logger = (options: LoggerOptions) => {
@@ -50,16 +50,16 @@ export const Logger = (options: LoggerOptions) => {
     logDirectory: null,
     format: {
       json: false,
-      colorize: false
+      colorize: false,
     },
-    cwd: process.cwd()
+    cwd: process.cwd(),
   });
 
   // Defining custom formats
   const styleFormats = [
     format.timestamp({
-      format: "YYYY-MM-DD HH:mm:ss"
-    })
+      format: 'YYYY-MM-DD HH:mm:ss',
+    }),
   ];
 
   // special case: if json is not defined , use by default the custom format
@@ -76,7 +76,7 @@ export const Logger = (options: LoggerOptions) => {
     }
   }
   const logger = createLogger({
-    format: format.combine(...styleFormats)
+    format: format.combine(...styleFormats),
   });
 
   // Adding a new Console transport
@@ -87,24 +87,24 @@ export const Logger = (options: LoggerOptions) => {
 
     logger.add(
       new transports.File({
-        filename: path.resolve(options.logDirectory, "app.log"),
+        filename: path.resolve(options.logDirectory, 'app.log'),
         maxFiles: 5,
         maxsize: 10485760,
-        level: "info"
-      })
+        level: 'info',
+      }),
     );
   }
   // Adding fluentD transport
   if (!_.isEmpty(options.fluentD)) {
-    let name: string = getPackageName(getPackageManifest(options.cwd));
+    const name: string = getPackageName(getPackageManifest(options.cwd));
 
     options = _.defaultsDeep(options, {
       fluentD: {
-        host: "localhost",
+        host: 'localhost',
         port: 24224,
         timeout: 3.0,
-        tag: name || "labshare"
-      }
+        tag: name || 'labshare',
+      },
     });
 
     logger.add(new FluentTransport(options.fluentD.tag, options.fluentD));
@@ -112,12 +112,12 @@ export const Logger = (options: LoggerOptions) => {
   // Workaround to support the Morgan request logging middleware
   return _.assign(logger, {
     stream: () => {
-      let self: any = this;
+      const self: any = this;
       return {
-        write(options?: any): void {
-          self.info(options);
-        }
+        write(writeOptions?: any): void {
+          self.info(writeOptions);
+        },
       };
-    }
+    },
   });
 };

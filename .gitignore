@@ -55,6 +55,3 @@ cli/*.js
 test/lib/**/*.js
 index.js
 *.js.map
-
-# NPM
-package-lock.json

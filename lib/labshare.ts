@@ -1,4 +1,4 @@
 export default {
-    Config: {},
-    Logger: {}
+  Config: {},
+  Logger: {},
 };

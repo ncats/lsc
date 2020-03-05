@@ -5,11 +5,11 @@ module.exports = {
   // Use the typescript-eslint parser
   parser: '@typescript-eslint/parser',
   // Enable eslint and typescript-eslint
-  plugins: ['eslint-plugin', '@typescript-eslint', 'mocha'],
+  plugins: ['eslint-plugin', '@typescript-eslint', 'jasmine'],
   env: {
     es6: true,
     node: true,
-    mocha: true,
+    jasmine:true
   },
   parserOptions: {
     sourceType: 'module',
@@ -42,13 +42,10 @@ module.exports = {
     'no-useless-escape': 'off',
     // TypeScript allows the same name for namespace and function
     'no-redeclare': 'off',
+
     // Avoid promise rewrapping
     // https://exploringjs.com/es2016-es2017/ch_async-functions.html#_returned-promises-are-not-wrapped
     'no-return-await': 'error',
-    'mocha/handle-done-callback': 'error',
-    'mocha/no-exclusive-tests': 'error',
-    'mocha/no-identical-title': 'error',
-    'mocha/no-nested-tests': 'error',
     'no-array-constructor': 'error',
 
     /**
@@ -70,17 +67,21 @@ module.exports = {
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-triple-slash-reference': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
+
+    /**
+     * The following rules are enforced to support legacy tslint configuration
+     */
+    // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/ROADMAP.md
     '@typescript-eslint/adjacent-overload-signatures': 'error', // tslint:adjacent-overload-signatures
     '@typescript-eslint/prefer-for-of': 'error', // tslint:prefer-for-of
     '@typescript-eslint/unified-signatures': 'error', // tslint:unified-signatures
     '@typescript-eslint/no-explicit-any': 'off', // tslint:no-any
-
     'no-unused-labels': 'error', // tslint:label-position
     'no-caller': 'error', // tslint:no-arg
     'no-new-wrappers': 'error', // tslint:no-construct
-    // 'no-redeclare': 'error', // tslint:no-duplicate-variable
-
-    'no-invalid-this': 'error',
+    // because of the flatiron plugin
+    'no-invalid-this': 'off',
+    '@typescript-eslint/no-this-alias':'off',
     '@typescript-eslint/no-misused-new': 'error',
     'no-shadow': 'error', // tslint:no-shadowed-variable
     'no-throw-literal': 'error', // tslint:no-string-throw
@@ -97,10 +98,8 @@ module.exports = {
     'no-unused-expressions': 'error', // tslint:no-unused-expression
     'no-var': 'error', // tslint:no-var-keyword
     eqeqeq: ['error', 'smart'], // tslint:triple-equals: [true, 'allow-null-check', 'allow-undefined-check'],
-
-    // Rules mapped from `@loopback/tslint-config/tslint.build.json
     '@typescript-eslint/await-thenable': 'error', // tslint:await-promise: [true, 'PromiseLike', 'RequestPromise'],
-    '@typescript-eslint/no-floating-promises': 'error',
+    '@typescript-eslint/no-floating-promises': 'off',
 
     'no-void': 'error', // tslint:no-void-expression: [true, 'ignore-arrow-function-shorthand'],
 
