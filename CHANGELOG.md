@@ -1,3 +1,17 @@
+# [2.11.0](https://github.com/LabShare/lsc/compare/v2.10.2...v2.11.0) (2020-03-05)
+
+
+### Bug Fixes
+
+* adding lint packages ([5bc913b](https://github.com/LabShare/lsc/commit/5bc913b70558a503fbce8612fecc477fe70b5813))
+* adding ts support ([11b18a1](https://github.com/LabShare/lsc/commit/11b18a1dcb9982fc49351466b80e7797eee83bef))
+* cli template ([4abaf96](https://github.com/LabShare/lsc/commit/4abaf96bebac8ccef12926554b687dab1f49ff80))
+
+
+### Features
+
+* lsc using prettier and ts with a dist folder structure ([82f3de6](https://github.com/LabShare/lsc/commit/82f3de65b353e1cc8435c26856f4c326c25c1bf3))
+
 ## [2.10.2](https://github.com/LabShare/lsc/compare/v2.10.1...v2.10.2) (2020-02-28)
 
 
