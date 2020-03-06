@@ -1,3 +1,11 @@
+## [2.11.1](https://github.com/LabShare/lsc/compare/v2.11.0...v2.11.1) (2020-03-06)
+
+
+### Bug Fixes
+
+* lint-staged ([d64d788](https://github.com/LabShare/lsc/commit/d64d788ce91c6f73f5352891a51b34732ce3c0e6))
+* templates and package versions ([1498256](https://github.com/LabShare/lsc/commit/14982565fce6c3dfb8ac9449dd3fe32410d74d0a))
+
 # [2.11.0](https://github.com/LabShare/lsc/compare/v2.10.2...v2.11.0) (2020-03-05)
 
 
