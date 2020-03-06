@@ -3,13 +3,12 @@
     "outDir": "./dist",
     "rootDir":"./",
     "module": "commonjs",
-    "target": "es6",
+    "target": "es2015",
     "sourceMap": true,
     "noImplicitAny": false,
     "skipLibCheck": true,
     "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "esModuleInterop":true
+    "experimentalDecorators": true
   },
   "compileOnSave": true,
   "exclude": [
