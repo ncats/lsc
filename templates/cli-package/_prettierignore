@@ -2,3 +2,6 @@ dist
 *.json
 coverage
 .eslintrc.js
+CHANGELOG.md
+*.yml
+index.js
