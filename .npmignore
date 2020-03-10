@@ -13,3 +13,4 @@ package-lock.json
 node_modules/@types/*
 # including the files for template
 !templates/**/*
+!dist/templates/**/*
