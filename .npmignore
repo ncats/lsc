@@ -12,8 +12,4 @@ package-lock.json
 .eslintignore
 node_modules/@types/*
 # including the files for template
-!templates/**/tsconfig.json
-!templates/**/*.md
-!templates/**/*.ts
-!templates/**/tests
-!templates/**/docs
+!templates/**/*
