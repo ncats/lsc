@@ -1,3 +1,11 @@
+## [2.11.2](https://github.com/LabShare/lsc/compare/v2.11.1...v2.11.2) (2020-03-06)
+
+
+### Bug Fixes
+
+* global interface ([2f4c9eb](https://github.com/LabShare/lsc/commit/2f4c9eb623f1a43b3a1afcda08e1e429fc519809))
+* removing esmoduleinterop ([dd15d76](https://github.com/LabShare/lsc/commit/dd15d7606e518a45f3ac460bf0cf883f4c2f97d9))
+
 ## [2.11.1](https://github.com/LabShare/lsc/compare/v2.11.0...v2.11.1) (2020-03-06)
 
 ### Bug Fixes
