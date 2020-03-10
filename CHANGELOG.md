@@ -1,3 +1,10 @@
+## [2.11.4](https://github.com/LabShare/lsc/compare/v2.11.3...v2.11.4) (2020-03-10)
+
+
+### Bug Fixes
+
+* templates to dist folder and npmignore ([afe5038](https://github.com/LabShare/lsc/commit/afe503867124ee359398b1ba198f69ab1e4fe83e))
+
 ## [2.11.3](https://github.com/LabShare/lsc/compare/v2.11.2...v2.11.3) (2020-03-10)
 
 
