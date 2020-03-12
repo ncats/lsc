@@ -258,9 +258,7 @@ export class CliLoader {
 
     const packageName = getPackageName(manifest);
     const lscSettings = getPackageLscSettings(manifest);
-    const pattern = lscSettings?.cliDir
-      ? `${lscSettings.cliDir}/*.js`
-      : this.options.pattern;
+    const pattern = lscSettings?.cliPattern || this.options.pattern;
     const commands = this.getCommands(directory, pattern);
     _.each(commands, (command, name: string) => {
       this._commands[packageName] = this._commands[packageName] || {};

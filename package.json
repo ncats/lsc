@@ -6,7 +6,7 @@
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "lsc": {
-    "cliDir": "dist/cli"
+    "cliPattern": "dist/cli/*.js"
   },
   "repository": {
     "type": "git",
