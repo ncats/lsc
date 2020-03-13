@@ -1,3 +1,20 @@
+## [2.11.4](https://github.com/LabShare/lsc/compare/v2.11.3...v2.11.4) (2020-03-10)
+
+
+### Bug Fixes
+
+* templates to dist folder and npmignore ([afe5038](https://github.com/LabShare/lsc/commit/afe503867124ee359398b1ba198f69ab1e4fe83e))
+
+## [2.11.3](https://github.com/LabShare/lsc/compare/v2.11.2...v2.11.3) (2020-03-10)
+
+
+### Bug Fixes
+
+* commitlint.js removal ([9a8d617](https://github.com/LabShare/lsc/commit/9a8d617ab0e8af446608b0d28ba309f923eb38a8))
+* patch templates files ([bc1f544](https://github.com/LabShare/lsc/commit/bc1f54406a35e643f02a8f2d69864976feaddeef))
+* patch templates files ([266ccaf](https://github.com/LabShare/lsc/commit/266ccaf797372f57fb7fb302edc5a239da21975d))
+* templates ([672b688](https://github.com/LabShare/lsc/commit/672b6885617922d04ffb8a3e2e26952f5abac254))
+
 ## [2.11.2](https://github.com/LabShare/lsc/compare/v2.11.1...v2.11.2) (2020-03-06)
 
 
