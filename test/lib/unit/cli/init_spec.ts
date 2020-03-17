@@ -1,6 +1,6 @@
 import {initConfig} from '../../../../lib/cli';
 import * as path from 'path';
-
+process.env.TEST_VAR = 'TEST_VAR';
 describe('.start()', () => {
   afterEach(() => {
     delete global.LabShare;
@@ -35,5 +35,15 @@ describe('.start()', () => {
     });
     expect(config).toBeDefined();
     expect(config.test).toEqual('test from folder with test config');
+  });
+  it('tests the init command with a configuration folder with test settings and correct env vars', async () => {
+    const cwd = path.join(process.cwd(), 'test', 'configuration-folder');
+    const config: any = initConfig({
+      cwd,
+      configuration: 'test',
+    });
+    expect(config).toBeDefined();
+    expect(config.test).toEqual('test from folder with test config');
+    expect(config.var).toEqual('TEST_VAR');
   });
 });
