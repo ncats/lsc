@@ -46,4 +46,15 @@ describe('.start()', () => {
     expect(config.test).toEqual('test from folder with test config');
     expect(config.var).toEqual('TEST_VAR');
   });
+
+  it('tests the init command with a configuration folder with test settings and env file', async () => {
+    const cwd = path.join(process.cwd(), 'test', 'configuration-folder');
+    const config: any = initConfig({
+      cwd,
+      configuration: 'test-env',
+    });
+    expect(config).toBeDefined();
+    expect(config.test).toEqual('test from folder with test config');
+    expect(config.var).toEqual('from env file');
+  });
 });
