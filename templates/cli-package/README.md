@@ -38,7 +38,7 @@ To change the lsc package configuration for using typescript you need to change 
 
 ```json
  "lsc": {
-    "cliDir": "dist/cli"
+    "cliPattern": "dist/cli/*.js"
   },
 ```
 
@@ -46,7 +46,7 @@ For adding package dependencies you can use the `packageDependencies` section  a
 ```json
   // at package.json
  "lsc": {
-    "cliDir": "dist/cli",
+    "cliPattern": "dist/cli/*.js",
     "packageDependencies": ["dependency-1"]
   },
 ```

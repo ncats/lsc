@@ -17,8 +17,8 @@ interface PackageDependencies {
 }
 
 interface LscSettings {
-  cliDir?: string;
-  packageDependencies?: PackageDependencies | string[];
+  cliPattern?: string;
+  packageDependencies?: PackageDependencies | any[];
 }
 
 /**
@@ -27,11 +27,22 @@ interface LscSettings {
  * @private
  */
 function getPackageDependencies(manifest): PackageDependencies | string[] {
-  return _.isObject(manifest) && _.isObject(manifest.packageDependencies)
-    ? _.isArray(manifest.packageDependencies)
-      ? manifest.packageDependencies
-      : Object.keys(manifest.packageDependencies)
-    : [];
+  if (_.isObject(manifest)) {
+    if (_.isArray(manifest.packageDependencies)) {
+      return manifest.packageDependencies;
+    } else if (_.isObject(manifest.packageDependencies)) {
+      const dependencies = [];
+      for (const [key, value] of Object.entries(manifest.packageDependencies)) {
+        if (key === value) {
+          dependencies.push(key);
+        } else {
+          dependencies.push({key, value});
+        }
+      }
+      return dependencies;
+    }
+  }
+  return [];
 }
 /**
  * @description Retrieves the LabShare package's name
@@ -164,19 +175,19 @@ export function applyToNodeModulesSync(
 
   func(packagePath);
 
-  for (const dependency of dependencies) {
+  for (const dependencyObj of dependencies) {
+    const dependency = _.isString(dependencyObj)
+      ? dependencyObj
+      : dependencyObj?.key;
     const dependencyPath = resolve(dependency, {cwd: packagePath});
-
     if (!dependencyPath) {
       throw new Error(
         `Dependency: "${dependency}" required by "${packagePath}" could not be found. Is it installed?`,
       );
     }
-
     func(dependencyPath);
   }
 }
-
 /**
  * Throws an exception if the pattern is empty or glob.sync has an error.
  *
