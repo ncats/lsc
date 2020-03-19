@@ -1,3 +1,17 @@
+# [2.12.0](https://github.com/LabShare/lsc/compare/v2.11.4...v2.12.0) (2020-03-19)
+
+
+### Bug Fixes
+
+* env test added ([94ab0ca](https://github.com/LabShare/lsc/commit/94ab0ca08bd58e3fe993381843083f6cec3c0a28))
+* from clidir to clipattern ([09bbc37](https://github.com/LabShare/lsc/commit/09bbc376113bedd54fb5ca732c51b81a9e4b7b85))
+* test configuration and env file ([1485245](https://github.com/LabShare/lsc/commit/14852451e7f3b59e2599ae585d6b24172fd8e29e))
+
+
+### Features
+
+* support for loading config folder ([c043981](https://github.com/LabShare/lsc/commit/c0439819c3b879f9b4a637f4f2f68651c4b0f3e2))
+
 ## [2.11.4](https://github.com/LabShare/lsc/compare/v2.11.3...v2.11.4) (2020-03-10)
 
 
