@@ -1,3 +1,34 @@
+# [2.12.0](https://github.com/LabShare/lsc/compare/v2.11.4...v2.12.0) (2020-03-19)
+
+
+### Bug Fixes
+
+* env test added ([94ab0ca](https://github.com/LabShare/lsc/commit/94ab0ca08bd58e3fe993381843083f6cec3c0a28))
+* from clidir to clipattern ([09bbc37](https://github.com/LabShare/lsc/commit/09bbc376113bedd54fb5ca732c51b81a9e4b7b85))
+* test configuration and env file ([1485245](https://github.com/LabShare/lsc/commit/14852451e7f3b59e2599ae585d6b24172fd8e29e))
+
+
+### Features
+
+* support for loading config folder ([c043981](https://github.com/LabShare/lsc/commit/c0439819c3b879f9b4a637f4f2f68651c4b0f3e2))
+
+## [2.11.4](https://github.com/LabShare/lsc/compare/v2.11.3...v2.11.4) (2020-03-10)
+
+
+### Bug Fixes
+
+* templates to dist folder and npmignore ([afe5038](https://github.com/LabShare/lsc/commit/afe503867124ee359398b1ba198f69ab1e4fe83e))
+
+## [2.11.3](https://github.com/LabShare/lsc/compare/v2.11.2...v2.11.3) (2020-03-10)
+
+
+### Bug Fixes
+
+* commitlint.js removal ([9a8d617](https://github.com/LabShare/lsc/commit/9a8d617ab0e8af446608b0d28ba309f923eb38a8))
+* patch templates files ([bc1f544](https://github.com/LabShare/lsc/commit/bc1f54406a35e643f02a8f2d69864976feaddeef))
+* patch templates files ([266ccaf](https://github.com/LabShare/lsc/commit/266ccaf797372f57fb7fb302edc5a239da21975d))
+* templates ([672b688](https://github.com/LabShare/lsc/commit/672b6885617922d04ffb8a3e2e26952f5abac254))
+
 ## [2.11.2](https://github.com/LabShare/lsc/compare/v2.11.1...v2.11.2) (2020-03-06)
 
 

@@ -2,7 +2,7 @@
   "name": "@labshare/lsc",
   "namespace": "lsc",
   "main": "./dist/index.js",
-  "version": "2.11.2",
+  "version": "2.12.0",
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "lsc": {
@@ -54,6 +54,8 @@
     "@types/winston": "^2.3.6",
     "@types/yargs": "^12.0.0",
     "change-case": "^4.1.1",
+    "config": "^3.3.0",
+    "dotenv": "^8.2.0",
     "flatiron": "^0.4.2",
     "flatiron-cli-config": "^0.1.5",
     "fluent-logger": "^3.0.0",
