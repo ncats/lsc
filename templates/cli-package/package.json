@@ -20,7 +20,7 @@
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "coverage": "nyc npm run test"
   },
-  "description": "",
+  "description": "<%= appDescription %>",
   "private": true,
   "contributors": "https://github.com/LabShare/<%= appNameSlug %>/graphs/contributors",
   "repository": {

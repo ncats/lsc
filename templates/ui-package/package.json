@@ -1,6 +1,7 @@
 {
   "name": "<%= appNameSlug %>",
   "version": "0.0.0",
+  "description": "<%= appDescription %>",
   "scripts": {
     "ng": "ng",
     "start": "lsc start site",
