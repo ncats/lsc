@@ -12,6 +12,14 @@
 
 Run `lsc help` to display a list of available commands.
 
+## App Templates
+
+Run `lsc create app` to display a list of available templates.
+
+- api: API template powered by LoopBack and LabShare Services
+- ui: UI template powered by Angular and LabShare Services
+- cli: CLI template LabShare Services
+
 ## lsc Settings
 
 To define the cliPattern and packageDependencies, you can use the `lsc` property at package.json

@@ -10,6 +10,6 @@ export async function main() {
   await server.boot();
   await server.start();
   console.log(
-    `Server is running at http://127.0.0.1:${config.rest.port}${config.<%= appNamePascalCase %>.basePath}`,
+    `Server is running at http://127.0.0.1:${config.rest.port}${config.<%= appNameCamelCase %>.basePath}`,
   );
 }

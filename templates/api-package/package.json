@@ -9,7 +9,7 @@
     "url": "https://github.com/LabShare/<%= appNameSlug %>.git"
   },
   "bugs": {
-    "url": "https://github.com/LabShare/c<%= appNameSlug %>/issues"
+    "url": "https://github.com/LabShare/<%= appNameSlug %>/issues"
   },
   "main": "index.js",
   "engines": {

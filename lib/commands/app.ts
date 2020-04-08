@@ -5,6 +5,7 @@ import * as template from 'gulp-template';
 import * as rename from 'gulp-rename';
 import * as changeCase from 'change-case';
 import {PackageUpdate} from '../../lib/package/update';
+import {camelCaseTransformMerge, pascalCaseTransformMerge} from 'change-case';
 const _ = require('underscore.string');
 const inquirer = require('inquirer');
 
@@ -57,8 +58,12 @@ export const create = function() {
       today.getMonth() + 1 + padLeft(today.getDate()),
     ].join('.');
     answers.appNameSlug = _.slugify(answers.appName);
-    answers.appNamePascalCase = changeCase.pascalCase(answers.appName);
-    answers.appNameCamelCase = changeCase.camelCase(answers.appName);
+    answers.appNamePascalCase = changeCase.pascalCase(answers.appName, {
+      transform: pascalCaseTransformMerge,
+    });
+    answers.appNameCamelCase = changeCase.camelCase(answers.appName, {
+      transform: camelCaseTransformMerge,
+    });
     answers.appTitle = changeCase
       .capitalCase(answers.appName)
       .split(' ')

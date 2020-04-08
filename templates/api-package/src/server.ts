@@ -14,7 +14,7 @@ export class ExpressServer {
     this.api = new <%= appNamePascalCase %>Application(options);
 
     // Expose the front-end assets via Express, not as LB4 route
-    this.app.use(this.options.<%= appNamePascalCase %>.basePath, this.api.requestHandler);
+    this.app.use(this.options.<%= appNameCamelCase %>.basePath, this.api.requestHandler);
 
     // Serve static files in the public folder
     this.app.use(express.static('public'));

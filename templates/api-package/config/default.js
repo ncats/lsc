@@ -42,6 +42,12 @@ module.exports = {
     test: 'TEST',
     email:{
       to: process.env.TEMPLATE_EMAIL_TO
+    },
+    db:{
+      name: "DemoItemsDS",
+      connector: "memory",
+      localStorage: "",
+      file: ""
     }
   }
 };

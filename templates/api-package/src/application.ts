@@ -66,6 +66,7 @@ export class <%= appNamePascalCase %>Application extends BootMixin(
   }
 
   setUpBindings(options: ApplicationConfig): void {
+    this.bind('datasources.config.dineDB').to(options.<%= appNameCamelCase %>?.db);
     this.bind(<%= appNamePascalCase %>ApiBindings.CONFIG).to(options);
     this.bind(LogBindings.LOG_CONFIG).to(options?.services?.log);
     this.bind(CacheBindings.CACHE_CONFIG).to(options?.services?.cache);
