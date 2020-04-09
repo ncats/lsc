@@ -53,6 +53,7 @@
     "@types/semver": "^5.4.0",
     "@types/winston": "^2.3.6",
     "@types/yargs": "^12.0.0",
+    "change-case": "^4.1.1",
     "config": "^3.3.0",
     "dotenv": "^8.2.0",
     "flatiron": "^0.4.2",

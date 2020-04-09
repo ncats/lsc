@@ -1,4 +1,3 @@
-
 [![Coverage Status](https://coveralls.io/repos/github/LabShare/lsc/badge.svg?branch=master)](https://coveralls.io/github/LabShare/lsc?branch=master)
 [![Build Status](https://travis-ci.org/LabShare/lsc.svg?branch=master)](https://travis-ci.org/LabShare/lsc)
 [![codecov](https://codecov.io/gh/LabShare/lsc/branch/master/graph/badge.svg)](https://codecov.io/gh/LabShare/lsc)
@@ -12,6 +11,14 @@
 ## Usage
 
 Run `lsc help` to display a list of available commands.
+
+## App Templates
+
+Run `lsc create app` to display a list of available templates.
+
+- api: API template powered by LoopBack and LabShare Services
+- ui: UI template powered by Angular and LabShare Services
+- cli: CLI template LabShare Services
 
 ## lsc Settings
 

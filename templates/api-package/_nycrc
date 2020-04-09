@@ -1,0 +1,17 @@
+{
+   "require": [
+      "ts-node/register"
+    ],
+    "exclude": [
+      "dist/__tests__/",
+      "src/index.ts"
+    ],
+    "extension": [
+      ".js",
+      ".ts"
+    ],
+    "reporter": [
+    "text",
+    "lcov"
+    ]
+}

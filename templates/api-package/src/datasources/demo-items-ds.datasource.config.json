@@ -1,0 +1,6 @@
+{
+  "name": "DemoItemsDS",
+  "connector": "memory",
+  "localStorage": "",
+  "file": ""
+}

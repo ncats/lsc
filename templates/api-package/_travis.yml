@@ -1,0 +1,28 @@
+  
+language: node_js
+node_js:
+  - lts/*
+  - node
+services:
+  - docker
+before_install:
+  - |-
+    if [ $TRAVIS_PULL_REQUEST == false ] && [ $TRAVIS_BRANCH == "master" ];
+     then
+        echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > ~/.npmrc;
+      else
+        echo "//registry.npmjs.org/:_authToken=\${NPM_INSTALL_TOKEN}" > ~/.npmrc;
+    fi
+  - 'git config --global url."git@github.com:".insteadOf "https://github.com/"'
+  - npm install -g codecov
+install:
+  - npm install
+script:
+  - npm run build
+  - npm run lint
+  - npm run test
+after_success:
+  - codecov
+matrix:
+  allow_failures:
+    - node_js: node

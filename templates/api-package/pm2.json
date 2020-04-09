@@ -1,0 +1,12 @@
+{
+    "name": "<%= appNameSlug %>",
+    "script": "./index.js",
+    "instances": "2",
+    "log_file": "./<%= appNameSlug %>.log",
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "env_production" : {
+      "NODE_ENV": "production"
+    }
+  }
