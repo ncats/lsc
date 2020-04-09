@@ -1,3 +1,16 @@
+# [2.13.0](https://github.com/LabShare/lsc/compare/v2.12.0...v2.13.0) (2020-04-09)
+
+
+### Bug Fixes
+
+* api template ([2ac6b9f](https://github.com/LabShare/lsc/commit/2ac6b9f14a2589c4342bd3263215e359e7f00ee6))
+* descriptions added ([583cf25](https://github.com/LabShare/lsc/commit/583cf2528797307bd24ab4ef99b3cc501ce18ce0))
+
+
+### Features
+
+* api template crud example ([177c092](https://github.com/LabShare/lsc/commit/177c0925aef85a807b01eab8ab6e2bc58bac04b3))
+
 # [2.12.0](https://github.com/LabShare/lsc/compare/v2.11.4...v2.12.0) (2020-03-19)
 
 
