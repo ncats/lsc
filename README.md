@@ -20,6 +20,8 @@ Run `lsc create app` to display a list of available templates.
 - ui: UI template powered by Angular and LabShare Services
 - cli: CLI template LabShare Services
 
+Note: The command will add all the app's files. It is recommended to create a folder and execute the command
+inside that folder.
 ## lsc Settings
 
 To define the cliPattern and packageDependencies, you can use the `lsc` property at package.json
