@@ -7,7 +7,6 @@ test
 *.ts
 *.map
 config.json
-package-lock.json
 .eslintrc.json
 .eslintignore
 node_modules/@types/*

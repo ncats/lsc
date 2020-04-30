@@ -69,7 +69,6 @@ export const create = function() {
       .split(' ')
       .join('');
     answers.appYear = year;
-
     gulp
       .src([
         `${__dirname}/../../templates/common/**`,
@@ -81,6 +80,11 @@ export const create = function() {
         rename(file => {
           if (file.basename[0] === '_') {
             file.basename = '.' + file.basename.slice(1);
+          }
+          // package.json was causing issues with the Files property in the template
+          // the only solution is to
+          if (file.basename === 'tmp-package') {
+            file.basename = 'package';
           }
         }),
       )
