@@ -1,3 +1,10 @@
+## [2.13.1](https://github.com/LabShare/lsc/compare/v2.13.0...v2.13.1) (2020-04-30)
+
+
+### Bug Fixes
+
+* files property in package.json ([fe12ca4](https://github.com/LabShare/lsc/commit/fe12ca4069d0214bd0de68272d956417ccb8aeaf))
+
 # [2.13.0](https://github.com/LabShare/lsc/compare/v2.12.0...v2.13.0) (2020-04-09)
 
 
