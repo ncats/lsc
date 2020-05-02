@@ -5,15 +5,15 @@ import {
   ValueOrPromise,
 } from '@loopback/core';
 import {juggler} from '@loopback/repository';
-import config from './demo-items-ds.datasource.config.json';
+import config from './api-ds.datasource.config.json';
 
 @lifeCycleObserver('datasource')
-export class DemoItemsDsDataSource extends juggler.DataSource
+export class ApiDsDataSource extends juggler.DataSource
   implements LifeCycleObserver {
-  static dataSourceName = 'DemoItemsDS';
+  static dataSourceName = 'ApiDS';
 
   constructor(
-    @inject('datasources.config.DemoItemsDS', {optional: true})
+    @inject('datasources.config.ApiDS', {optional: true})
     dsConfig: object = config,
   ) {
     super(dsConfig);

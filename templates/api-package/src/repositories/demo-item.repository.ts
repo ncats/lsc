@@ -1,6 +1,6 @@
 import {DefaultCrudRepository} from '@loopback/repository';
 import {DemoItem, DemoItemRelations} from '../models';
-import {DemoItemsDsDataSource} from '../datasources';
+import {ApiDsDataSource} from '../datasources';
 import {inject} from '@loopback/core';
 
 export class DemoItemRepository extends DefaultCrudRepository<
@@ -8,9 +8,7 @@ export class DemoItemRepository extends DefaultCrudRepository<
   typeof DemoItem.prototype.id,
   DemoItemRelations
 > {
-  constructor(
-    @inject('datasources.DemoItemsDS') dataSource: DemoItemsDsDataSource,
-  ) {
+  constructor(@inject('datasources.ApiDS') dataSource: ApiDsDataSource) {
     super(DemoItem, dataSource);
   }
 }
