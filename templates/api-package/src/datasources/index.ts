@@ -1,1 +1,1 @@
-export * from './demo-items-ds.datasource';
+export * from './api-ds.datasource';

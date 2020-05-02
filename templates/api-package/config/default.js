@@ -44,7 +44,7 @@ module.exports = {
       to: process.env.TEMPLATE_EMAIL_TO
     },
     db:{
-      name: "DemoItemsDS",
+      name: "ApiDS",
       connector: "memory",
       localStorage: "",
       file: ""
