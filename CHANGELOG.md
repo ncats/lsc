@@ -1,3 +1,10 @@
+## [2.13.2](https://github.com/LabShare/lsc/compare/v2.13.1...v2.13.2) (2020-05-02)
+
+
+### Bug Fixes
+
+* template renaming ([020f563](https://github.com/LabShare/lsc/commit/020f5638894ba3a70a968efa072e59f472f95336))
+
 ## [2.13.1](https://github.com/LabShare/lsc/compare/v2.13.0...v2.13.1) (2020-04-30)
 
 
