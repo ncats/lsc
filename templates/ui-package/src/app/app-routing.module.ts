@@ -1,7 +1,7 @@
 import {RouterModule, Routes} from '@angular/router';
-import {LayoutComponent, LeftNavComponent, HeaderComponent, TenantNavComponent} from '@labshare/ngx-core-components';
+import {LayoutComponent, LeftNavComponent, HeaderComponent, TenantNavComponent} from '@labshare/ngx-base-components';
 import {LabShareComponent} from './labshare/labshare.component';
-import {ConfigResolverService} from '@labshare/ngx-core-components';
+import {ConfigResolverService} from '@labshare/ngx-base-components';
 import {FormsComponent} from './forms/forms.component';
 import {LoggingComponent} from './logging/logging.component';
 import {AuthComponent} from './auth/auth.component';

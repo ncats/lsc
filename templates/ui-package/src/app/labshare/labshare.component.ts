@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EventService} from '@labshare/ngx-core-services';
 import {Title} from '@angular/platform-browser';
-import {EventKeys} from '@labshare/ngx-core-components';
+import {EventKeys} from '@labshare/ngx-base-components';
 
 @Component({
   selector: 'app-labshare',
