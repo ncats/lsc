@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule, APP_INITIALIZER} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UsersRouting} from './app-routing.module';
-import {LayoutModule} from '@labshare/ngx-base-components';
+import {NgxBaseComponentsModule} from '@labshare/ngx-base-components';
 import {CenterHeaderComponent} from './center-header/center-header.component';
 import {AppComponent} from './app.component';
 import {LabShareComponent} from './labshare/labshare.component';
@@ -52,7 +52,7 @@ function initialize(http: HttpClient, config: ConfigService, auth: AuthService):
   imports: [
     BrowserModule,
     NgxCoreServicesModule.forRoot({appConf: APP_CONF, appType: APP_TYPE, appBuildVersion: APP_BUILD_VERSION}),
-    LayoutModule.forRoot(customThemes),
+    NgxBaseComponentsModule.forRoot(customThemes),
     CommonModule,
     UsersRouting,
     ReactiveFormsModule,
