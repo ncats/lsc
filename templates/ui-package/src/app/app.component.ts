@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService, EventService} from '@labshare/ngx-core-services';
 import {ActivatedRoute, Router} from '@angular/router';
-import {EventKeys} from '@labshare/ngx-core-components';
+import {EventKeys} from '@labshare/ngx-base-components';
 import {filter} from 'rxjs/operators';
 @Component({
   selector: 'app-root',
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.eventService
       .get(EventKeys.LeftMenu)
-      .pipe(filter(x => x !== null))
+      .pipe(filter(x => x))
       .subscribe(val => {
         switch (val.id) {
           case 'left.home':
