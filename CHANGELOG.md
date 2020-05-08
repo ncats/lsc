@@ -1,3 +1,13 @@
+## [2.13.3](https://github.com/LabShare/lsc/compare/v2.13.2...v2.13.3) (2020-05-08)
+
+
+### Bug Fixes
+
+* angular 9 template ([d390344](https://github.com/LabShare/lsc/commit/d390344002f2d58a1da9d9df8745d7d08a77993e))
+* ngx base components fix ([7a8b39a](https://github.com/LabShare/lsc/commit/7a8b39ac148763cbb150e618d4bb051739fc6339))
+* powershell added ([191e425](https://github.com/LabShare/lsc/commit/191e425c92f52b3c5c2719efa8b954b0d7459fda))
+* removing critical info ([0f32b08](https://github.com/LabShare/lsc/commit/0f32b083fe0441f5362957f88e2c8d14ad6d49cc))
+
 ## [2.13.2](https://github.com/LabShare/lsc/compare/v2.13.1...v2.13.2) (2020-05-02)
 
 
