@@ -7,19 +7,16 @@ import {AuthService} from '@labshare/ngx-core-services';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
+  onAuthorizationResult;
   isLoggingEnable = false;
   configurationCode = `
   module.exports = {
     services: {
-      logging: {
-        // for apps with no signup page you need to enable
-        silentRenew :true,
-        // for changing auth flows  - implicit is the default one
-        authFlowType : 'code',
-        url: process.env.SERVICES_LOG_URL,
-        application: process.env.SERVICES_LOG_APP,
-        environment: process.env.SERVICES_LOG_ENV,
-        subTag: process.env.SERVICES_LOG_TAG,
+      auth: {
+        authFlowType: 'code',
+        url: process.env.SERVICES_AUTH_URL,
+        clientId: process.env.SERVICES_AUTH_CLIENT_ID,
+        tenant: process.env.SERVICES_AUTH_TENANT
       },
     }
   };
@@ -29,18 +26,12 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Observable for receiving the auth's events, also you can use the default behaviour
-    // which is redirect
-    this.authService.onAuthorizationResult().subscribe(result => {
-      if (result.authorizationState === 'authorized') {
-        console.log(\`authorized\`);
-
-      }
-    });
-    //Observable to determine if is authorized or not
+    // Observable to determine if is authorized or not, default value is undefined
     this.authService.isAuthorized().subscribe(authorized => {
-      this.isLoggingEnable =authorized;
-      console.log('is authorized: ' + authorized);
+      if(authorized || authorized === false) {
+        this.isLoggingEnable = authorized;
+        console.log('is authorized: ' + authorized);
+      }
     });
   }
 
@@ -53,34 +44,38 @@ export class AuthComponent implements OnInit {
   public logout() {
     this.authService.logout();
   }
-
-
   `;
   appComponentSourceCode = `
   // at App Component
-  constructor(private authService: AuthService,
-    private router: Router,
-    private eventService: EventService) {
-    this.authService.configure().subscribe(done => {
-      this.authService.onAuthCallback();
+  public onAuthorizationResult;
+  constructor(private authService: AuthService, private router: Router, private eventService: EventService) {
+    this.onAuthorizationResult = this.authService.onAuthorizationResult();
+  }
+
+  ngOnInit(): void {
+    //process the callback after authorization with auth system
+    this.authService.onAuthCallback();
+
+    // Observable for receiving the auth's events
+    this.onAuthorizationResult.subscribe(result => {
+      if (result.authorizationState === 'authorized') {
+        console.log('authorized');
+      }
     });
   }
 
   `;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    this.onAuthorizationResult = this.authService.onAuthorizationResult();
+  }
 
   ngOnInit() {
-    // Observable for receiving the auth's events, also you can use the default behaviour
-    // which is redirect
-    this.authService.onAuthorizationResult().subscribe(result => {
-      if (result.authorizationState === 'authorized') {
-        console.log(`authorized`);
-      }
-    });
-    // Observable to determine if is authorized or not
+    // Observable to determine if is authorized or not, default value is undefined
     this.authService.isAuthorized().subscribe(authorized => {
-      this.isLoggingEnable = authorized;
-      console.log('is authorized: ' + authorized);
+      if(authorized || authorized === false) {
+        this.isLoggingEnable = authorized;
+        console.log('is authorized: ' + authorized);
+      }
     });
   }
 

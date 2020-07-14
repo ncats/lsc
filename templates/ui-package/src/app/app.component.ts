@@ -9,9 +9,21 @@ import {filter} from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router, private eventService: EventService) {}
+  public onAuthorizationResult;
+  constructor(private authService: AuthService, private router: Router, private eventService: EventService) {
+    this.onAuthorizationResult = this.authService.onAuthorizationResult();
+  }
   title = '<%= appNameSlug %>';
   ngOnInit(): void {
+    this.authService.onAuthCallback();
+
+    // Observable for receiving the auth's events
+    this.onAuthorizationResult.subscribe(result => {
+      if (result.authorizationState === 'authorized') {
+        console.log(`authorized`);
+      }
+    });
+
     this.eventService
       .get(EventKeys.LeftMenu)
       .pipe(filter(x => x))
