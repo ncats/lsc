@@ -1,3 +1,10 @@
+## [2.13.4](https://github.com/LabShare/lsc/compare/v2.13.3...v2.13.4) (2020-07-15)
+
+
+### Bug Fixes
+
+* ui template for auth ([41108f8](https://github.com/LabShare/lsc/commit/41108f8ec97f11b03a13c037a617bd7ea17a5b0c))
+
 ## [2.13.3](https://github.com/LabShare/lsc/compare/v2.13.2...v2.13.3) (2020-05-08)
 
 
