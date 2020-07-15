@@ -19,7 +19,10 @@ describe('AppComponent', () => {
             },
             getProfile() {
               return of({});
-            }
+            },
+            onAuthorizationResult() {
+              return of('authorized');
+            },
           }
         }
       ],

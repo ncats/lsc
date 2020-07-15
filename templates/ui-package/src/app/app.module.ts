@@ -20,7 +20,6 @@ import {
   ConfigService,
   initializeFromAppConf,
   AppType,
-  EventService
 } from '@labshare/ngx-core-services';
 // this editor should be removed for a real project
 import {LoggingComponent} from './logging/logging.component';
@@ -72,7 +71,5 @@ function initialize(http: HttpClient, config: ConfigService, auth: AuthService):
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private authService: AuthService, private router: Router, private eventService: EventService) {
-    this.authService.onAuthCallback();
-  }
+  constructor() {}
 }
