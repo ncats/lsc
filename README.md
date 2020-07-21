@@ -3,6 +3,7 @@
 [![codecov](https://codecov.io/gh/LabShare/lsc/branch/master/graph/badge.svg)](https://codecov.io/gh/LabShare/lsc)
 
 # LSC
+has all the code for CLI of LabShare. It is based on flatIron.
 
 ## Install
 
