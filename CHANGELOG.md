@@ -1,3 +1,10 @@
+## [2.13.5](https://github.com/LabShare/lsc/compare/v2.13.4...v2.13.5) (2020-08-17)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([6f7eeaa](https://github.com/LabShare/lsc/commit/6f7eeaacf48041bbe1f7e7aad17a209fbcba612c))
+
 ## [2.13.4](https://github.com/LabShare/lsc/compare/v2.13.3...v2.13.4) (2020-07-15)
 
 
