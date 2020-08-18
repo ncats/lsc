@@ -19,12 +19,11 @@ import {
   AuthService,
   ConfigService,
   initializeFromAppConf,
-  AppType,
+  AppType
 } from '@labshare/ngx-core-services';
 // this editor should be removed for a real project
 import {LoggingComponent} from './logging/logging.component';
 import {AuthComponent} from './auth/auth.component';
-import {Router} from '@angular/router';
 
 const customThemes = [labshare];
 // Export Angular 8 feature module

@@ -72,7 +72,7 @@ export class AuthComponent implements OnInit {
   ngOnInit() {
     // Observable to determine if is authorized or not, default value is undefined
     this.authService.isAuthorized().subscribe(authorized => {
-      if(authorized !== undefined) {
+      if (authorized !== undefined) {
         this.isLoggingEnable = authorized;
         console.log('is authorized: ' + authorized);
       }

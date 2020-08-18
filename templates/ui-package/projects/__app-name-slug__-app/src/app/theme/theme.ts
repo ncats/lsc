@@ -5,6 +5,6 @@ export const labshare: Theme = {
   extend: 'default',
   properties: {
     'main-background-color': '#ffffff',
-    'header-background-color': '#321771'
+    'header-background-color': '#2c2c2c'
   }
 };

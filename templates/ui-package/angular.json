@@ -3,32 +3,32 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "<%= appNameSlug %>": {
+    "<%= appNameSlug %>-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "projects/<%= appNameSlug %>-app",
+      "sourceRoot": "projects/<%= appNameSlug %>-app/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@labshare/shell-ui:browser",
           "options": {
-            "outputPath": "dist/<%= appNameSlug %>",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "dist/<%= appNameSlug %>-app",
+            "index": "projects/<%= appNameSlug %>-app/src/index.html",
+            "main": "projects/<%= appNameSlug %>-app/src/main.ts",
+            "polyfills": "projects/<%= appNameSlug %>-app/src/polyfills.ts",
+            "tsConfig": "projects/<%= appNameSlug %>-app/tsconfig.app.json",
             "aot": false,
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/<%= appNameSlug %>-app/src/favicon.ico",
+              "projects/<%= appNameSlug %>-app/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "projects/<%= appNameSlug %>-app/src/styles.scss"
             ],
             "scripts": []
           },
@@ -36,8 +36,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "projects/<%= appNameSlug %>-app/src/environments/environment.ts",
+                  "with": "projects/<%= appNameSlug %>-app/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -67,33 +67,33 @@
         "serve": {
           "builder": "@labshare/shell-ui:dev-server",
           "options": {
-            "browserTarget": "<%= appNameSlug %>:build"
+            "browserTarget": "<%= appNameSlug %>-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "<%= appNameSlug %>:build:production"
+              "browserTarget": "<%= appNameSlug %>-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "<%= appNameSlug %>:build"
+            "browserTarget": "<%= appNameSlug %>-app:build"
           }
         },
         "test": {
           "builder": "@labshare/shell-ui:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
+            "main": "projects/<%= appNameSlug %>-app/src/test.ts",
+            "polyfills": "projects/<%= appNameSlug %>-app/src/polyfills.ts",
+            "tsConfig": "projects/<%= appNameSlug %>-app/tsconfig.spec.json",
+            "karmaConfig": "projects/<%= appNameSlug %>-app/karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/<%= appNameSlug %>-app/src/favicon.ico",
+              "projects/<%= appNameSlug %>-app/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "projects/<%= appNameSlug %>-app/src/styles.scss"
             ],
             "scripts": []
           }
@@ -102,9 +102,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "projects/<%= appNameSlug %>-app/tsconfig.app.json",
+              "projects/<%= appNameSlug %>-app/tsconfig.spec.json",
+              "projects/<%= appNameSlug %>-app/e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -115,25 +115,25 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "<%= appNameSlug %>:serve"
+            "devServerTarget": "<%= appNameSlug %>-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "<%= appNameSlug %>:serve:production"
+              "devServerTarget": "<%= appNameSlug %>-app:serve:production"
             }
           }
         },
         "electron": {
           "builder": "@labshare/shell-ui:electron",
           "options": {
-            "browserTarget": "<%= appNameSlug %>:build",
+            "browserTarget": "<%= appNameSlug %>-app:build",
             "baseHref": "./"
           }
         },
         "pack-electron": {
           "builder": "@labshare/shell-ui:pack-electron",
           "options": {
-            "browserTarget": "<%= appNameSlug %>:build",
+            "browserTarget": "<%= appNameSlug %>-app:build",
             "outputPath": "dist/<%= appNameSlug %>/electron",
             "plaform": "mac",
             "baseHref": "./"
@@ -142,7 +142,7 @@
         "pack-cordova": {
           "builder": "@labshare/shell-ui:pack-cordova",
           "options": {
-            "browserTarget": "<%= appNameSlug %>:build",
+            "browserTarget": "<%= appNameSlug %>-app:build",
             "outputPath": "dist/<%= appNameSlug %>/cordova",
             "plaform": "ios",
             "baseHref": "./",
@@ -152,24 +152,64 @@
         "pack-sharepoint": {
           "builder": "@labshare/shell-ui:pack-sharepoint",
           "options": {
-            "browserTarget": "<%= appNameSlug %>:build",
+            "browserTarget": "<%= appNameSlug %>-app:build",
             "baseHref": "./",
             "outputPath": "dist/<%= appNameSlug %>/sharepoint",
             "spVersion": "online",
             "sharepoint": {
-              "solutionName": "<%= appNameSlug %>",
+              "solutionName": "<%= appNameSlug %>-app",
               "solutionGuid": "4c874b09-7940-4c1c-9203-d1b6c3f1d74d",
               "zippedPackage": "solution/<%= appNameSlug %>.sppkg",
               "webPartGuid": "c3ad6298-a085-4269-9b94-357640cdcf69",
-              "webPartAlias": "<%= appNameSlug %>",
-              "webPartTitle": "<%= appNameSlug %>",
-              "webPartDescription": "<%= appNameSlug %> description",
-              "webPartPropertiesDescription": "<%= appNameSlug %> properties description"
+              "webPartAlias": "<%= appNameSlug %>-app",
+              "webPartTitle": "<%= appNameSlug %>-app",
+              "webPartDescription": "<%= appNameSlug %>-app description",
+              "webPartPropertiesDescription": "<%= appNameSlug %>-app properties description"
             }
           }
         }
       }
-    }
+    },
+    "<%= appNameSlug %>-lib": {
+      "projectType": "library",
+      "root": "projects/<%= appNameSlug %>-lib",
+      "sourceRoot": "projects/<%= appNameSlug %>-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/<%= appNameSlug %>-lib/tsconfig.lib.json",
+            "project": "projects/<%= appNameSlug %>-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/<%= appNameSlug %>-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/<%= appNameSlug %>-lib/src/test.ts",
+            "tsConfig": "projects/<%= appNameSlug %>-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/<%= appNameSlug %>-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/<%= appNameSlug %>-lib/tsconfig.lib.json",
+              "projects/<%= appNameSlug %>-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }    
   },
-  "defaultProject": "<%= appNameSlug %>"
+  "defaultProject": "<%= appNameSlug %>-app"
 }
