@@ -6,21 +6,19 @@ import * as rename from 'gulp-rename';
 import * as changeCase from 'change-case';
 import {PackageUpdate} from '../../lib/package/update';
 import {camelCaseTransformMerge, pascalCaseTransformMerge} from 'change-case';
-import { padLeft } from '../utils/pad-left';
-import { bootstrapUIPackage } from '../utils/bootstrap-ui-package';
-import { readArguments, defaultPrompts } from '../utils/create-utils';
+import {padLeft} from '../utils/pad-left';
+import {bootstrapUIPackage} from '../utils/bootstrap-ui-package';
+import {readArguments, defaultPrompts} from '../utils/create-utils';
 
 const _ = require('underscore.string');
 const inquirer = require('inquirer');
 
 export const create = function() {
-
   /* Skip prompts if cli arguments were provided */
-  let {prompts: remainingPrompts, cliAnswers} = readArguments(defaultPrompts);
+  const {prompts: remainingPrompts, cliAnswers} = readArguments(defaultPrompts);
   inquirer.prompt(remainingPrompts).then(answers => {
-
     /* Extend with answers from CLI arguments */
-    answers = {...answers, ...cliAnswers}
+    answers = {...answers, ...cliAnswers};
 
     if (!answers.moveon) {
       return;
@@ -78,9 +76,8 @@ export const create = function() {
         /* Apply instructions only for ui projects meanwhile.
         In the future, we could extend the features to other package types. */
         if (answers.projectType === 'ui') {
-          bootstrapUIPackage(answers, this);          
+          bootstrapUIPackage(answers, this);
         }
-
       });
   });
 };

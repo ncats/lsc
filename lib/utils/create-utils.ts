@@ -1,13 +1,13 @@
 import * as yargs from 'yargs';
-import { flipObject } from './flip-object';
-import { getCLIAnswers } from './get-cli-answers';
+import {flipObject} from './flip-object';
+import {getCLIAnswers} from './get-cli-answers';
 
 /** Mapping of CLI argument names to respective prompt names */
 export const argsToPromptNames = {
   type: 'projectType',
   name: 'appName',
   description: 'appDescription',
-  y: 'moveon'
+  y: 'moveon',
 } as const;
 
 /** Inverse mapping of argsToPromptNames */
@@ -15,9 +15,9 @@ const promptNamesToArgs = flipObject(argsToPromptNames);
 
 /** Available CLI arguments for programmatic use. */
 const defaultCLIArgs = yargs.options({
-  type: { type: 'string', choices: ['cli', 'api', 'ui'] },
-  name: { type: 'string' },
-  y: { type: 'boolean' }
+  type: {type: 'string', choices: ['cli', 'api', 'ui']},
+  name: {type: 'string'},
+  y: {type: 'boolean'},
 }).argv;
 
 /** Default App Name based on CWD */
@@ -60,16 +60,16 @@ export const getPromptNameFor = (key: keyof typeof argsToPromptNames) => {
 /** Decides if a prompt should be showed to the user.
  * Returns false in case the equivalent cli argument has been provided.
  */
-const shouldPrompt = (cliArgs) => (prompt) => {
-  const { name } = prompt;
+const shouldPrompt = cliArgs => prompt => {
+  const {name} = prompt;
   const arg = promptNamesToArgs[name];
-  return (typeof arg === 'string') ? !cliArgs[arg] : true;
+  return typeof arg === 'string' ? !cliArgs[arg] : true;
 };
 
 /** Read arguments provided in the CLI and return remaining prompts to be used. */
 export const readArguments = (prompts: typeof defaultPrompts) => {
   return {
     prompts: prompts.filter(shouldPrompt(defaultCLIArgs)),
-    cliAnswers: getCLIAnswers(defaultCLIArgs)
+    cliAnswers: getCLIAnswers(defaultCLIArgs),
   };
 };
