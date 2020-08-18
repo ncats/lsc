@@ -2,7 +2,7 @@
   "name": "@labshare/lsc",
   "namespace": "lsc",
   "main": "./dist/index.js",
-  "version": "2.13.4",
+  "version": "2.13.5",
   "description": "Lab Share Command",
   "contributors": "https://github.com/LabShare/lsc/graphs/contributors",
   "lsc": {
@@ -67,7 +67,7 @@
     "i": "^0.3.6",
     "inquirer": "^6.0.0",
     "json-override": "^0.2.0",
-    "lodash": "^4.12.0",
+    "lodash": "^4.17.20",
     "npm": "^6.13.7",
     "request": "^2.88.0",
     "resolve-pkg": "^1.0.0",
