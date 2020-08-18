@@ -6,46 +6,22 @@ import * as rename from 'gulp-rename';
 import * as changeCase from 'change-case';
 import {PackageUpdate} from '../../lib/package/update';
 import {camelCaseTransformMerge, pascalCaseTransformMerge} from 'change-case';
+import { padLeft } from '../utils/pad-left';
+import { bootstrapUIPackage } from '../utils/bootstrap-ui-package';
+import { readArguments, defaultPrompts } from '../utils/create-utils';
+
 const _ = require('underscore.string');
 const inquirer = require('inquirer');
 
-function padLeft(dateValue: number) {
-  return dateValue < 10 ? '0' + dateValue : dateValue.toString();
-}
-
-const defaultAppName = process
-  .cwd()
-  .split('/')
-  .pop()
-  .split('\\')
-  .pop();
-
 export const create = function() {
-  const prompts = [
-    {
-      name: 'projectType',
-      message: 'Which type of LabShare package do you want to create?',
-      type: 'list',
-      default: 'cli',
-      choices: ['cli', 'api', 'ui'],
-    },
-    {
-      name: 'appName',
-      message: 'What is the name of your project?',
-      default: defaultAppName,
-    },
-    {
-      name: 'appDescription',
-      message: 'What is the description?',
-    },
-    {
-      type: 'confirm',
-      name: 'moveon',
-      message: 'Continue?',
-    },
-  ];
 
-  inquirer.prompt(prompts).then(answers => {
+  /* Skip prompts if cli arguments were provided */
+  let {prompts: remainingPrompts, cliAnswers} = readArguments(defaultPrompts);
+  inquirer.prompt(remainingPrompts).then(answers => {
+
+    /* Extend with answers from CLI arguments */
+    answers = {...answers, ...cliAnswers}
+
     if (!answers.moveon) {
       return;
     }
@@ -78,6 +54,11 @@ export const create = function() {
       .pipe(template(answers, {interpolate: /<%=([\s\S]+?)%>/g}))
       .pipe(
         rename(file => {
+          /* Generate dynamic folder and file names with provided app name */
+          const slugRegex = /__app-name-slug__/g;
+          file.basename = file.basename.replace(slugRegex, answers.appNameSlug);
+          file.dirname = file.dirname.replace(slugRegex, answers.appNameSlug);
+
           if (file.basename[0] === '_') {
             file.basename = '.' + file.basename.slice(1);
           }
@@ -93,6 +74,13 @@ export const create = function() {
         this.log.info(
           `Successfully created LabShare ${answers.projectType} package...`,
         );
+
+        /* Apply instructions only for ui projects meanwhile.
+        In the future, we could extend the features to other package types. */
+        if (answers.projectType === 'ui') {
+          bootstrapUIPackage(answers, this);          
+        }
+
       });
   });
 };
