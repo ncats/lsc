@@ -6,17 +6,23 @@ import * as rename from 'gulp-rename';
 import * as changeCase from 'change-case';
 import {PackageUpdate} from '../../lib/package/update';
 import {camelCaseTransformMerge, pascalCaseTransformMerge} from 'change-case';
-import {padLeft} from '../utils/pad-left';
 import {bootstrapUIPackage} from '../utils/bootstrap-ui-package';
-import {readArguments, defaultPrompts} from '../utils/create-utils';
+import {
+  readArguments,
+  defaultPrompts,
+  UI_PROJECT_TYPE,
+  answersObject,
+} from '../utils/create-utils';
+import * as inquirer from 'inquirer';
+import padLeft = require('pad-left');
 
 const _ = require('underscore.string');
-const inquirer = require('inquirer');
 
 export const create = function() {
   /* Skip prompts if cli arguments were provided */
   const {prompts: remainingPrompts, cliAnswers} = readArguments(defaultPrompts);
-  inquirer.prompt(remainingPrompts).then(answers => {
+
+  inquirer.prompt(remainingPrompts).then((answers: answersObject) => {
     /* Extend with answers from CLI arguments */
     answers = {...answers, ...cliAnswers};
 
@@ -29,7 +35,7 @@ export const create = function() {
     answers.appVersion = [
       'v0',
       year.slice(2),
-      today.getMonth() + 1 + padLeft(today.getDate()),
+      today.getMonth() + 1 + padLeft(today.getDate().toString(), 2, '0'),
     ].join('.');
     answers.appNameSlug = _.slugify(answers.appName);
     answers.appNamePascalCase = changeCase.pascalCase(answers.appName, {
@@ -75,7 +81,7 @@ export const create = function() {
 
         /* Apply instructions only for ui projects meanwhile.
         In the future, we could extend the features to other package types. */
-        if (answers.projectType === 'ui') {
+        if (answers.projectType === UI_PROJECT_TYPE) {
           bootstrapUIPackage(answers, this);
         }
       });

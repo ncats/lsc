@@ -1,10 +1,31 @@
 import {sync as commandExistsSync} from 'command-exists';
 import {join} from 'path';
 import {SpawnSyncStrict} from './spawn-sync-strict';
+import {answersObject} from './create-utils';
 
 const defaultSpawnOptions = {stdio: 'inherit', encoding: 'utf-8'} as const;
 
-export function bootstrapUIPackage(answers: any, context) {
+/* Context object is passed by flatiron during plugin registration.
+Check /lib/cli/start.ts app.use(loaderPlugin, {...}) call for more information.
+Flatiron inherits functionality from broadway npm module, and neither have
+typings registered on npm.
+This is a simplification suited for our current needs.
+*/
+type ContextType = {
+  log: {
+    info: (a: string) => void;
+    error: (a: string) => void;
+  };
+};
+
+/** Bootstraps UI Package template created in current working directory.
+ * Installs npm packages, runs git commands to commit source code,
+ * and builds angular library for local development.
+ */
+export function bootstrapUIPackage(
+  answers: answersObject,
+  context: ContextType,
+) {
   const isGitInstalled = commandExistsSync('git');
 
   /** Helper to exit process in case one sub-process fails */
@@ -39,7 +60,9 @@ export function bootstrapUIPackage(answers: any, context) {
       cwd: uiModulesFolder,
     });
   } else {
-    context.log.info(`OS does not contain chmod command.`);
+    context.log.info(
+      `OS does not contain chmod command. Skipping optional step (assign read-only permissions).`,
+    );
   }
 
   /* Run NPM Install */

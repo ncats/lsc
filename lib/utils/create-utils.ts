@@ -1,6 +1,6 @@
 import * as yargs from 'yargs';
-import {flipObject} from './flip-object';
 import {getCLIAnswers} from './get-cli-answers';
+import {invert} from 'lodash';
 
 /** Mapping of CLI argument names to respective prompt names */
 export const argsToPromptNames = {
@@ -10,12 +10,35 @@ export const argsToPromptNames = {
   y: 'moveon',
 } as const;
 
+export const UI_PROJECT_TYPE = 'ui';
+export const API_PROJECT_TYPE = 'api';
+export const CLI_PROJECT_TYPE = 'cli';
+
+export type answersObject = {
+  projectType:
+    | typeof UI_PROJECT_TYPE
+    | typeof API_PROJECT_TYPE
+    | typeof CLI_PROJECT_TYPE;
+  appName: string;
+  appDescription: string;
+  moveon: boolean;
+  appVersion: string;
+  appNameSlug: string;
+  appNamePascalCase: string;
+  appNameCamelCase: string;
+  appTitle: string;
+  appYear: string;
+};
+
 /** Inverse mapping of argsToPromptNames */
-const promptNamesToArgs = flipObject(argsToPromptNames);
+const promptNamesToArgs = invert(argsToPromptNames);
 
 /** Available CLI arguments for programmatic use. */
 const defaultCLIArgs = yargs.options({
-  type: {type: 'string', choices: ['cli', 'api', 'ui']},
+  type: {
+    type: 'string',
+    choices: [CLI_PROJECT_TYPE, API_PROJECT_TYPE, UI_PROJECT_TYPE],
+  },
   name: {type: 'string'},
   y: {type: 'boolean'},
 }).argv;
@@ -34,8 +57,8 @@ export const defaultPrompts = [
     name: 'projectType',
     message: 'Which type of LabShare package do you want to create?',
     type: 'list',
-    default: 'cli',
-    choices: ['cli', 'api', 'ui'],
+    default: CLI_PROJECT_TYPE,
+    choices: [CLI_PROJECT_TYPE, API_PROJECT_TYPE, UI_PROJECT_TYPE],
   },
   {
     name: 'appName',
