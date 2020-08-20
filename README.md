@@ -21,6 +21,12 @@ Run `lsc create app` to display a list of available templates.
 - ui: UI template powered by Angular and LabShare Services
 - cli: CLI template LabShare Services
 
+You can also provide CLI arguments for a programmatic usage:
+- `--name my-app-name`
+- `--description 'some description'`
+- `--type ui` (can be `ui`, `api`, or `cli`)
+- `-y` (Bypass "continue?" question, useful for automated scripts)
+
 Note: The command will add all the app's files. It is recommended to create a folder and execute the command
 inside that folder.
 ## lsc Settings

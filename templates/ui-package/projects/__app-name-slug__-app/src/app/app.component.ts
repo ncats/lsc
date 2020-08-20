@@ -13,38 +13,23 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private eventService: EventService) {
     this.onAuthorizationResult = this.authService.onAuthorizationResult();
   }
-  title = '<%= appNameSlug %>';
+
   ngOnInit(): void {
     this.authService.onAuthCallback();
 
-    // Observable for receiving the auth's events
+    /* Observable for receiving the Auth Events */
     this.onAuthorizationResult.subscribe(result => {
       if (result.authorizationState === 'authorized') {
         console.log(`authorized`);
       }
     });
 
+    /* Observable for receiving AppMenu Events and navigating to route */
     this.eventService
-      .get(EventKeys.LeftMenu)
-      .pipe(filter(x => x))
-      .subscribe(val => {
-        switch (val.id) {
-          case 'left.home':
-            this.router.navigate(['./labshare/']);
-            break;
-          case 'left.forms':
-            this.router.navigate(['./labshare/forms']);
-            break;
-          case 'left.auth':
-            this.router.navigate(['./labshare/auth']);
-            break;
-          case 'left.logging':
-            this.router.navigate(['./labshare/logging']);
-            break;
-          case 'left.version':
-            this.router.navigate(['./labshare/shell']);
-            break;
-        }
+      .get(EventKeys.AppMenu)
+      .pipe(filter(i => i))
+      .subscribe(i => {
+        this.router.navigate(['labshare', i.route]);
       });
   }
 }

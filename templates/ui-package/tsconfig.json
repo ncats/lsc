@@ -17,7 +17,13 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@labshare/<%= appNameSlug %>": [
+        "dist/<%= appNameSlug %>-lib/labshare-<%= appNameSlug %>",
+        "dist/<%= appNameSlug %>-lib"
+      ]
+    }    
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
