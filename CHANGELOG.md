@@ -1,3 +1,17 @@
+# [2.14.0](https://github.com/LabShare/lsc/compare/v2.13.5...v2.14.0) (2020-08-20)
+
+
+### Bug Fixes
+
+* use consts, typings and add packages ([67636be](https://github.com/LabShare/lsc/commit/67636bed315de1b9b8755b0ac8910ee8ccf89485))
+* use ngx-core-service v3 ([479f9d8](https://github.com/LabShare/lsc/commit/479f9d8b512b1d2071afd7a8243d677fd8de3fa8))
+
+
+### Features
+
+* add library and cli args to lsc create app ([a5debee](https://github.com/LabShare/lsc/commit/a5debee79d134fa88d33a3194a50141857dbd471))
+* update ui template, add library by default ([06ce226](https://github.com/LabShare/lsc/commit/06ce226985f958f27908580dd4215194468bea3a))
+
 ## [2.13.5](https://github.com/LabShare/lsc/compare/v2.13.4...v2.13.5) (2020-08-17)
 
 
