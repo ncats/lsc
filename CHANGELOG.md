@@ -1,3 +1,10 @@
+## [2.14.1](https://github.com/LabShare/lsc/compare/v2.14.0...v2.14.1) (2020-08-21)
+
+
+### Bug Fixes
+
+* turn off analytics by default ([e32d813](https://github.com/LabShare/lsc/commit/e32d813226ca99b0586709bae03915e0d4393cf3))
+
 # [2.14.0](https://github.com/LabShare/lsc/compare/v2.13.5...v2.14.0) (2020-08-20)
 
 
