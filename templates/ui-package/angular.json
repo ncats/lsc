@@ -211,5 +211,8 @@
       }
     }    
   },
-  "defaultProject": "<%= appNameSlug %>-app"
+  "defaultProject": "<%= appNameSlug %>-app",
+  "cli": {
+    "analytics": false
+  }
 }
