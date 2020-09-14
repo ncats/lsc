@@ -4,7 +4,11 @@ import {SpawnSyncStrict} from './spawn-sync-strict';
 import {answersObject} from './create-utils';
 
 /* Use shell: true to work on Windows */
-const defaultSpawnOptions = {stdio: 'inherit', encoding: 'utf-8', shell: true} as const;
+const defaultSpawnOptions = {
+  stdio: 'inherit',
+  encoding: 'utf-8',
+  shell: true,
+} as const;
 
 /* Context object is passed by flatiron during plugin registration.
 Check /lib/cli/start.ts app.use(loaderPlugin, {...}) call for more information.
