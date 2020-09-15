@@ -80,7 +80,7 @@ export function bootstrapUIPackage(
     spawnSyncStrict('git', ['add', '-A']);
     spawnSyncStrict(
       'git',
-      ['commit', '-m', 'chore: create lsc ui app'],
+      ['commit', '-m', '"chore: create lsc ui app"'],
       defaultSpawnOptions,
     );
   }
