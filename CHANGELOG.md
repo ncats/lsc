@@ -1,3 +1,11 @@
+## [2.14.2](https://github.com/LabShare/lsc/compare/v2.14.1...v2.14.2) (2020-09-15)
+
+
+### Bug Fixes
+
+* make commands work on windows ([e9cb770](https://github.com/LabShare/lsc/commit/e9cb77066c8c35e29c866a66559a358bfa51457a))
+* use quotes because of shell spawn ([ee4eb91](https://github.com/LabShare/lsc/commit/ee4eb916516241f624fe929d1b89406f3ea61cbf))
+
 ## [2.14.1](https://github.com/LabShare/lsc/compare/v2.14.0...v2.14.1) (2020-08-21)
 
 
