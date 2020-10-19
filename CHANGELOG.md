@@ -1,3 +1,10 @@
+# [2.15.0](https://github.com/LabShare/lsc/compare/v2.14.2...v2.15.0) (2020-10-19)
+
+
+### Features
+
+* add lsc manifest configuration ([21e66f5](https://github.com/LabShare/lsc/commit/21e66f5e9e3eb4812018c529f02132f15471e317))
+
 ## [2.14.2](https://github.com/LabShare/lsc/compare/v2.14.1...v2.14.2) (2020-09-15)
 
 
