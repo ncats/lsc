@@ -3,5 +3,8 @@
   "dest": "../../dist/<%= appNameSlug %>-lib",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": [
+    "labshare-manifest.js"
+  ]  
 }

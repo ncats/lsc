@@ -30,7 +30,8 @@
             "styles": [
               "projects/<%= appNameSlug %>-app/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "preserveSymlinks": true
           },
           "configurations": {
             "production": {
