@@ -5,6 +5,6 @@ export const generatedMenuItems = [
     route: '<%= appNameSlug %>',
     click: 'tenant-switch',
     text: '<%= appNamePascalCase %>',
-    icon: 'icon-lsi-edit2'
+    icon: 'icon-lsi-info-fill'
   }
 ];

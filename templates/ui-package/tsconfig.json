@@ -20,7 +20,6 @@
     ],
     "paths": {
       "@labshare/<%= appNameSlug %>": [
-        "dist/<%= appNameSlug %>-lib/labshare-<%= appNameSlug %>",
         "dist/<%= appNameSlug %>-lib"
       ]
     }    
