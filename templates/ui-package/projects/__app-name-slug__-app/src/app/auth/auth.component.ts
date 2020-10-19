@@ -13,7 +13,7 @@ export class AuthComponent implements OnInit {
   module.exports = {
     services: {
       auth: {
-        authFlowType: 'code',
+        responseType: 'code',
         url: process.env.SERVICES_AUTH_URL,
         clientId: process.env.SERVICES_AUTH_CLIENT_ID,
         tenant: process.env.SERVICES_AUTH_TENANT
