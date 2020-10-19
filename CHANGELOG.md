@@ -1,3 +1,10 @@
+## [2.15.1](https://github.com/LabShare/lsc/compare/v2.15.0...v2.15.1) (2020-10-19)
+
+
+### Bug Fixes
+
+* use responseType instead of authFlowType ([365657e](https://github.com/LabShare/lsc/commit/365657e1b02e205bf98f554e8efd9bca03830e20))
+
 # [2.15.0](https://github.com/LabShare/lsc/compare/v2.14.2...v2.15.0) (2020-10-19)
 
 
