@@ -173,6 +173,11 @@
     },
     "<%= appNameSlug %>-lib": {
       "projectType": "library",
+       "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "projects/<%= appNameSlug %>-lib",
       "sourceRoot": "projects/<%= appNameSlug %>-lib/src",
       "prefix": "lib",
