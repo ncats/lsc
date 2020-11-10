@@ -1,3 +1,10 @@
+## [2.15.2](https://github.com/LabShare/lsc/compare/v2.15.1...v2.15.2) (2020-11-10)
+
+
+### Bug Fixes
+
+* **schematics-styles:** enforce scss by default in lib ([fd0dd03](https://github.com/LabShare/lsc/commit/fd0dd0380f104d2dbc0fcc1d17387aee32e232b4))
+
 ## [2.15.1](https://github.com/LabShare/lsc/compare/v2.15.0...v2.15.1) (2020-10-19)
 
 
