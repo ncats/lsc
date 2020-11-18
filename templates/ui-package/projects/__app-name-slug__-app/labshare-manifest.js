@@ -9,7 +9,8 @@ module.exports = {
                 entryModule: "<%= appNamePascalCase %>Module",
                 description: "Description for <%= appNameSlug %>",
                 consumeEvents: [],
-                emitEvents: []
+                emitEvents: [],
+                name: "<%= appNameSlug %>"
             }
         }
     ]

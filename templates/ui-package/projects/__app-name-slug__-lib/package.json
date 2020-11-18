@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^9.1.12",
-    "@angular/core": "^9.1.12"
+    "@angular/core": "^9.1.12",
+    "@labshare/ngx-core-services": "^3.1.2"    
   },
   "dependencies": {
     "tslib": "^1.10.0"
