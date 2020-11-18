@@ -1,3 +1,10 @@
+## [2.15.3](https://github.com/LabShare/lsc/compare/v2.15.2...v2.15.3) (2020-11-18)
+
+
+### Bug Fixes
+
+* improve labshare library template ([b592eea](https://github.com/LabShare/lsc/commit/b592eeacbffbc8a20c22f5d4ffa5c1b06689c8e0))
+
 ## [2.15.2](https://github.com/LabShare/lsc/compare/v2.15.1...v2.15.2) (2020-11-10)
 
 
