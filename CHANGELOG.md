@@ -1,3 +1,24 @@
+## [2.15.2](https://github.com/LabShare/lsc/compare/v2.15.1...v2.15.2) (2020-11-10)
+
+
+### Bug Fixes
+
+* **schematics-styles:** enforce scss by default in lib ([fd0dd03](https://github.com/LabShare/lsc/commit/fd0dd0380f104d2dbc0fcc1d17387aee32e232b4))
+
+## [2.15.1](https://github.com/LabShare/lsc/compare/v2.15.0...v2.15.1) (2020-10-19)
+
+
+### Bug Fixes
+
+* use responseType instead of authFlowType ([365657e](https://github.com/LabShare/lsc/commit/365657e1b02e205bf98f554e8efd9bca03830e20))
+
+# [2.15.0](https://github.com/LabShare/lsc/compare/v2.14.2...v2.15.0) (2020-10-19)
+
+
+### Features
+
+* add lsc manifest configuration ([21e66f5](https://github.com/LabShare/lsc/commit/21e66f5e9e3eb4812018c529f02132f15471e317))
+
 ## [2.14.2](https://github.com/LabShare/lsc/compare/v2.14.1...v2.14.2) (2020-09-15)
 
 
