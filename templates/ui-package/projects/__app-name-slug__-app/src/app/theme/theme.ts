@@ -1,4 +1,4 @@
-import {Theme} from '@labshare/ngx-base-components';
+import {Theme} from '@labshare/ngx-components/theme';
 
 export const labshare: Theme = {
   name: 'labshare',

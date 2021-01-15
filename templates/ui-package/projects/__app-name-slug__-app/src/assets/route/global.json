@@ -2,7 +2,7 @@
     "routes": [
         {
             "path": "noleft",
-            "component": "LayoutComponent",
+            "component": "LayoutDefaultComponent",
             "resolve": { 
                 "items": "ConfigResolverService"
             },

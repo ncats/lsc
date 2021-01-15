@@ -42,7 +42,7 @@
     "@angular/platform-browser-dynamic": "~9.1.4",
     "@angular/router": "~9.1.4",
     "@labshare/ls-font": "^1.0.0",
-    "@labshare/ngx-base-components": "^1.2.4",
+    "@labshare/ngx-components": "^2.13.0",
     "@labshare/ngx-core-services": "^3.1.2",
     "@ng-bootstrap/ng-bootstrap": "^5.2.2",
     "@ngx-formly/bootstrap": "^5.5.11",

@@ -1,9 +1,12 @@
-import {RouterModule, Routes} from '@angular/router';
-import {LayoutComponent, LeftNavComponent, HeaderComponent, TenantNavComponent} from '@labshare/ngx-base-components';
-import {LabShareComponent} from './labshare/labshare.component';
-import {ConfigResolverService} from '@labshare/ngx-base-components';
-import {generatedRoutes} from './ui-modules/module-routes';
-import {generatedMenuItems} from './ui-modules/menu-items';
+import { RouterModule, Routes } from '@angular/router';
+import { LayoutDefaultComponent, } from '@labshare/ngx-components/layout-default';
+import { LeftNavComponent, } from '@labshare/ngx-components/left-menu';
+import { HeaderComponent } from '@labshare/ngx-components/header';
+import { TenantNavComponent } from '@labshare/ngx-components/tenant-nav';
+import { LabShareComponent } from './labshare/labshare.component';
+import { ConfigResolverService } from '@labshare/ngx-components/theme';
+import { generatedRoutes } from './ui-modules/module-routes';
+import { generatedMenuItems } from './ui-modules/menu-items';
 
 const routes: Routes = [
   {
@@ -16,8 +19,8 @@ const routes: Routes = [
     data: {
       theme: 'labshare'
     },
-    component: LayoutComponent,
-    resolve: {items: ConfigResolverService},
+    component: LayoutDefaultComponent,
+    resolve: { items: ConfigResolverService },
     children: [
       {
         path: '',
@@ -102,7 +105,7 @@ const routes: Routes = [
 
       {
         path: '',
-        component: LayoutComponent,
+        component: LayoutDefaultComponent,
         outlet: 'right'
       }
     ]
