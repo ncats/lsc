@@ -1,3 +1,10 @@
+# [2.16.0](https://github.com/LabShare/lsc/compare/v2.15.3...v2.16.0) (2021-01-15)
+
+
+### Features
+
+* updated shared components ([32887db](https://github.com/LabShare/lsc/commit/32887db9401374578c511fcf47f026edf740ed44))
+
 ## [2.15.3](https://github.com/LabShare/lsc/compare/v2.15.2...v2.15.3) (2020-11-18)
 
 
