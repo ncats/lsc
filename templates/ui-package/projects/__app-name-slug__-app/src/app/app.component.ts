@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService, EventService} from '@labshare/ngx-core-services';
-import {ActivatedRoute, Router} from '@angular/router';
-import {EventKeys} from '@labshare/ngx-base-components';
-import {filter} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { AuthService, EventService } from '@labshare/ngx-core-services';
+import { Router } from '@angular/router';
+import { LeftMenuEventKeys } from '@labshare/ngx-components/left-menu';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -26,8 +26,8 @@ export class AppComponent implements OnInit {
 
     /* Observable for receiving AppMenu Events and navigating to route */
     this.eventService
-      .get(EventKeys.AppMenu)
-      .pipe(filter(i => i))
+      .get(LeftMenuEventKeys.OnClick)
+      .pipe(filter(i => !!i))
       .subscribe(i => {
         this.router.navigate(['labshare', i.route]);
       });
