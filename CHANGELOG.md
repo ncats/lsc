@@ -1,3 +1,10 @@
+# [2.17.0](https://github.com/LabShare/lsc/compare/v2.16.0...v2.17.0) (2021-03-24)
+
+
+### Features
+
+* add cypress to ui template, use ngcc LSA-999 ([01e7eb5](https://github.com/LabShare/lsc/commit/01e7eb584c734adae74825ce8e8cca1166ebdd81))
+
 # [2.16.0](https://github.com/LabShare/lsc/compare/v2.15.3...v2.16.0) (2021-01-15)
 
 
