@@ -57,3 +57,7 @@ Thumbs.db
 
 #env vars
 .env
+
+# Cypress assets
+cypress/videos
+cypress/screenshots
