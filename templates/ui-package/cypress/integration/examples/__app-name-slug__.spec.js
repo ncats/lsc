@@ -2,7 +2,7 @@
 
 let config = require('../../fixtures/config');
 
-context('Actions', () => {
+context('<%= appNameSlug %>', () => {
     beforeEach(() => {
         Cypress.Cookies.defaults({
             preserve: cookie => true
@@ -13,8 +13,8 @@ context('Actions', () => {
         cy.visit(config.url);
     });
 
-    it('finds text', () => {
-        cy.contains(' Register a tenant Manage tenants ');
+    it('Finds search icon', () => {
+        cy.get('.icon-lsi-search');
     });
 
     /* Stop testing in case one fails. 
