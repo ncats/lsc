@@ -1,0 +1,68 @@
+name: Cypress Tests
+on:
+  push:
+    branches:
+      - master
+jobs:
+  cypress-run:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          # Semantic Release uses a separate Github Token for publishing
+          # See: https://github.com/semantic-release/semantic-release/blob/master/docs/recipes/github-actions.md#pushing-packagejson-changes-to-a-master-branch
+          persist-credentials: false
+      - uses: mstachniuk/ci-skip@v1
+        # Cancels the pipeline early if [ci skip] is detected in the commit header.
+        # For example, changelog commits from the Semantic Release toolchain will generate a commit with the [ci skip] in the header.
+        with:
+          fail-fast: true
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org
+          always-auth: true
+      - name: Install dependencies
+        # Skip post-install scripts here, as a malicious
+        # script could steal NODE_AUTH_TOKEN.
+        run: npm i --ignore-scripts
+        env:
+          # Use the read-only access NPM token here
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Build
+        # `npm rebuild` will run all those post-install scripts for us.
+        run: |
+          npm rebuild          
+      # Run Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        id: cypress_run
+        env:
+          CYPRESS_TEST_USERNAME: ${{secrets.CYPRESS_TEST_USERNAME}}
+          CYPRESS_TEST_PASSWORD: ${{secrets.CYPRESS_TEST_PASSWORD}} 
+          CYPRESS_TEST_EMAIL: ${{secrets.CYPRESS_TEST_EMAIL}}    
+        with:
+          install: false
+      - name: Slack Notification
+        if: ${{ steps.cypress_run.outcome === 'failure' }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }} 
+          SLACK_COLOR: 'red'
+          SLACK_TITLE: Cypress Testing Failure                
+      # NOTE: screenshots will be generated only if E2E test failed
+      # thus we store screenshots only on failures
+      - uses: actions/upload-artifact@v1
+        if: ${{ steps.cypress_run.outcome === 'failure' }}
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots          
+      # Test run video was always captured, so this action uses "always()" condition
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
