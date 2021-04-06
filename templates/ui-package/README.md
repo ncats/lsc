@@ -63,7 +63,7 @@ To get more help on the shell-ui and lsc CLI go check out the
 [LSC CLI README](https://github.com/angular/lsc/blob/master/README.md).
 
 ## Cypress Configuration
-- `NODE_AUTH_TOKEN`: An npm install token with access to the organization private repos.
+- `NPM_TOKEN`: An npm install token with access to the organization private repos.
 - `AWS_ACCESS_TOKEN`: An access token to AWS S3 Buckets service
 - `PROJECT_ID`: Your project's name in **slug-case**
 - `AWS_BUCKET_NAME`: Bucket to which Cypress videos will be uploaded to
