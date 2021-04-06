@@ -53,13 +53,24 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
+          # install awscli to use s3 buckets, and configure its credentials
           pip install --user awscli    
           aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_TOKEN}}
-          aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_TOKEN}}    
+          aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_TOKEN}}
+
+          # obtain the current date and time, and save into a txt for later usage
           date +%Y%m%d-%H%M%S | tee video-date.txt
+
+          # copy generated cypress video into s3, and rename it with saved date and time
           aws s3 cp ./cypress/videos/examples/${{secrets.PROJECT_ID}}.mp4 s3://${{secrets.AWS_BUCKET_NAME}}/$(cat video-date.txt).mp4
+
+          # assign public read permissions to the uploaded video
           aws s3api put-object-acl --bucket ${{secrets.AWS_BUCKET_NAME}} --key $(cat video-date.txt).mp4 --acl public-read
+
+          # rotate videos in s3 (remove older videos past a count limit)
           node ./cypress/s3/rotate-videos.js
+
+          # output video_url so that other steps can use it
           echo "::set-output name=video_url::https://${{secrets.AWS_BUCKET_NAME}}.s3.amazonaws.com/$(cat video-date.txt).mp4"
 
       - name: Slack Notification
