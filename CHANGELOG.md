@@ -1,3 +1,15 @@
+# [2.18.0](https://github.com/LabShare/lsc/compare/v2.17.1...v2.18.0) (2021-04-07)
+
+
+### Bug Fixes
+
+* use npm token in docs ([9e0c96d](https://github.com/LabShare/lsc/commit/9e0c96d46b8dbef536ffd4ce449c46a672716acd))
+
+
+### Features
+
+* update cypress configuration ([2d4f5d1](https://github.com/LabShare/lsc/commit/2d4f5d1e449eded9a49995725e3f9f2f0b5fa8f0))
+
 ## [2.17.1](https://github.com/LabShare/lsc/compare/v2.17.0...v2.17.1) (2021-03-31)
 
 
