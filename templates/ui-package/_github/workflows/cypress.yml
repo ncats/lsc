@@ -1,0 +1,87 @@
+name: Cypress Tests
+on:
+  push:
+    branches:
+      - master
+jobs:
+  cypress-run:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          # Semantic Release uses a separate Github Token for publishing
+          # See: https://github.com/semantic-release/semantic-release/blob/master/docs/recipes/github-actions.md#pushing-packagejson-changes-to-a-master-branch
+          persist-credentials: false
+
+      - uses: mstachniuk/ci-skip@v1
+        # Cancels the pipeline early if [ci skip] is detected in the commit header.
+        # For example, changelog commits from the Semantic Release toolchain will generate a commit with the [ci skip] in the header.
+        with:
+          fail-fast: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org
+          always-auth: true
+
+      - name: Install dependencies
+        # Skip post-install scripts here, as a malicious
+        # script could steal NODE_AUTH_TOKEN.
+        run: npm i --ignore-scripts
+        env:
+          # Use the read-only access NPM token here
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - name: Build
+        # `npm rebuild` will run all those post-install scripts for us.
+        run: npm rebuild    
+
+      # Run Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        id: cypress_run  
+        continue-on-error: true
+        with:
+          install: false
+
+      - name: S3 Video Upload
+        id: s3_video_upload
+        if: always()
+        continue-on-error: true
+        run: |
+          # install awscli to use s3 buckets, and configure its credentials
+          pip install --user awscli    
+          aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_TOKEN}}
+          aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_TOKEN}}
+
+          # obtain the current date and time, and save into a txt for later usage
+          date +%Y%m%d-%H%M%S | tee video-date.txt
+
+          # copy generated cypress video into s3, and rename it with saved date and time
+          aws s3 cp ./cypress/videos/examples/${{secrets.PROJECT_ID}}.mp4 s3://${{secrets.AWS_BUCKET_NAME}}/$(cat video-date.txt).mp4
+
+          # assign public read permissions to the uploaded video
+          aws s3api put-object-acl --bucket ${{secrets.AWS_BUCKET_NAME}} --key $(cat video-date.txt).mp4 --acl public-read
+
+          # rotate videos in s3 (remove older videos past a count limit)
+          node ./cypress/s3/rotate-videos.js
+
+          # output video_url so that other steps can use it
+          echo "::set-output name=video_url::https://${{secrets.AWS_BUCKET_NAME}}.s3.amazonaws.com/$(cat video-date.txt).mp4"
+
+      - name: Slack Notification
+        if: ${{ steps.cypress_run.outcome == 'failure' }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_USERNAME: Cypress-Testing-Bot
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }} 
+          SLACK_COLOR: 'failure'
+          SLACK_TITLE: 'Cypress Test Failed'
+          SLACK_MESSAGE: ${{ steps.s3_video_upload.outputs.video_url }}
+          SLACK_ICON: 'https://${{secrets.AWS_BUCKET_NAME}}.s3.amazonaws.com/robot.jpg'
+        continue-on-error: true
+      
