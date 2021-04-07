@@ -3,12 +3,13 @@
 import flatiron = require('flatiron');
 import path = require('path');
 import {isPackageSync} from './utils';
-import {checkVersion} from '../check-self-update';
 import labShare from '../labshare';
 import loaderPlugin = require('./loader-plugin');
+import updateNotifier = require('update-notifier');
 
 const {app} = flatiron;
 const lscRoot = path.join(__dirname, '..', '..', '..');
+const lscPackageJson = require(path.join(lscRoot, 'package.json'));
 
 export interface StartOptions {
   directories?: string[];
@@ -37,7 +38,9 @@ export async function start({
 }: StartOptions) {
   let pkg: PackageJson;
 
-  await checkVersion({name: 'lsc', logger: app.log});
+  // Asynchronously checks if there is a newer version available.
+  // See: https://github.com/yeoman/update-notifier#readme
+  updateNotifier({pkg: lscPackageJson}).notify();
 
   if (isPackageSync(cwd)) {
     app.config.file({
@@ -45,7 +48,7 @@ export async function start({
     });
     pkg = require(path.join(cwd, 'package.json'));
   } else {
-    pkg = require(path.join(lscRoot, 'package.json'));
+    pkg = lscPackageJson;
     app.config.file({
       file: path.join(lscRoot, 'config.json'),
     });
