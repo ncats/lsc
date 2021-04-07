@@ -1,3 +1,10 @@
+# [2.19.0](https://github.com/LabShare/lsc/compare/v2.18.0...v2.19.0) (2021-04-07)
+
+
+### Features
+
+* **update-notifier:** replace custom update notify ([3413a73](https://github.com/LabShare/lsc/commit/3413a737d57d3e987ad04368efa17d91bd7eec97))
+
 # [2.18.0](https://github.com/LabShare/lsc/compare/v2.17.1...v2.18.0) (2021-04-07)
 
 
