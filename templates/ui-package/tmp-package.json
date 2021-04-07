@@ -19,7 +19,9 @@
     "prettier:cli": "npm run prettier -- -c",
     "prettier:fix": "npm run prettier:cli -- --write",
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "coverage": "npm run test:ci -- --code-coverage"
+    "coverage": "npm run test:ci -- --code-coverage",
+    "ngcc": "ngcc",
+    "test:cypress": "cypress run --browser chrome"
   },
   "contributors": "https://github.com/LabShare/<%= appNameSlug %>/graphs/contributors",
   "repository": {
@@ -97,6 +99,9 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
+  },
+  "optionalDependencies": {
+    "cypress": "^6.8.0"
   },
   "husky": {
     "hooks": {

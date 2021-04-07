@@ -89,5 +89,8 @@ export function bootstrapUIPackage(
   context.log.info(`Building library for development`);
   spawnSyncStrict('npm', ['run', 'build:lib'], defaultSpawnOptions);
 
+  context.log.info('Running ngcc to avoid build errors');
+  spawnSyncStrict('npm', ['run', 'ngcc'], defaultSpawnOptions);
+
   context.log.info(`lsc create app done.`);
 }
