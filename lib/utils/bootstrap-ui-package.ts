@@ -46,7 +46,7 @@ export function bootstrapUIPackage(
   /* Initialize before npm i because husky requires git for setup */
   if (isGitInstalled) {
     context.log.info(`Git is installed, initializing repo.`);
-    spawnSyncStrict('git', ['init'], defaultSpawnOptions);
+    spawnSyncStrict('git', ['init', '-b', 'main'], defaultSpawnOptions);
   }
 
   /* Some files should be automatically generated. Set them to read-only to avoid user manipulation */
@@ -72,7 +72,7 @@ export function bootstrapUIPackage(
 
   /* Run NPM Install */
   context.log.info(`Installing npm dependencies.`);
-  spawnSyncStrict('npm', ['i'], defaultSpawnOptions);
+  spawnSyncStrict('npm', ['i', '--legacy-peer-deps'], defaultSpawnOptions);
 
   /* Create initial commit */
   if (isGitInstalled) {
